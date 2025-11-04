@@ -6,15 +6,6 @@ body.fondo {
   background-position: center;
 }
 
-.login-popup {
-  background-color: #DFF8F3;
-  padding: 10px 80px  !important;
-  border-radius: 10px !important;
-  box-shadow: 0 4px 25px rgba(0,0,0,0.3) !important;
-  max-width: 500px !important;
-  width: 90% !important;
-}
-
 #lang-popup {
     position: fixed;
     top: 10px;
@@ -30,25 +21,40 @@ body.fondo {
     min-width: 40px;
 }
 
-
-button {
-  background-color: #009888 !important;
-  color: white !important;
-  border: 1px solid #008071 !important;
-  padding: 6px 12px;
-  border-radius: 5px;
-  transition: background-color 0.2s, color 0.2s;
+.lang-btn.active {
+  background-color: #008071;
+  color: white;
+  border-color: #0d6efd;
 }
 
-button:hover {
-  background-color: #0F3D1A !important;
+.login-popup {
+  background-color: #DFF8F3;
+  padding: 10px 80px  !important;
+  border-radius: 10px !important;
+  box-shadow: 0 4px 25px rgba(0,0,0,0.3) !important;
+  max-width: 500px !important;
+  width: 90% !important;
+}
+
+.form-check-input:checked {
+  background-color: #009888;
+  border-color: #009888;
+}
+
+
+.submit-btn {
+  background-color: #009888;  
+  border: 1px solid #008071 ;
+  color: white;
+  padding: 6px 12px;
+  border-radius: 5px;
+}
+
+.submit-btn:hover {
+  background-color: #008071;
+  border: 1px solid #008071 ;
   cursor: pointer;
 }
 
 
-/* Botón de idioma activo sigue distinto */
-.lang-btn.active {
-  background-color: #008071 !important; /* azul para activo */
-  color: white;
-  border-color: #0d6efd !important;
-}
+
