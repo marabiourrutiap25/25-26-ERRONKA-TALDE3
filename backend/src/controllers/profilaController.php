@@ -8,6 +8,9 @@
     if($_SERVER["REQUEST_METHOD"]=="PUT"){
         $nombre=$data["nombre"];
         http_response_code(200);
+        json_encode([
+            "message" => "mensaje"
+        ]);
     }
 
 

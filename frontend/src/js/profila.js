@@ -3,22 +3,25 @@ document.addEventListener("submit", function (event) {
 
     // Obtener los datos del formulario
     const form = event.target;
-    const nombre = form.nombre.value;
-    const apellidos = form.apellidos.value;
-    const contrasena = form.contrasena.value;
+    const izena = form.izena.value;
+    const abizena = form.abizena.value;
+    const pasahitza = form.pasahitza.value;
 
     // Crear objeto con los datos
     const datos = {
-        nombre: nombre,
-        apellidos: apellidos,
-        contrasena: contrasena
+        izena: izena,
+        abizena: abizena,
+        pasahitza: pasahitza
     };
 
 
-    fetch("http://localhost/25-26-ERRONKA-TALDE2/backend/src/controllers/profilaController.php",{
+    fetch("http://localhost/25-26-ERRONKA-TALDE3/backend/src/controllers/profilaController.php",{
         method:"PUT",
         body: JSON.stringify(datos)
-    }).then(respuesta=>console.log(respuesta.status));
+    }).then(respuesta=>
+        console.log(respuesta.status),
+        console.log(respuesta.message)
+    );
 
 
 
