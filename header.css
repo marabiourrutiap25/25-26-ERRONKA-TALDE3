@@ -1,0 +1,126 @@
+/* Letra */
+body, nav a, .lang-btn {
+    font-family: 'Inter', sans-serif;
+    font-weight: 600;
+}
+
+/* Header */
+header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: #009888;
+    padding: 10px 20px;
+}
+
+/* Logoak */
+.logo {
+    height: 50px;
+}
+
+/* Menu */
+nav {
+    display: flex;
+    gap: 50px;
+    align-items: center;
+}
+
+/* Links */
+nav a {
+    color: #17355F;
+    text-decoration: none;
+    transition: 0.2s;
+}
+
+nav a:hover {
+    text-decoration: underline;
+}
+
+/* Hizkunta botoia */
+.lang-btn {
+    background: #FFFFFF;
+    border: 2px solid #17355F;
+    color: #17355F;
+    padding: 4px 12px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: 0.2s;
+    display: inline-block;
+}
+
+/* Lehen botoia (EUS) */
+#btn-eu {
+    border-radius: 6px 0 0 6px;
+    border-right: 0; /* elimina separación */
+}
+
+/* Bigarren botoia (CAS) */
+#btn-es {
+    border-radius: 0 6px 6px 0;
+    border-left: 0; /* elimina separación */
+}
+
+/* Aktibo botoia */
+.lang-btn.active {
+    background: #17355F;
+    color: white;
+    font-weight: 700;
+}
+
+/* Hover */
+.lang-btn:hover {
+    background: #17355F21;
+}
+
+/* Usuarioa */
+.user-container {
+    position: relative;
+}
+
+.user-btn {
+    cursor: pointer;
+}
+
+/* Menu usuarioa */
+.user-menu {
+    position: absolute;
+    right: 0;
+    top: 60px;
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0px 4px 8px rgba(0,0,0,0.15);
+    display: none;
+    flex-direction: column;
+    min-width: 150px;
+    padding: 8px 0;
+}
+
+.user-menu a {
+    padding: 10px 15px;
+    text-decoration: none;
+    color: #17355F;
+    display: block;
+    transition: background 0.2s;
+    font-weight: 600;
+}
+
+.user-menu a:hover {
+    background: #e6f3f1;
+}
+
+.user-menu.show {
+    display: flex;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    header {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    nav {
+        flex-wrap: wrap;
+        gap: 25px;
+    }
+}
