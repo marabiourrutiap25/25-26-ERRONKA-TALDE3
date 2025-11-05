@@ -2,14 +2,15 @@
     require("../model/profila.php");
 
     $json = file_get_contents('php://input');
-    $data = json_decode($json);
+    $data = json_decode($json, true);
 
 
     if($_SERVER["REQUEST_METHOD"]=="PUT"){
-        $nombre=$data["nombre"];
+        
+        $nombre=$data["izena"] ?? null;
         http_response_code(200);
-        json_encode([
-            "message" => "mensaje"
+        echo json_encode([
+            "message" => $nombre
         ]);
     }
 
