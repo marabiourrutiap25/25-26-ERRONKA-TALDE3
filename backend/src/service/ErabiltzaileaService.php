@@ -34,12 +34,44 @@ class ErabiltzaileaService
     {
         $user = $this->select_Erabiltzailea($username);
 
-        // La contraseña tiene que estar hasheada, por eso lo del password_verify.
+        // ✅ Verificamos contraseña (hasheada)
         if ($user && password_verify($password, $user->pasahitza)) {
+
+            // 🔑 Generar nueva api_key aleatoria
+            $newApiKey = bin2hex(random_bytes(16)); // 32 caracteres hexadecimales
+
+            // 🔒 Guardar api_key en la base de datos
+            $updateQuery = "UPDATE " . $this->table_name . " SET api_key = ? WHERE nan = ?";
+            $updateStmt = $this->conn->prepare($updateQuery);
+            $updateStmt->bind_param("ss", $newApiKey, $user->nan);
+            $updateStmt->execute();
+
+            $user->api_key = $newApiKey;
+
             return $user;
         }
 
         return null;
     }
+
+    public function select_ApiKey($api_key)
+{
+    $query = "SELECT * FROM " . $this->table_name . " WHERE api_key = ? LIMIT 1";
+    $stmt = $this->conn->prepare($query);
+    if (!$stmt) {
+        die("Errorea kontsulta prestatzean: " . $this->conn->error);
+    }
+
+    $stmt->bind_param("s", $api_key);
+    $stmt->execute();
+    $result = $stmt->get_result();
+
+    if ($result && $result->num_rows > 0) {
+        $row = $result->fetch_assoc();
+        return new Erabiltzailea($row);
+    }
+    return null;
+}
+
 }
 ?>

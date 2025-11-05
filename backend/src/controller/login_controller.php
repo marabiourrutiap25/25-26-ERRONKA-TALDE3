@@ -23,7 +23,8 @@ if (!empty($data->erabiltzailea) && !empty($data->pasahitza)) {
                 "nan" => $user->nan,
                 "izena" => $user->izena,
                 "abizena" => $user->abizena,
-                "rola" => $user->rola
+                "rola" => $user->rola,
+                "api_key" => $user->api_key
             ]
         ]);
     } else {
