@@ -38,17 +38,12 @@
                 </label>
                 <input type="password" id="password" class="form-control mb-3" data-i18n-placeholder="password-placeholder">
 
-                <!-- 🔹 Checkbox -->
-                <fieldset class="form-check mb-3 text-start">
-                    <input class="form-check-input" type="checkbox" id="remember">
-                    <label class="form-check-label" for="remember" data-i18n="remember">
-                        Nire kontua gogoratu
-                    </label>
-                </fieldset>
+                <button type="submit" class="submit-btn btn btn-primary w-100 mb-2" data-i18n="submit">Sartu</button>
 
-                <button type="submit" class="submit-btn btn btn-primary w-100" data-i18n="submit">Sartu</button>
+                <button id="continueBtn" type="button" class="btn btn-outline-success w-100" style="display:none;">
+                    🔑 Jarraitu saioa (este botón aparece si hay api key en la cookie, y no está traducido)
+                </button>
 
-                <!-- 🔹 Elemento oculto para traducir el mensaje de error -->
                 <p id="error-template" data-i18n="errore_mezua" hidden></p>
             </form>
 
@@ -59,43 +54,28 @@
             </footer>
         </section>
     </main>
+
 <script>
 document.addEventListener("DOMContentLoaded", () => {
     const form = document.getElementById("loginForm");
     const usuarioInput = document.getElementById("usuario");
     const passwordInput = document.getElementById("password");
-    const rememberCheckbox = document.getElementById("remember");
+    const continueBtn = document.getElementById("continueBtn");
 
     const messageDiv = document.createElement("p");
     messageDiv.id = "login-message";
     messageDiv.classList.add("mt-3", "fw-bold");
     form.appendChild(messageDiv);
 
-    function setCookie(name, value, days) {
-        const date = new Date();
-        date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
-        const expires = "expires=" + date.toUTCString();
-        document.cookie = `${name}=${encodeURIComponent(value)}; ${expires}; path=/`;
-    }
+    const savedApiKey = localStorage.getItem("api_key");
+    if (savedApiKey) {
+        console.log("🔹 API key encontrada, mostrando botón de continuar...");
+        continueBtn.style.display = "block";
 
-    function getCookie(name) {
-        const value = `; ${document.cookie}`;
-        const parts = value.split(`; ${name}=`);
-        if (parts.length === 2) return decodeURIComponent(parts.pop().split(';').shift());
-        return "";
-    }
-
-    function deleteCookie(name) {
-        document.cookie = `${name}=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;`;
-    }
-
-    const savedUser = getCookie("usuario");
-    const savedPass = getCookie("password");
-
-    if (savedUser && savedPass) {
-        usuarioInput.value = savedUser;
-        passwordInput.value = savedPass;
-        rememberCheckbox.checked = true;
+        continueBtn.addEventListener("click", () => {
+            const encoded = encodeURIComponent(savedApiKey);
+            window.location.href = `../src/pages/Pagina_Prueba.html?api_key=${encoded}`;
+        });
     }
 
     form.addEventListener("submit", (event) => {
@@ -108,15 +88,10 @@ document.addEventListener("DOMContentLoaded", () => {
             pasahitza: passwordInput.value.trim()
         };
 
-        console.log("JSON generado:");
-        console.log(JSON.stringify(jsonData));
-
-        if (rememberCheckbox.checked) {
-            setCookie("usuario", usuarioInput.value.trim(), 7);
-            setCookie("password", passwordInput.value.trim(), 7);
-        } else {
-            deleteCookie("usuario");
-            deleteCookie("password");
+        if (!jsonData.erabiltzailea || !jsonData.pasahitza) {
+            messageDiv.textContent = "⚠️ Datuak falta dira.";
+            messageDiv.style.color = "red";
+            return;
         }
 
         fetch("http://localhost/25-26-ERRONKA-TALDE3/backend/src/controller/login_controller.php", {
@@ -128,28 +103,22 @@ document.addEventListener("DOMContentLoaded", () => {
         .then(data => {
             console.log("🔹 Respuesta del servidor:", data);
 
-            if (data.success) {
-                console.log("Logina ONDO");
-                console.log("Usuario:", data.user);
+            if (data.success && data.user.api_key) {
+                console.log("✅ Login correcto, guardando API key...");
+                localStorage.setItem("api_key", data.user.api_key);
 
-                if (data.user.api_key) {
-                    localStorage.setItem("api_key", data.user.api_key);
-                }
-
-                const apiKey = encodeURIComponent(data.user.api_key || "");
+                const apiKey = encodeURIComponent(data.user.api_key);
                 window.location.href = `../src/pages/Pagina_Prueba.html?api_key=${apiKey}`;
             } else {
-                console.warn("Logina ERROREA:", data.message);
-
+                console.warn("❌ Login error:", data.message);
                 const errorTemplate = document.getElementById("error-template");
-                const translatedError = errorTemplate ? errorTemplate.textContent.trim() : "";
-
+                const translatedError = errorTemplate ? errorTemplate.textContent.trim() : "Errorea gertatu da.";
                 messageDiv.textContent = `❌ ${translatedError}`;
                 messageDiv.style.color = "red";
             }
         })
         .catch(error => {
-            console.error("Logina ERROREA (2):", error);
+            console.error("⚠️ Logina ERROREA (fetch):", error);
             messageDiv.textContent = "⚠️ Zerbitzariarekin errorea gertatu da.";
             messageDiv.style.color = "red";
         });

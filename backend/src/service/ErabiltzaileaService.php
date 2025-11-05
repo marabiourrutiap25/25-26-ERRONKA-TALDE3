@@ -33,20 +33,19 @@ class ErabiltzaileaService
     public function logina_kontsultatu($username, $password)
     {
         $user = $this->select_Erabiltzailea($username);
-
-        // ✅ Verificamos contraseña (hasheada)
         if ($user && password_verify($password, $user->pasahitza)) {
 
-            // 🔑 Generar nueva api_key aleatoria
-            $newApiKey = bin2hex(random_bytes(16)); // 32 caracteres hexadecimales
+            if (empty($user->api_key)) {
 
-            // 🔒 Guardar api_key en la base de datos
-            $updateQuery = "UPDATE " . $this->table_name . " SET api_key = ? WHERE nan = ?";
-            $updateStmt = $this->conn->prepare($updateQuery);
-            $updateStmt->bind_param("ss", $newApiKey, $user->nan);
-            $updateStmt->execute();
+                $newApiKey = $this->sortuApiKeyBerria();
 
-            $user->api_key = $newApiKey;
+                $updateQuery = "UPDATE " . $this->table_name . " SET api_key = ? WHERE nan = ?";
+                $updateStmt = $this->conn->prepare($updateQuery);
+                $updateStmt->bind_param("ss", $newApiKey, $user->nan);
+                $updateStmt->execute();
+
+                $user->api_key = $newApiKey;
+            }
 
             return $user;
         }
@@ -55,23 +54,37 @@ class ErabiltzaileaService
     }
 
     public function select_ApiKey($api_key)
-{
-    $query = "SELECT * FROM " . $this->table_name . " WHERE api_key = ? LIMIT 1";
-    $stmt = $this->conn->prepare($query);
-    if (!$stmt) {
-        die("Errorea kontsulta prestatzean: " . $this->conn->error);
+    {
+        $query = "SELECT * FROM " . $this->table_name . " WHERE api_key = ? LIMIT 1";
+        $stmt = $this->conn->prepare($query);
+        if (!$stmt) {
+            die("Errorea kontsulta prestatzean: " . $this->conn->error);
+        }
+
+        $stmt->bind_param("s", $api_key);
+        $stmt->execute();
+        $result = $stmt->get_result();
+
+        if ($result && $result->num_rows > 0) {
+            $row = $result->fetch_assoc();
+            return new Erabiltzailea($row);
+        }
+        return null;
     }
 
-    $stmt->bind_param("s", $api_key);
-    $stmt->execute();
-    $result = $stmt->get_result();
+    private function sortuApiKeyBerria()
+    {
+        do {
+            $api_key = bin2hex(random_bytes(16));
+            $checkQuery = "SELECT COUNT(*) as total FROM " . $this->table_name . " WHERE api_key = ?";
+            $stmt = $this->conn->prepare($checkQuery);
+            $stmt->bind_param("s", $api_key);
+            $stmt->execute();
+            $result = $stmt->get_result();
+            $row = $result->fetch_assoc();
+        } while ($row['total'] > 0);
 
-    if ($result && $result->num_rows > 0) {
-        $row = $result->fetch_assoc();
-        return new Erabiltzailea($row);
+        return $api_key;
     }
-    return null;
-}
-
 }
 ?>

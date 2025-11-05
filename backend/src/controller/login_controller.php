@@ -18,7 +18,7 @@ if (!empty($data->erabiltzailea) && !empty($data->pasahitza)) {
     if ($user) {
         echo json_encode([
             "success" => true,
-            "message" => "Saioa hasi da ondo!",
+            "message" => "Saioa hasita!",
             "user" => [
                 "nan" => $user->nan,
                 "izena" => $user->izena,
