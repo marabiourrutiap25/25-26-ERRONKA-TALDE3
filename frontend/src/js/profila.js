@@ -15,7 +15,7 @@ document.addEventListener("submit", function (event) {
     };
 
 
-    fetch("http://localhost/25-26-ERRONKA-TALDE3/backend/src/controllers/profilaController.php",{
+    fetch("http://localhost/25-26-ERRONKA-TALDE3/backend/src/controller/profila_controller.php",{
         method:"PUT",
         body: JSON.stringify(datos)
     }).then(respuesta=>
