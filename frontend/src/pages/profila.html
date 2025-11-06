@@ -11,36 +11,41 @@
 <body class="fondo">
 
     <main class="d-flex justify-content-center align-items-center vh-100">
-        <section class="login-popup text-center p-4 rounded">
+        <section class="login-popup text-center rounded">
             <header class="text-center mb-3">
                 <figure class="mb-2">
-                    <img src="../assets/img/logo_horizontal_principal.png" alt="Logo" width="350">
+                    <img src="../assets/img/profila.png" alt="Logo" width="100">
                 </figure>
             </header>
 
             <hr>
 
             <form id="profilaForm">
-                <label for="izena" class="form-label text-start w-100" data-i18n="username-label">
-                    Izena:
-                </label>
-                <input type="text" id="izena" name="izena" class="form-control mb-3" data-i18n-placeholder="username-placeholder">
-
-                <label for="abizena" class="form-label text-start w-100" data-i18n="username-label">
-                    Abizena:
-                </label>
-                <input type="text" id="abizena" name="abizena" class="form-control mb-3" data-i18n-placeholder="username-placeholder">
-
-                <label for="erabiltzailea" class="form-label text-start w-100" data-i18n="username-label">
-                    Erabiltzailea:
-                </label>
-                <input type="text" id="erabiltzailea" name="erabiltzailea" class="form-control mb-3" data-i18n-placeholder="username-placeholder">
-                
-                <label for="pasahitza" class="form-label text-start w-100" data-i18n="password-label">
-                    Pasahitza:
-                </label>
-                <input type="password" id="pasahitza" name="pasahitza" class="form-control mb-3" data-i18n-placeholder="password-placeholder">
-
+                <nav class="row">
+                    <nav class="col">
+                        <label for="izena" class="form-label text-start w-100" data-i18n="username-label">
+                            Izena:
+                        </label>
+                        <input type="text" id="izena" name="izena" class="form-control mb-3" data-i18n-placeholder="username-placeholder">
+                        
+                        <label for="erabiltzailea" class="form-label text-start w-100" data-i18n="username-label">
+                            Erabiltzailea:
+                        </label>
+                        <input type="text" id="erabiltzailea" name="erabiltzailea" class="form-control mb-3" data-i18n-placeholder="username-placeholder">
+                    </nav>
+                    <nav class="col">
+                        <label for="abizena" class="form-label text-start w-100" data-i18n="username-label">
+                            Abizena:
+                        </label>
+                        <input type="text" id="abizena" name="abizena" class="form-control mb-3" data-i18n-placeholder="username-placeholder">
+                        
+                        <label for="pasahitza" class="form-label text-start w-100" data-i18n="password-label">
+                            Pasahitza:
+                        </label>
+                        <input type="password" id="pasahitza" name="pasahitza" class="form-control mb-3" data-i18n-placeholder="password-placeholder">
+                       
+                    </nav>
+                </nav> 
                 
                 <button type="submit" class="submit-btn btn btn-primary w-100" data-i18n="submit">Aldatu</button>
             </form>

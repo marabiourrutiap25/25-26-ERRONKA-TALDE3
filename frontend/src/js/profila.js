@@ -5,12 +5,14 @@ document.addEventListener("submit", function (event) {
     const form = event.target;
     const izena = form.izena.value;
     const abizena = form.abizena.value;
+    const erabiltzailea = form.erabiltzailea.value;
     const pasahitza = form.pasahitza.value;
 
     // Crear objeto con los datos
     const datos = {
         izena: izena,
         abizena: abizena,
+        erabiltzailea: erabiltzailea,
         pasahitza: pasahitza
     };
 
@@ -18,6 +20,7 @@ document.addEventListener("submit", function (event) {
     fetch("http://localhost/25-26-ERRONKA-TALDE3/backend/src/controller/profila_controller.php",{
         method:"PUT",
         body: JSON.stringify(datos)
+
     })
     .then(res => res.json())
     .then(data => console.log(data));
