@@ -36,13 +36,17 @@
                 <label for="password" class="form-label text-start w-100" data-i18n="password-label">
                     Pasahitza:
                 </label>
-                <input type="password" id="password" class="form-control mb-3" data-i18n-placeholder="password-placeholder">
+                <input type="password" id="password" class="form-control mb-3"
+                    data-i18n-placeholder="password-placeholder">
+
+                <fieldset class="form-check mb-3 text-start">
+                    <input class="form-check-input" type="checkbox" id="remember">
+                    <label class="form-check-label" for="remember" data-i18n="remember">
+                        Nire kontua gogoratu
+                    </label>
+                </fieldset>
 
                 <button type="submit" class="submit-btn btn btn-primary w-100 mb-2" data-i18n="submit">Sartu</button>
-
-                <button id="continueBtn" type="button" class="btn btn-outline-success w-100" style="display:none;">
-                    🔑 Jarraitu saioa (este botón aparece si hay api key en la cookie, y no está traducido)
-                </button>
 
                 <p id="error-template" data-i18n="errore_mezua" hidden></p>
             </form>
@@ -55,77 +59,78 @@
         </section>
     </main>
 
-<script>
-document.addEventListener("DOMContentLoaded", () => {
-    const form = document.getElementById("loginForm");
-    const usuarioInput = document.getElementById("usuario");
-    const passwordInput = document.getElementById("password");
-    const continueBtn = document.getElementById("continueBtn");
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const form = document.getElementById("loginForm");
+            const usuarioInput = document.getElementById("usuario");
+            const passwordInput = document.getElementById("password");
+            const rememberCheckbox = document.getElementById("remember");
 
-    const messageDiv = document.createElement("p");
-    messageDiv.id = "login-message";
-    messageDiv.classList.add("mt-3", "fw-bold");
-    form.appendChild(messageDiv);
+            const messageDiv = document.createElement("p");
+            messageDiv.id = "login-message";
+            messageDiv.classList.add("mt-3", "fw-bold");
+            form.appendChild(messageDiv);
 
-    const savedApiKey = localStorage.getItem("api_key");
-    if (savedApiKey) {
-        console.log("🔹 API key encontrada, mostrando botón de continuar...");
-        continueBtn.style.display = "block";
-
-        continueBtn.addEventListener("click", () => {
-            const encoded = encodeURIComponent(savedApiKey);
-            window.location.href = `../src/pages/Pagina_Prueba.html?api_key=${encoded}`;
-        });
-    }
-
-    form.addEventListener("submit", (event) => {
-        event.preventDefault();
-        messageDiv.textContent = "";
-        messageDiv.style.color = "";
-
-        const jsonData = {
-            erabiltzailea: usuarioInput.value.trim(),
-            pasahitza: passwordInput.value.trim()
-        };
-
-        if (!jsonData.erabiltzailea || !jsonData.pasahitza) {
-            messageDiv.textContent = "⚠️ Datuak falta dira.";
-            messageDiv.style.color = "red";
-            return;
-        }
-
-        fetch("http://localhost/25-26-ERRONKA-TALDE3/backend/src/controller/login_controller.php", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify(jsonData)
-        })
-        .then(response => response.json())
-        .then(data => {
-            console.log("🔹 Respuesta del servidor:", data);
-
-            if (data.success && data.user.api_key) {
-                console.log("✅ Login correcto, guardando API key...");
-                localStorage.setItem("api_key", data.user.api_key);
-
-                const apiKey = encodeURIComponent(data.user.api_key);
-                window.location.href = `../src/pages/Pagina_Prueba.html?api_key=${apiKey}`;
-            } else {
-                console.warn("❌ Login error:", data.message);
-                const errorTemplate = document.getElementById("error-template");
-                const translatedError = errorTemplate ? errorTemplate.textContent.trim() : "Errorea gertatu da.";
-                messageDiv.textContent = `❌ ${translatedError}`;
-                messageDiv.style.color = "red";
+            const savedApiKey = localStorage.getItem("api_key");
+            if (savedApiKey) {
+                const encoded = encodeURIComponent(savedApiKey);
+                window.location.href = `../src/pages/Pagina_Prueba.html?api_key=${encoded}`;
             }
-        })
-        .catch(error => {
-            console.error("⚠️ Logina ERROREA (fetch):", error);
-            messageDiv.textContent = "⚠️ Zerbitzariarekin errorea gertatu da.";
-            messageDiv.style.color = "red";
-        });
-    });
-});
-</script>
 
-<script src="../src/js/lang.js"></script>
+            form.addEventListener("submit", (event) => {
+                event.preventDefault();
+                messageDiv.textContent = "";
+                messageDiv.style.color = "";
+
+                const jsonData = {
+                    erabiltzailea: usuarioInput.value.trim(),
+                    pasahitza: passwordInput.value.trim()
+                };
+
+                if (!jsonData.erabiltzailea || !jsonData.pasahitza) {
+                    messageDiv.textContent = "⚠️ Datuak falta dira.";
+                    messageDiv.style.color = "red";
+                    return;
+                }
+
+                fetch("http://localhost/25-26-ERRONKA-TALDE3/backend/src/controller/login_controller.php", {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify(jsonData)
+                })
+                    .then(response => response.json())
+                    .then(data => {
+                        console.log("🔹 Respuesta del servidor:", data);
+
+                        if (data.success && data.user.api_key) {
+                            console.log("✅ Login correcto");
+
+                            const apiKey = encodeURIComponent(data.user.api_key);
+
+                            if (rememberCheckbox.checked) {
+                                localStorage.setItem("api_key", data.user.api_key);
+                                console.log("💾 API key guardada en localStorage");
+                            }
+
+                            window.location.href = `../src/pages/Pagina_Prueba.html?api_key=${apiKey}`;
+                        } else {
+                            console.warn("❌ Login error:", data.message);
+                            const errorTemplate = document.getElementById("error-template");
+                            const translatedError = errorTemplate ? errorTemplate.textContent.trim() : "Errorea gertatu da.";
+                            messageDiv.textContent = `❌ ${translatedError}`;
+                            messageDiv.style.color = "red";
+                        }
+                    })
+                    .catch(error => {
+                        console.error("⚠️ Logina ERROREA (fetch):", error);
+                        messageDiv.textContent = "⚠️ Zerbitzariarekin errorea gertatu da.";
+                        messageDiv.style.color = "red";
+                    });
+            });
+        });
+    </script>
+
+    <script src="../src/js/lang.js"></script>
 </body>
+
 </html>
