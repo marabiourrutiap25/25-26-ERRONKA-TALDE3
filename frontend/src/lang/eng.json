@@ -5,5 +5,6 @@
   "password-placeholder": "Enter your password",
   "remember": "Remember me",
   "submit": "Login",
-  "contact": "No account? Contact: example@fpsanturtzilh.eus"
+  "contact": "No account? Contact: example@fpsanturtzilh.eus",
+  "errore_mezua": "User or password is invalid."
 }
