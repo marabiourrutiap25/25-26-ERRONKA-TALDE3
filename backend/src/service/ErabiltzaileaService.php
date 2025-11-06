@@ -86,5 +86,23 @@ class ErabiltzaileaService
 
         return $api_key;
     }
+
+    public function aldatuIzena($api_key, $izena_berria) // Esta es la prueba.
+    {
+        $user = $this->select_ApiKey($api_key);
+        if (!$user) {
+            return ["success" => false, "message" => "API key ez da baliozkoa."];
+        }
+
+        $query = "UPDATE " . $this->table_name . " SET izena = ? WHERE nan = ?";
+        $stmt = $this->conn->prepare($query);
+        $stmt->bind_param("ss", $izena_berria, $user->nan);
+
+        if ($stmt->execute()) {
+            return ["success" => true, "message" => "Izena ongi eguneratu da.", "nuevo_izena" => $izena_berria];
+        } else {
+            return ["success" => false, "message" => "Errorea izena eguneratzean."];
+        }
+    }
 }
 ?>
