@@ -20,9 +20,6 @@
             "abizena"=>$abizena,
             "erabiltzailea"=>$erabiltzailea]);
 
-        
-
-
 
         http_response_code(200);
         echo json_encode([

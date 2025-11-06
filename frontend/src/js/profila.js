@@ -1,3 +1,13 @@
+function erabiltzailearenInformazioa(){
+    fetch("http://localhost/25-26-ERRONKA-TALDE3/backend/src/controller/profila_controller.php",{
+
+    })
+
+}
+
+
+
+
 document.addEventListener("submit", function (event) {
     event.preventDefault();
 
