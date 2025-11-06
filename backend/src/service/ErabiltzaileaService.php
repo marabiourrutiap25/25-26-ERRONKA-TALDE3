@@ -3,13 +3,17 @@ require_once __DIR__ . '/../model/Erabiltzailea.php';
 
 class ErabiltzaileaService
 {
+
+    private $dbObj;
     private $conn;
+    public function __construct(){
+        $this->dbObj = new DB();
+        $this->conn = $this->dbObj->konektatu();
+    }
+    
+
     private $table_name = "erabiltzailea";
 
-    public function __construct($db)
-    {
-        $this->conn = $db;
-    }
 
     public function select_Erabiltzailea($username)
     {
