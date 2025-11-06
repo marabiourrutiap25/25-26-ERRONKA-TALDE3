@@ -6,6 +6,7 @@ class Erabiltzailea {
     public $erabiltzailea;
     public $pasahitza;
     public $rola;
+    public $api_key; // 🔑 nuevo campo
 
     public function __construct($row = null) {
         if ($row) {
@@ -15,6 +16,7 @@ class Erabiltzailea {
             $this->erabiltzailea = $row['erabiltzailea'];
             $this->pasahitza = $row['pasahitza'];
             $this->rola = $row['rola'];
+            $this->api_key = $row['api_key'] ?? null;
         }
     }
 }
