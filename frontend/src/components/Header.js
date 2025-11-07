@@ -2,7 +2,7 @@ class CustomHeader extends HTMLElement {
   connectedCallback() {
     this.innerHTML = `
       <header>
-        <img src="../assets/icons/sanJorge.png" alt="Logo Izq" class="logo">
+        <img src="../assets/img/logo_horizontal_principal.png" alt="Logo Izq" class="logo">
 
         <nav>
           <a href="ekipamendua.html" data-page="ekipamendua">EKIPAMENDUA</a>
@@ -25,7 +25,6 @@ class CustomHeader extends HTMLElement {
 
             <div class="user-menu" id="userMenu">
               <a href="profile.html">Profila</a>
-              <a href="settings.html">Ezarpenak</a>
               <a href="logout.html">Saioa itxi</a>
             </div>
           </div>
@@ -72,7 +71,9 @@ class CustomHeader extends HTMLElement {
       nav {
         display: flex;
         align-items: center;
+        justify-content: center;
         gap: 50px;
+        flex: 1 1 auto;
         flex-shrink: 1;
         min-width: 0; /* importante para permitir que nav se reduzca */
       }
