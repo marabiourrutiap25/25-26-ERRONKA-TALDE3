@@ -6,7 +6,7 @@ class Erabiltzailea {
     public $erabiltzailea;
     public $pasahitza;
     public $rola;
-    public $api_key; // 🔑 nuevo campo
+    public $api_key;
 
     public function __construct($nan=null, $izena=null, $abizena=null, $erabiltzailea=null, $pasahitza=null, $rola=null) {
         $this->nan = $nan;
