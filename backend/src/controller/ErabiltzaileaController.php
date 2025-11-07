@@ -14,8 +14,9 @@ $service = new ErabiltzaileaService($conn);
 
 $action = $_GET['action'] ?? null;
 
-if ($_SERVER['REQUEST_METHOD'] === 'POST' && $action === 'aldatuIzena') {
-
+// Extraer API key desde header Authorization: Bearer <key>
+function getApiKeyFromHeaders()
+{
     $headers = getallheaders();
     $api_key = null;
     if (isset($headers['Authorization'])) {
@@ -24,21 +25,93 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && $action === 'aldatuIzena') {
             $api_key = trim(substr($authHeader, 7));
         }
     }
+    return $api_key;
+}
 
-    $data = json_decode(file_get_contents("php://input"));
-    $izena_berria = $data->izena ?? null;
-
-    if (!$api_key || !$izena_berria) {
+// GET -> obtener todos
+if ($_SERVER['REQUEST_METHOD'] === 'GET' && $action === 'getAll') {
+    $api_key = getApiKeyFromHeaders();
+    if (!$api_key) {
         http_response_code(400);
-        echo json_encode(["success" => false, "message" => "Faltan parámetros (Authorization o izena)."]);
+        echo json_encode(["success" => false, "message" => "Authorization header falta."]);
         exit;
     }
-
-    $resultado = $service->aldatuIzena($api_key, $izena_berria);
+    $resultado = $service->getAllErabiltzaileak($api_key);
     echo json_encode($resultado);
-
-} else {
-    http_response_code(404);
-    echo json_encode(["success" => false, "message" => "Ekintza ez da aurkitu."]);
+    exit;
 }
+
+// GET -> obtener por nan
+if ($_SERVER['REQUEST_METHOD'] === 'GET' && $action === 'getById') {
+    $api_key = getApiKeyFromHeaders();
+    $nan = $_GET['nan'] ?? null;
+    if (!$api_key || !$nan) {
+        http_response_code(400);
+        echo json_encode(["success" => false, "message" => "Faltan parámetros (Authorization o nan)."]);
+        exit;
+    }
+    $resultado = $service->getByNan($api_key, $nan);
+    echo json_encode($resultado);
+    exit;
+}
+
+// POST -> crear usuario (action=create)
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && $action === 'create') {
+    $api_key = getApiKeyFromHeaders();
+    $data = json_decode(file_get_contents("php://input"));
+    if (!$api_key || !$data) {
+        http_response_code(400);
+        echo json_encode(["success" => false, "message" => "Faltan parámetros (Authorization o cuerpo JSON)."]);
+        exit;
+    }
+    $resultado = $service->createErabiltzailea($api_key, $data);
+    echo json_encode($resultado);
+    exit;
+}
+
+// POST -> actualizar usuario (action=update) - el nan se pasa por parámetro (query) preferiblemente
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && $action === 'update') {
+    $api_key = getApiKeyFromHeaders();
+    $data = json_decode(file_get_contents("php://input"));
+    $nan = $_GET['nan'] ?? null; // preferir query param
+    if (!$api_key || !$data || !$nan) {
+        http_response_code(400);
+        echo json_encode(["success" => false, "message" => "Faltan parámetros (Authorization, nan en query o cuerpo JSON)."]);
+        exit;
+    }
+    $resultado = $service->updateErabiltzailea($api_key, $data, $nan);
+    echo json_encode($resultado);
+    exit;
+}
+
+// DELETE -> eliminar usuario por nan (action=delete) (nan por query param)
+if ($_SERVER['REQUEST_METHOD'] === 'DELETE' && $action === 'delete') {
+    $api_key = getApiKeyFromHeaders();
+    $nan = $_GET['nan'] ?? null;
+    if (!$api_key || !$nan) {
+        http_response_code(400);
+        echo json_encode(["success" => false, "message" => "Faltan parámetros (Authorization o nan en query)."]);
+        exit;
+    }
+    $resultado = $service->deleteByNan($api_key, $nan);
+    echo json_encode($resultado);
+    exit;
+}
+
+// Para compatibilidad, aceptar también POST delete con nan en query
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && $action === 'delete') {
+    $api_key = getApiKeyFromHeaders();
+    $nan = $_GET['nan'] ?? null;
+    if (!$api_key || !$nan) {
+        http_response_code(400);
+        echo json_encode(["success" => false, "message" => "Faltan parámetros (Authorization o nan en query)."]);
+        exit;
+    }
+    $resultado = $service->deleteByNan($api_key, $nan);
+    echo json_encode($resultado);
+    exit;
+}
+
+http_response_code(404);
+echo json_encode(["success" => false, "message" => "Ekintza ez da aurkitu."]);
 ?>
