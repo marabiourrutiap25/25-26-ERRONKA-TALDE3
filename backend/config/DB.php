@@ -10,7 +10,7 @@ class DB {
     {
         $this->user = "root";
         $this->host = "localhost";
-        $this->pass = "1234";
+        $this->pass = "root";
         $this->db = "Erronka1";
     }
 
