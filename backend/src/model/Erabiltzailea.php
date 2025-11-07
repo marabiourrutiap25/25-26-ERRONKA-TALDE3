@@ -6,7 +6,7 @@ class Erabiltzailea {
     public $erabiltzailea;
     public $pasahitza;
     public $rola;
-    public $api_key; // 🔑 nuevo campo
+    public $api_key;
 
     public function __construct($row = null) {
         if ($row) {
