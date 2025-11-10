@@ -11,7 +11,7 @@ async function loadLang(lang) {
   console.log("Intentando cargar idioma:", lang);
 
   try {
-    const response = await fetch(`../src/lang/${lang}.json`);
+    const response = await fetch(`../lang/${lang}.json`);
     console.log("Respuesta fetch:", response);
 
     if (!response.ok) throw new Error("No se pudo cargar el JSON");
