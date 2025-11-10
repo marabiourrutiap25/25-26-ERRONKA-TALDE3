@@ -7,6 +7,7 @@ class Ekipamendua {
     public $modelo;
     public $stock;
     public $idKategoria;
+    public $kategoria_izena;
 
     public function __construct($row = null) {
         if ($row) {
@@ -17,6 +18,7 @@ class Ekipamendua {
             $this->modelo = $row['modelo'];
             $this->stock = $row['stock'];
             $this->idKategoria = $row['idKategoria'];
+            $this->kategoria_izena = $row['kategoria_izena'] ?? null;
         }
     }
 }

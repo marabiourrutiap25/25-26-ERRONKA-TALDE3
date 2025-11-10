@@ -55,7 +55,9 @@ class EkipamenduaService
             return ["success" => false, "message" => "API key ez da baliozkoa."];
         }
 
-        $query = "SELECT * FROM " . $this->table_name;
+        $query = "SELECT e.*, k.izena as kategoria_izena 
+                 FROM " . $this->table_name . " e 
+                 LEFT JOIN kategoria k ON e.idKategoria = k.id";
         $stmt = $this->conn->prepare($query);
         if (!$stmt) {
             return ["success" => false, "message" => "Errorea kontsulta prestatzean."];
@@ -78,7 +80,10 @@ class EkipamenduaService
             return ["success" => false, "message" => "API key ez da baliozkoa."];
         }
 
-        $query = "SELECT * FROM " . $this->table_name . " WHERE id = ? LIMIT 1";
+        $query = "SELECT e.*, k.izena as kategoria_izena 
+                 FROM " . $this->table_name . " e 
+                 LEFT JOIN kategoria k ON e.idKategoria = k.id 
+                 WHERE e.id = ? LIMIT 1";
         $stmt = $this->conn->prepare($query);
         if (!$stmt) {
             return ["success" => false, "message" => "Errorea kontsulta prestatzean."];
