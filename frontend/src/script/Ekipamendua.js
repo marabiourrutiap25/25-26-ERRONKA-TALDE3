@@ -252,7 +252,7 @@ form.addEventListener('submit', async e => {
 });
 
 async function deleteEkipamendua(id) {
-  if (!confirm('Ziur al zaude ezabatu nahi duzula?')) return;
+  if (!confirm('Pendiente borrar este akert')) return;
   const api_key = getApiKey();
   const res = await fetch(`${apiUrl}?action=delete&id=${id}`, {
     method: 'DELETE',
