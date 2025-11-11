@@ -1,4 +1,10 @@
 {
+  "ekipamendua-header": "EQUIPAMENTO",
+  "inbentarioa-header": "INVENTARIO",
+  "kudeaketa-header": "GESTIÓN",
+  "erabiltzaileak-header": "USUARIOS",
+  "profila-header": "perfil",
+  "saioa-itxi-header": "cerrar sesión",
   "username-label": "Usuario:",
   "username-placeholder": "Introduce tu usuario",
   "password-label": "Contraseña:",

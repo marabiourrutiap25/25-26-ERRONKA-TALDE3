@@ -1,4 +1,10 @@
 {
+  "ekipamendua-header": "EKIPAMENDUA",
+  "inbentarioa-header": "INBENTARIOA",
+  "kudeaketa-header": "KUDEAKETA",
+  "erabiltzaileak-header": "ERABILTZAILEAK",
+  "profila-header": "profila",
+  "saioa-itxi-header": "saioa itxi",
   "username-label": "Erabiltzailea:",
   "username-placeholder": "Sartu zure erabiltzaile izena",
   "password-label": "Pasahitza:",

@@ -5,10 +5,10 @@ class CustomHeader extends HTMLElement {
         <img src="../assets/img/logo_horizontal_principal.png" alt="Logo Izq" class="logo">
 
         <nav>
-          <a href="ekipamendua.html" data-page="ekipamendua">EKIPAMENDUA</a>
-          <a href="inbentarioa.html" data-page="inbentarioa">INBENTARIOA</a>
-          <a href="kudeaketa.html" data-page="kudeaketa">KUDEAKETA</a>
-          <a href="erabiltzaileak.html" data-page="erabiltzaileak">ERABILTZAILEAK</a>
+          <a href="ekipamendua.html" data-page="ekipamendua" data-i18n="ekipamendua-header">EKIPAMENDUA</a>
+          <a href="inbentarioa.html" data-page="inbentarioa" data-i18n="inbentarioa-header">INBENTARIOA</a>
+          <a href="kudeaketa.html" data-page="kudeaketa" data-i18n="kudeaketa-header">KUDEAKETA</a>
+          <a href="erabiltzaileak.html" data-page="erabiltzaileak" data-i18n="erabiltzaileak-header">ERABILTZAILEAK</a>
         </nav>
 
         <div class="right-section">
@@ -24,8 +24,8 @@ class CustomHeader extends HTMLElement {
             </div>
 
             <div class="user-menu" id="userMenu">
-              <a href="profile.html">Profila</a>
-              <a href="logout.html">Saioa itxi</a>
+              <a href="profila.html" data-i18n="profila-header">Profila</a>
+              <a href="logout.html" data-i18n="saioa-itxi-header">Saioa itxi</a>
             </div>
           </div>
         </div>
