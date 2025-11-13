@@ -3,10 +3,30 @@
   const apiUrl = window.location.origin + '/25-26-ERRONKA-TALDE3/backend/src/controller/KokalekuaController.php';
   const gelaApiUrl = window.location.origin + '/25-26-ERRONKA-TALDE3/backend/src/controller/GelaController.php';
   const tbody = document.querySelector('#kokalekuaTable tbody');
-  const modal = new bootstrap.Modal(document.getElementById('kokalekuaModal'));
   const form = document.getElementById('kokalekuaForm');
   const searchInput = document.getElementById('searchKokalekuaInput');
   const gelaSelect = document.getElementById('idGela');
+  const modalElement = document.getElementById('kokalekuaModal');
+  const addBtn = document.getElementById('addKokalekuaBtn');
+  let modal = null;
+
+  console.log('[Kokalekua] Script initialising');
+
+  if (!tbody || !form || !searchInput || !gelaSelect || !modalElement || !addBtn) {
+    console.warn('[Kokalekua] Required DOM elements not found. Aborting script.');
+    return;
+  }
+
+  if (modalElement && window.bootstrap && typeof window.bootstrap.Modal === 'function') {
+    try {
+      modal = new bootstrap.Modal(modalElement);
+    } catch (err) {
+      console.warn('[Kokalekua] Bootstrap modal initialisation failed:', err);
+      modal = null;
+    }
+  } else {
+    console.warn('[Kokalekua] Bootstrap modal not available. Modal actions disabled.');
+  }
 
 function getCookie(name) {
   const value = `; ${document.cookie}`;
@@ -104,16 +124,22 @@ async function fetchKokalekuak() {
         <td>${escapeHtml(item.hasieraData)}</td>
         <td>${escapeHtml(item.amaieraData || '')}</td>
         <td>
-          <button class="btn-action editBtn" data-etiketa="${item.etiketa}" data-hasieraData="${item.hasieraData}">✏️</button>
-          <button class="btn-action deleteBtn" data-etiketa="${item.etiketa}" data-hasieraData="${item.hasieraData}">🗑️</button>
+          <button class="btn-action editBtn-kokalekua" data-etiketa="${item.etiketa}" data-hasieraData="${item.hasieraData}">✏️</button>
+          <button class="btn-action deleteBtn-kokalekua" data-etiketa="${item.etiketa}" data-hasieraData="${item.hasieraData}">🗑️</button>
         </td>
       </tr>`;
     }).join('');
-    document.querySelectorAll('.editBtn').forEach(btn => {
-      btn.addEventListener('click', () => openModal(btn.dataset.etiketa, btn.dataset.hasieraData));
+    tbody.querySelectorAll('.editBtn-kokalekua').forEach(btn => {
+      btn.addEventListener('click', () => {
+        console.log('[Kokalekua] Edit button clicked', btn.dataset.etiketa, btn.dataset.hasieraData);
+        openModal(btn.dataset.etiketa, btn.dataset.hasieraData);
+      });
     });
-    document.querySelectorAll('.deleteBtn').forEach(btn => {
-      btn.addEventListener('click', () => deleteKokalekua(btn.dataset.etiketa, btn.dataset.hasieraData));
+    tbody.querySelectorAll('.deleteBtn-kokalekua').forEach(btn => {
+      btn.addEventListener('click', () => {
+        console.log('[Kokalekua] Delete button clicked', btn.dataset.etiketa, btn.dataset.hasieraData);
+        deleteKokalekua(btn.dataset.etiketa, btn.dataset.hasieraData);
+      });
     });
   } catch (err) {
     tbody.innerHTML = `<tr><td colspan="5">${escapeHtml(err.message)}</td></tr>`;
@@ -172,8 +198,10 @@ async function openModal(etiketa = null, hasieraData = null) {
     document.getElementById('hasieraDataOld').value = '';
     document.getElementById('kokalekuaModalLabel').textContent = 'Sortu';
   }
-  modal.hide();
-  modal.show();
+  if (modal) {
+    modal.hide();
+    modal.show();
+  }
 }
 
 form.addEventListener('submit', async e => {
@@ -228,7 +256,10 @@ async function deleteKokalekua(etiketa, hasieraData) {
   fetchKokalekuak();
 }
 
-document.getElementById('addKokalekuaBtn').addEventListener('click', () => openModal());
+addBtn.addEventListener('click', () => {
+  console.log('[Kokalekua] Add button clicked');
+  openModal();
+});
 window.addEventListener('DOMContentLoaded', fetchKokalekuak);
 searchInput.addEventListener('input', () => {
   const filter = searchInput.value.toLowerCase();

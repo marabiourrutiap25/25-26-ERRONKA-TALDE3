@@ -2,9 +2,29 @@
 (function() {
   const apiUrl = window.location.origin + '/25-26-ERRONKA-TALDE3/backend/src/controller/KategoriaController.php';
   const tbody = document.querySelector('#kategoriaTable tbody');
-  const modal = new bootstrap.Modal(document.getElementById('kategoriaModal'));
   const form = document.getElementById('kategoriaForm');
   const searchInput = document.getElementById('searchKategoriaInput');
+  const addBtn = document.getElementById('addKategoriaBtn');
+  const modalElement = document.getElementById('kategoriaModal');
+  let modal = null;
+
+  console.log('[Kategoria] Script initialising');
+
+  if (!tbody || !form || !searchInput || !addBtn) {
+    console.warn('[Kategoria] Required DOM elements not found. Aborting script.');
+    return;
+  }
+
+  if (modalElement && window.bootstrap && typeof window.bootstrap.Modal === 'function') {
+    try {
+      modal = new bootstrap.Modal(modalElement);
+    } catch (err) {
+      console.warn('[Kategoria] Bootstrap modal initialisation failed:', err);
+      modal = null;
+    }
+  } else {
+    console.warn('[Kategoria] Bootstrap modal not available. Modal actions disabled.');
+  }
 
 function getCookie(name) {
   const value = `; ${document.cookie}`;
@@ -98,16 +118,22 @@ async function fetchKategoriak() {
         <td>${escapeHtml(item.id)}</td>
         <td>${escapeHtml(item.izena)}</td>
         <td>
-          <button class="btn-action editBtn" data-id="${item.id}">✏️</button>
-          <button class="btn-action deleteBtn" data-id="${item.id}">🗑️</button>
+          <button class="btn-action editBtn-kategoria" data-id="${item.id}">✏️</button>
+          <button class="btn-action deleteBtn-kategoria" data-id="${item.id}">🗑️</button>
         </td>
       </tr>`;
     }).join('');
-    document.querySelectorAll('.editBtn').forEach(btn => {
-      btn.addEventListener('click', () => openModal(btn.dataset.id));
+    tbody.querySelectorAll('.editBtn-kategoria').forEach(btn => {
+      btn.addEventListener('click', () => {
+        console.log('[Kategoria] Edit button clicked', btn.dataset.id);
+        openModal(btn.dataset.id);
+      });
     });
-    document.querySelectorAll('.deleteBtn').forEach(btn => {
-      btn.addEventListener('click', () => deleteKategoria(btn.dataset.id));
+    tbody.querySelectorAll('.deleteBtn-kategoria').forEach(btn => {
+      btn.addEventListener('click', () => {
+        console.log('[Kategoria] Delete button clicked', btn.dataset.id);
+        deleteKategoria(btn.dataset.id);
+      });
     });
   } catch (err) {
     tbody.innerHTML = `<tr><td colspan="3">${escapeHtml(err.message)}</td></tr>`;
@@ -137,8 +163,10 @@ async function openModal(id = null) {
     document.getElementById('kategoriaId').value = '';
     document.getElementById('kategoriaModalLabel').textContent = 'Sortu';
   }
-  modal.hide();
-  modal.show();
+  if (modal) {
+    modal.hide();
+    modal.show();
+  }
 }
 
 form.addEventListener('submit', async e => {
@@ -186,7 +214,10 @@ async function deleteKategoria(id) {
   fetchKategoriak();
 }
 
-document.getElementById('addKategoriaBtn').addEventListener('click', () => openModal());
+addBtn.addEventListener('click', () => {
+  console.log('[Kategoria] Add button clicked');
+  openModal();
+});
 window.addEventListener('DOMContentLoaded', fetchKategoriak);
 searchInput.addEventListener('input', () => {
   const filter = searchInput.value.toLowerCase();

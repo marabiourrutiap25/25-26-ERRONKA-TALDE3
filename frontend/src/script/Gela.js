@@ -2,9 +2,29 @@
 (function() {
   const apiUrl = window.location.origin + '/25-26-ERRONKA-TALDE3/backend/src/controller/GelaController.php';
   const tbody = document.querySelector('#gelaTable tbody');
-  const modal = new bootstrap.Modal(document.getElementById('gelaModal'));
   const form = document.getElementById('gelaForm');
   const searchInput = document.getElementById('searchGelaInput');
+  const modalElement = document.getElementById('gelaModal');
+  const addBtn = document.getElementById('addGelaBtn');
+  let modal = null;
+
+  console.log('[Gela] Script initialising');
+
+  if (!tbody || !form || !searchInput || !modalElement || !addBtn) {
+    console.warn('[Gela] Required DOM elements not found. Aborting script.');
+    return;
+  }
+
+  if (modalElement && window.bootstrap && typeof window.bootstrap.Modal === 'function') {
+    try {
+      modal = new bootstrap.Modal(modalElement);
+    } catch (err) {
+      console.warn('[Gela] Bootstrap modal initialisation failed:', err);
+      modal = null;
+    }
+  } else {
+    console.warn('[Gela] Bootstrap modal not available. Modal actions disabled.');
+  }
 
 function getCookie(name) {
   const value = `; ${document.cookie}`;
@@ -99,16 +119,22 @@ async function fetchGelak() {
         <td>${escapeHtml(item.izena)}</td>
         <td>${escapeHtml(item.taldea || '')}</td>
         <td>
-          <button class="btn-action editBtn" data-id="${item.id}">✏️</button>
-          <button class="btn-action deleteBtn" data-id="${item.id}">🗑️</button>
+          <button class="btn-action editBtn-gela" data-id="${item.id}">✏️</button>
+          <button class="btn-action deleteBtn-gela" data-id="${item.id}">🗑️</button>
         </td>
       </tr>`;
     }).join('');
-    document.querySelectorAll('.editBtn').forEach(btn => {
-      btn.addEventListener('click', () => openModal(btn.dataset.id));
+    tbody.querySelectorAll('.editBtn-gela').forEach(btn => {
+      btn.addEventListener('click', () => {
+        console.log('[Gela] Edit button clicked', btn.dataset.id);
+        openModal(btn.dataset.id);
+      });
     });
-    document.querySelectorAll('.deleteBtn').forEach(btn => {
-      btn.addEventListener('click', () => deleteGela(btn.dataset.id));
+    tbody.querySelectorAll('.deleteBtn-gela').forEach(btn => {
+      btn.addEventListener('click', () => {
+        console.log('[Gela] Delete button clicked', btn.dataset.id);
+        deleteGela(btn.dataset.id);
+      });
     });
   } catch (err) {
     tbody.innerHTML = `<tr><td colspan="4">${escapeHtml(err.message)}</td></tr>`;
@@ -139,8 +165,10 @@ async function openModal(id = null) {
     document.getElementById('gelaId').value = '';
     document.getElementById('gelaModalLabel').textContent = 'Sortu';
   }
-  modal.hide();
-  modal.show();
+  if (modal) {
+    modal.hide();
+    modal.show();
+  }
 }
 
 form.addEventListener('submit', async e => {
@@ -189,7 +217,10 @@ async function deleteGela(id) {
   fetchGelak();
 }
 
-document.getElementById('addGelaBtn').addEventListener('click', () => openModal());
+addBtn.addEventListener('click', () => {
+  console.log('[Gela] Add button clicked');
+  openModal();
+});
 window.addEventListener('DOMContentLoaded', fetchGelak);
 searchInput.addEventListener('input', () => {
   const filter = searchInput.value.toLowerCase();
