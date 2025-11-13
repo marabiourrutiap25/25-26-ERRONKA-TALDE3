@@ -1,14 +1,24 @@
 {
-  "ekipamendua-header": "EQUIPMENT",
-  "inbentarioa-header": "INVENTORY",
-  "kudeaketa-header": "MANAGEMENT",
-  "erabiltzaileak-header": "USERS",
-  "profila-header": "profile",
-  "saioa-itxi-header": "logout",
+  "equipment-header": "EQUIPMENT",
+  "inventory-header": "INVENTORY",
+  "management-header": "MANAGEMENT",
+  "users-header": "USERS",
+  "profile-header": "profile",
+  "logout-header": "logout",
   "username-label": "Username:",
   "username-placeholder": "Enter your username",
   "password-label": "Password:",
   "password-placeholder": "Enter your password",
+  "name-label": "Name:",
+  "name-placeholder": "Enter your Name",
+  "surname-label": "Surname:",
+  "surname-placeholder": "Enter your surname",
+  
+  
+  
+  "passwordChangeCheckBox": "¿Do you want to change the password?",
+  "changeProfileButton": "Change",
+  
   "remember": "Remember me",
   "submit": "Login",
   "contact": "No account? Contact: example@fpsanturtzilh.eus",
