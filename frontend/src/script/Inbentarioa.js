@@ -225,7 +225,7 @@ form.addEventListener('submit', async e => {
 });
 
 async function deleteInbentarioa(etiketa, silent = false) {
-  if (!silent && !confirm('Pendiente borrar este akert')) return;
+  if (!silent && !confirm('Inbentarioa ezabatuko duzu.')) return;
   const api_key = localStorage.getItem('api_key');
   const res = await fetch(`${apiUrl}?action=delete&etiketa=${encodeURIComponent(etiketa)}`, {
     method: 'DELETE',

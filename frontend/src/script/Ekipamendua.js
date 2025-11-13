@@ -29,7 +29,7 @@ try {
   if (toastElement && window.bootstrap && typeof window.bootstrap.Toast === 'function') {
     toast = new bootstrap.Toast(toastElement, { delay: 3000 });
   } else {
-    toast = null; // fallback to alert-style
+    toast = null;
   }
 } catch (e) {
   // Don't let toast init break the rest of the script
@@ -73,14 +73,10 @@ function showToast(message, type = 'success') {
       toast.show();
       return;
     } catch (e) {
-      console.warn('Showing toast failed, falling back to alert:', e);
+      console.warn('Errore bat gertatu da:', e);
     }
   }
-
-  // Fallback: non-blocking alert replacement using console + small DOM alert
-  // Use a lightweight in-page fallback so the user still sees feedback if Bootstrap toast is unavailable
   console.log(`${type.toUpperCase()}: ${message}`);
-  // last resort: alert (very rare)
   try { window.alert(message); } catch (e) { /* ignore */ }
 }
 
@@ -139,8 +135,8 @@ async function fetchEkipamenduak() {
 
 function escapeHtml(str) {
   if (!str) return '';
-  return String(str).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')
-                    .replace(/"/g,'&quot;').replace(/'/g,'&#39;');
+  return String(str).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;').replace(/'/g, '&#39;');
 }
 
 async function loadKategoriak() {
@@ -157,7 +153,7 @@ async function loadKategoriak() {
 
     // Clear existing options except the first one
     kategoriaSelect.innerHTML = '<option value="">Aukeratu kategoria</option>';
-    
+
     // Add new options
     data.kategoriak.forEach(kategoria => {
       const option = document.createElement('option');
@@ -172,10 +168,10 @@ async function loadKategoriak() {
 
 async function openModal(id = null) {
   const api_key = getApiKey();
-  
+
   // Load categories first
   await loadKategoriak();
-  
+
   if (id) {
     const res = await fetch(`${apiUrl}?action=getById&id=${id}`, { headers: { 'Authorization': 'Bearer ' + api_key } });
     const data = await res.json();
@@ -214,7 +210,7 @@ async function openModal(id = null) {
     document.getElementById('ekipId').value = '';
     document.getElementById('ekipModalLabel').textContent = 'Sortu';
     // Ensure fields are enabled for creation
-    ['izena','deskribapena','marka','modelo','kategoria','stock'].forEach(id => {
+    ['izena', 'deskribapena', 'marka', 'modelo', 'kategoria', 'stock'].forEach(id => {
       const el = document.getElementById(id);
       if (el) { el.removeAttribute('disabled'); el.removeAttribute('readonly'); el.style.pointerEvents = ''; }
     });
@@ -252,7 +248,6 @@ form.addEventListener('submit', async e => {
 });
 
 async function deleteEkipamendua(id) {
-  if (!confirm('Pendiente borrar este akert')) return;
   const api_key = getApiKey();
   const res = await fetch(`${apiUrl}?action=delete&id=${id}`, {
     method: 'DELETE',
