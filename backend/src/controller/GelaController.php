@@ -95,6 +95,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'DELETE' && $action === 'delete') {
         exit;
     }
     $resultado = $service->deleteGela($api_key, $id);
+    if (!$resultado['success']) {
+        http_response_code(409);
+    }
     echo json_encode($resultado);
     exit;
 }
