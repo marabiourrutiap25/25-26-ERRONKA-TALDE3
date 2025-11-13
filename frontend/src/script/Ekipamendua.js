@@ -6,6 +6,19 @@ const form = document.getElementById('ekipForm');
 const searchInput = document.getElementById('searchInput');
 const kategoriaSelect = document.getElementById('kategoria');
 
+// ===== COOKIE HELPER FUNCTION =====
+function getCookie(name) {
+  const value = `; ${document.cookie}`;
+  const parts = value.split(`; ${name}=`);
+  if (parts.length === 2) return decodeURIComponent(parts.pop().split(';').shift());
+  return "";
+}
+
+// Obtener api_key desde cookie de sesión o localStorage
+function getApiKey() {
+  return getCookie('api_key_session') || localStorage.getItem('api_key');
+}
+
 // Toast initialization (defensive)
 let toast = null;
 let toastElement = document.getElementById('notificationToast');
@@ -16,7 +29,7 @@ try {
   if (toastElement && window.bootstrap && typeof window.bootstrap.Toast === 'function') {
     toast = new bootstrap.Toast(toastElement, { delay: 3000 });
   } else {
-    toast = null; // fallback to alert-style
+    toast = null;
   }
 } catch (e) {
   // Don't let toast init break the rest of the script
@@ -60,21 +73,20 @@ function showToast(message, type = 'success') {
       toast.show();
       return;
     } catch (e) {
-      console.warn('Showing toast failed, falling back to alert:', e);
+      console.warn('Errore bat gertatu da:', e);
     }
   }
-
-  // Fallback: non-blocking alert replacement using console + small DOM alert
-  // Use a lightweight in-page fallback so the user still sees feedback if Bootstrap toast is unavailable
   console.log(`${type.toUpperCase()}: ${message}`);
-  // last resort: alert (very rare)
   try { window.alert(message); } catch (e) { /* ignore */ }
 }
 
 async function fetchEkipamenduak() {
   tbody.innerHTML = '<tr><td colspan="8">Kargatzen...</td></tr>';
-  const api_key = localStorage.getItem('api_key');
-  if (!api_key) return;
+  const api_key = getApiKey();
+  if (!api_key) {
+    tbody.innerHTML = '<tr><td colspan="8">❌ Saioa ez da aktibo. Hasi saioa berriro.</td></tr>';
+    return;
+  }
 
   try {
     const res = await fetch(`${apiUrl}?action=getAll`, {
@@ -123,12 +135,12 @@ async function fetchEkipamenduak() {
 
 function escapeHtml(str) {
   if (!str) return '';
-  return String(str).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')
-                    .replace(/"/g,'&quot;').replace(/'/g,'&#39;');
+  return String(str).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;').replace(/'/g, '&#39;');
 }
 
 async function loadKategoriak() {
-  const api_key = localStorage.getItem('api_key');
+  const api_key = getApiKey();
   try {
     const res = await fetch(`${kategoriaApiUrl}?action=getAll`, {
       headers: { 'Authorization': 'Bearer ' + api_key }
@@ -141,7 +153,7 @@ async function loadKategoriak() {
 
     // Clear existing options except the first one
     kategoriaSelect.innerHTML = '<option value="">Aukeratu kategoria</option>';
-    
+
     // Add new options
     data.kategoriak.forEach(kategoria => {
       const option = document.createElement('option');
@@ -155,11 +167,11 @@ async function loadKategoriak() {
 }
 
 async function openModal(id = null) {
-  const api_key = localStorage.getItem('api_key');
-  
+  const api_key = getApiKey();
+
   // Load categories first
   await loadKategoriak();
-  
+
   if (id) {
     const res = await fetch(`${apiUrl}?action=getById&id=${id}`, { headers: { 'Authorization': 'Bearer ' + api_key } });
     const data = await res.json();
@@ -198,7 +210,7 @@ async function openModal(id = null) {
     document.getElementById('ekipId').value = '';
     document.getElementById('ekipModalLabel').textContent = 'Sortu';
     // Ensure fields are enabled for creation
-    ['izena','deskribapena','marka','modelo','kategoria','stock'].forEach(id => {
+    ['izena', 'deskribapena', 'marka', 'modelo', 'kategoria', 'stock'].forEach(id => {
       const el = document.getElementById(id);
       if (el) { el.removeAttribute('disabled'); el.removeAttribute('readonly'); el.style.pointerEvents = ''; }
     });
@@ -208,7 +220,7 @@ async function openModal(id = null) {
 
 form.addEventListener('submit', async e => {
   e.preventDefault();
-  const api_key = localStorage.getItem('api_key');
+  const api_key = getApiKey();
   const id = document.getElementById('ekipId').value;
   const payload = {
     izena: document.getElementById('izena').value,
@@ -236,8 +248,7 @@ form.addEventListener('submit', async e => {
 });
 
 async function deleteEkipamendua(id) {
-  if (!confirm('Ziur al zaude ezabatu nahi duzula?')) return;
-  const api_key = localStorage.getItem('api_key');
+  const api_key = getApiKey();
   const res = await fetch(`${apiUrl}?action=delete&id=${id}`, {
     method: 'DELETE',
     headers: { 'Authorization': 'Bearer ' + api_key }
