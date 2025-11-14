@@ -1,14 +1,14 @@
 class CustomHeader extends HTMLElement {
   connectedCallback() {
     this.innerHTML = `
-      <header>
-        <img src="../assets/icons/sanJorge.png" alt="Logo Izq" class="logo">
+      <header id="main-header">
+        <img src="../assets/img/logo_horizontal_principal.png" alt="Logo Izq" class="logo">
 
         <nav>
-          <a href="ekipamendua.html" data-page="ekipamendua">EKIPAMENDUA</a>
-          <a href="inbentarioa.html" data-page="inbentarioa">INBENTARIOA</a>
-          <a href="kudeaketa.html" data-page="kudeaketa">KUDEAKETA</a>
-          <a href="erabiltzaileak.html" data-page="erabiltzaileak">ERABILTZAILEAK</a>
+          <a href="ekipamendua.html" data-page="ekipamendua" data-i18n="equipment-header">EKIPAMENDUA</a>
+          <a href="inbentarioa.html" data-page="inbentarioa" data-i18n="inventory-header">INBENTARIOA</a>
+          <a href="kudeaketa.html" data-page="kudeaketa" data-i18n="management-header">KUDEAKETA</a>
+          <a href="erabiltzaileak.html" data-page="erabiltzaileak" data-i18n="users-header">ERABILTZAILEAK</a>
         </nav>
 
         <div class="right-section">
@@ -24,9 +24,8 @@ class CustomHeader extends HTMLElement {
             </div>
 
             <div class="user-menu" id="userMenu">
-              <a href="profile.html">Profila</a>
-              <a href="settings.html">Ezarpenak</a>
-              <a href="logout.html">Saioa itxi</a>
+              <a href="profila.html" data-i18n="profile-header">Profila</a>
+              <a href="../../public/index.html" data-i18n="logout-header" id="logout">Saioa itxi</a>
             </div>
           </div>
         </div>
@@ -36,8 +35,24 @@ class CustomHeader extends HTMLElement {
     this.initUserMenu();
     this.initLangButtons();
     this.highlightCurrentPage();
+    this.logout();
+    
   }
 
+  logout() {
+    const logout=document.getElementById("logout");
+    logout.addEventListener("click", function(){
+
+      localStorage.clear();
+      sessionStorage.clear();
+
+      document.cookie.split(";").forEach(cookie => {
+      const name = cookie.split("=")[0].trim();
+      document.cookie = name + "=;expires=Thu, 01 Jan 1970 00:00:00 UTC;path=/;";
+      });
+
+    });
+  }
   attachStyles() {
     const style = document.createElement('style');
     style.textContent = `
@@ -48,7 +63,7 @@ class CustomHeader extends HTMLElement {
       }
 
       /* ========================= HEADER ========================= */
-      header {
+      #main-header {
         display: flex;
         align-items: center;
         justify-content: space-between;
@@ -62,22 +77,24 @@ class CustomHeader extends HTMLElement {
       }
 
       /* ========================= LOGO ========================= */
-      .logo {
+      #main-header .logo {
         height: 50px;
         width: auto;
         flex-shrink: 0;
       }
 
       /* ========================= NAVEGACIÓN ========================= */
-      nav {
+      #main-header nav {
         display: flex;
         align-items: center;
+        justify-content: center;
         gap: 50px;
+        flex: 1 1 auto;
         flex-shrink: 1;
         min-width: 0; /* importante para permitir que nav se reduzca */
       }
 
-      nav a {
+      #main-header nav a {
         color: #17355F;
         text-decoration: none;
         transition: all 0.2s ease;
@@ -89,13 +106,13 @@ class CustomHeader extends HTMLElement {
         text-decoration: underline;
       }
 
-      nav a.active {
+      #main-header nav a.active {
         text-decoration: underline 2px solid #17355F;
         text-underline-offset: 4px;
       }
 
       /* ========================= BLOQUE DERECHO ========================= */
-      .right-section {
+      #main-header .right-section {
         display: flex;
         align-items: center;
         gap: 12px;
@@ -104,13 +121,13 @@ class CustomHeader extends HTMLElement {
       }
 
       /* ========================= SELECTOR DE IDIOMA ========================= */
-      .lang-switcher {
+      #main-header .lang-switcher {
         display: flex;
         align-items: center;
         gap: 8px;
       }
 
-      .lang-btn {
+      #main-header .lang-btn {
         font-weight: 600;
         border-color: #17355F !important;
         color: #17355F !important;
@@ -118,18 +135,18 @@ class CustomHeader extends HTMLElement {
         padding: 4px 8px;
       }
 
-      .lang-btn:hover,
-      .lang-btn.active {
+      #main-header .lang-btn:hover,
+      #main-header .lang-btn.active {
         background-color: #17355F !important;
         color: #fff !important;
       }
 
       /* ========================= USUARIO ========================= */
-      .user-container {
+      #main-header .user-container {
         position: relative;
       }
 
-      .user-btn {
+      #main-header .user-btn {
         width: 40px;
         height: 40px;
         background: #FFFFFF;
@@ -142,11 +159,11 @@ class CustomHeader extends HTMLElement {
         transition: background 0.2s;
       }
 
-      .user-btn:hover {
+      #main-header .user-btn:hover {
         background: rgba(23, 53, 95, 0.13);
       }
 
-      .user-icon {
+      #main-header .user-icon {
         width: 100%;
         height: 100%;
         object-fit: cover;
@@ -154,7 +171,7 @@ class CustomHeader extends HTMLElement {
       }
 
       /* ========================= MENÚ USUARIO ========================= */
-      .user-menu {
+      #main-header .user-menu {
         position: fixed;
         right: 20px;
         top: 70px;
@@ -168,7 +185,7 @@ class CustomHeader extends HTMLElement {
         z-index: 1000;
       }
 
-      .user-menu a {
+      #main-header .user-menu a {
         padding: 10px 15px;
         text-decoration: none;
         color: #17355F;
@@ -177,46 +194,46 @@ class CustomHeader extends HTMLElement {
         font-weight: 600;
       }
 
-      .user-menu a:hover {
+      #main-header .user-menu a:hover {
         background: #e6f3f1;
       }
 
-      .user-menu.show {
+      #main-header .user-menu.show {
         display: flex;
       }
 
       /* ========================= TABLAS (si las hay) ========================= */
-      table {
+      #main-header table {
         width: 100%;
         table-layout: auto;
         border-collapse: collapse;
       }
 
-      td, th {
+      #main-header td, th {
         word-wrap: break-word;
         white-space: normal;
       }
 
       /* ========================= RESPONSIVE ========================= */
-      @media (max-width: 768px) {
+      #main-header @media (max-width: 768px) {
         header {
           flex-direction: column;
           align-items: center;
           gap: 10px;
         }
 
-        nav {
+        #main-header nav {
           gap: 18px;
           justify-content: center;
         }
 
-        .right-section {
+        #main-header .right-section {
           margin-left: 0;
           width: 100%;
           justify-content: center;
         }
 
-        .lang-switcher {
+        #main-header .lang-switcher {
           margin-top: 8px;
           justify-content: center;
         }

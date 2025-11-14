@@ -1,10 +1,17 @@
 let currentLang = "eus";
 
+try {
+  const storedLang = localStorage.getItem("selectedLang");
+  if (storedLang) currentLang = storedLang;
+} catch (err) {
+  // Ignorar si localStorage no está disponible
+}
+
 async function loadLang(lang) {
   console.log("Intentando cargar idioma:", lang);
 
   try {
-    const response = await fetch(`../src/lang/${lang}.json`);
+    const response = await fetch("http://localhost/25-26-ERRONKA-TALDE3/frontend/src/lang/"+lang+".json");
     console.log("Respuesta fetch:", response);
 
     if (!response.ok) throw new Error("No se pudo cargar el JSON");
@@ -33,21 +40,31 @@ async function loadLang(lang) {
   }
 }
 
+// exponer función globalmente para que otros componentes puedan llamar
+if (typeof window !== "undefined") {
+  window.loadLang = loadLang;
+}
+
 // inicializar idioma por defecto
 loadLang(currentLang);
 
-// cambiar idioma al hacer clic en botones
-document.querySelectorAll(".lang-btn").forEach(btn => {
-  btn.addEventListener("click", () => {
-    const lang = btn.dataset.lang;
-    currentLang = lang;
-    loadLang(currentLang);
-
-    // actualizar el estado activo
-    document.querySelectorAll(".lang-btn").forEach(b => b.classList.remove("active"));
-    btn.classList.add("active");
-  });
+// cambiar idioma con delegación de eventos (funciona aunque los botones se inserten más tarde)
+document.addEventListener("click", (e) => {
+  const btn = e.target.closest(".lang-btn");
+  if (!btn) return;
+  const lang = btn.dataset.lang;
+  currentLang = lang;
+  loadLang(currentLang);
+  // actualizar el estado activo
+  document.querySelectorAll(".lang-btn").forEach(b => b.classList.remove("active"));
+  btn.classList.add("active");
+  try {
+    localStorage.setItem("selectedLang", lang);
+  } catch (err) {
+    // Ignorar si localStorage no está disponible
+  }
 });
 
-// marcar por defecto el botón activo al cargar
-document.querySelector(`.lang-btn[data-lang="${currentLang}"]`).classList.add("active");
+// marcar por defecto el botón activo al cargar (si ya existen)
+const initialActive = document.querySelector(`.lang-btn[data-lang="${currentLang}"]`);
+if (initialActive) initialActive.classList.add("active");

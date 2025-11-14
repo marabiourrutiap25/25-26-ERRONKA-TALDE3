@@ -19,5 +19,10 @@ class Erabiltzailea {
             $this->api_key = $row['api_key'] ?? null;
         }
     }
+
+
+
+
+
 }
 ?>

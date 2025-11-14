@@ -1,8 +1,23 @@
 {
+  "equipment-header": "EKIPAMENDUA",
+  "inventory-header": "INBENTARIOA",
+  "management-header": "KUDEAKETA",
+  "users-header": "ERABILTZAILEAK",
+  "profile-header": "profila",
+  "logout-header": "saioa itxi",
   "username-label": "Erabiltzailea:",
   "username-placeholder": "Sartu zure erabiltzaile izena",
   "password-label": "Pasahitza:",
-  "password-placeholder": "Sartu pasahitza",
+  "password-placeholder": "Sartu zure pasahitza",
+  "name-label": "Izena:",
+  "name-placeholder": "Sartu zure izena",
+  "surname-label": "Abizena:",
+  "surname-placeholder": "Sartu zure abizena",
+  
+  
+  "passwordChangeCheckBox": "¿Pasahitza aldatu nahi duzu?",
+  "changeProfileButton": "Aldatu",  
+  
   "remember": "Nire kontua gogoratu",
   "submit": "Sartu",
   "contact": "Ez duzu konturik? Jarri harremanetarako: adibide@fpsanturtzilh.eus",
