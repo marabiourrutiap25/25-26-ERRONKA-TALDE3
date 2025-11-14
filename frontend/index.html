@@ -159,7 +159,7 @@
                             }
 
                             const apiKey = encodeURIComponent(data.user.api_key);
-                            window.location.href = `src/pages/kudeaketa.html?api_key=${apiKey}`;
+                            window.location.href = `src/pages/kudeaketa.html`;
                         } else {
                             console.warn("❌ Login error:", data.message);
                             const errorTemplate = document.getElementById("error-template");
