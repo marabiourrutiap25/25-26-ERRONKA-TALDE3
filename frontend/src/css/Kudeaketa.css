@@ -1,14 +1,4 @@
-
-body {
-  background-color: #f8f9fa;
-  font-family: 'Segoe UI', sans-serif;
-}
-
-h1 {
-  font-weight: 600;
-  font-size: 1.8rem;
-}
-
+/* --- Estilo de botones personalizados --- */
 .btn-custom {
   border-radius: 1.5rem;
   padding: 0.4rem 1rem;
@@ -18,11 +8,13 @@ h1 {
   border: none;
 }
 
+/* --- Estilo de tarjetas que contienen tablas --- */
 .card {
   border-radius: 1rem;
   box-shadow: 0 0.125rem 0.25rem rgba(0,0,0,0.1);
 }
 
+/* --- Estilo de celdas y encabezados de tabla --- */
 table th, table td {
   vertical-align: middle !important;
 }
@@ -31,6 +23,7 @@ table th, table td {
   background-color: #f1f2f6;
 }
 
+/* --- Botones de acción en las tablas --- */
 .btn-action {
   width: 32px;
   height: 32px;
@@ -46,7 +39,8 @@ table th, table td {
   margin-right: 4px;
 }
 
-#searchKategoriaInput, #searchKokalekuaInput, #searchGelaInput {
+/* --- Inputs de búsqueda estandarizados --- */
+.table-search-input {
   border-radius: 1.5rem;
   padding: 0.4rem 1rem;
   border: 1px solid #009888;
@@ -54,28 +48,7 @@ table th, table td {
   width: 200px;
 }
 
-#searchKategoriaInput:focus, #searchKokalekuaInput:focus, #searchGelaInput:focus {
+.table-search-input:focus {
   box-shadow: 0 0 5px #009888;
   border-color: #009888;
-}
-
-.row.g-4 > [class^="col-"] {
-  display: flex;
-  flex-direction: column;
-}
-
-.section-title {
-  margin-top: 0.5rem;
-  margin-bottom: 1rem;
-  font-size: 1.3rem;
-  font-weight: 500;
-  color: #009888;
-}
-
-.section-title {
-  margin-top: 2rem;
-  margin-bottom: 1rem;
-  font-size: 1.3rem;
-  font-weight: 500;
-  color: #009888;
 }
