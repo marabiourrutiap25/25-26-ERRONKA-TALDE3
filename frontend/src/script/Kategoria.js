@@ -199,7 +199,6 @@ form.addEventListener('submit', async e => {
 });
 
 async function deleteKategoria(id) {
-  if (!confirm('Ziur al zaude ezabatu nahi duzula?')) return;
   const api_key = getApiKey();
   const res = await fetch(`${apiUrl}?action=delete&id=${encodeURIComponent(id)}`, {
     method: 'DELETE',

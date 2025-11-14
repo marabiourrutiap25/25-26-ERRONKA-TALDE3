@@ -218,9 +218,6 @@
       showToast('Saioa ez da aktibo. Hasi saioa berriro.', 'error');
       return;
     }
-    if (!confirm('Ziur al zaude gela hau ezabatu nahi duzula?')) {
-      return;
-    }
     try {
       const res = await fetch(`${apiUrl}?action=delete&id=${encodeURIComponent(id)}`, {
         method: 'DELETE',
