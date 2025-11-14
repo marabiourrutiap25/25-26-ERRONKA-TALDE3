@@ -183,6 +183,21 @@ class GelaService
             return ["success" => false, "message" => "Gela ez da existitzen."];
         }
 
+        // Comprobar dependencias en kokalekua
+        $dependencyQuery = "SELECT COUNT(*) as total FROM kokalekua WHERE idGela = ?";
+        $dependencyStmt = $this->conn->prepare($dependencyQuery);
+        if ($dependencyStmt) {
+            $dependencyStmt->bind_param("i", $id);
+            $dependencyStmt->execute();
+            $dependencyResult = $dependencyStmt->get_result();
+            $dependencyRow = $dependencyResult->fetch_assoc();
+            if (!empty($dependencyRow['total']) && intval($dependencyRow['total']) > 0) {
+                return ["success" => false, "message" => "Ezin da ezabatu: gela honek kokalekuak lotuta ditu."];
+            }
+        } else {
+            return ["success" => false, "message" => "Errorea mendekotasunak egiaztatzean."];
+        }
+
         $query = "DELETE FROM " . $this->table_name . " WHERE id = ?";
         $stmt = $this->conn->prepare($query);
         if (!$stmt) {
@@ -195,6 +210,11 @@ class GelaService
                 return ["success" => true, "message" => "Gela ezabatu da."];
             }
             return ["success" => false, "message" => "Ezin izan da gela ezabatu."];
+        }
+
+        $errorCode = $stmt->errno ?: mysqli_errno($this->conn);
+        if ($errorCode === 1451) {
+            return ["success" => false, "message" => "Ezin da gela ezabatu, mendekotasunak ditu."];
         }
 
         return ["success" => false, "message" => "Errorea gela ezabatzean."];
