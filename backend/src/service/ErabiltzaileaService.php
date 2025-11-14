@@ -3,17 +3,13 @@ require_once __DIR__ . '/../model/Erabiltzailea.php';
 
 class ErabiltzaileaService
 {
-
-    private $dbObj;
     private $conn;
-    public function __construct(){
-        $this->dbObj = new DB();
-        $this->conn = $this->dbObj->konektatu();
-    }
-    
-
     private $table_name = "erabiltzailea";
 
+    public function __construct($db)
+    {
+        $this->conn = $db;
+    }
 
     public function select_Erabiltzailea($username)
     {
@@ -29,10 +25,7 @@ class ErabiltzaileaService
 
         if ($result && $result->num_rows > 0) {
             $row = $result->fetch_assoc();
-
-            $newErabiltzaile=new Erabiltzailea();
-            $newErabiltzaile->sortu_erabiltzaile_array_asociativo($row); 
-            return $newErabiltzaile;
+            return new Erabiltzailea($row);
         }
         return null;
     }
@@ -133,27 +126,6 @@ class ErabiltzaileaService
         }
 
         return ["success" => true, "count" => count($items), "users" => $items];
-    }
-    // Obtener usuario por api_key
-    public function getByApiKey($api_key){
-        $user = $this->select_ApiKey($api_key);
-        if (!$user) {
-            return ["success" => false, "message" => "API key ez da baliozkoa."];
-        }
-        $query = "SELECT nan, izena, abizena, erabiltzailea FROM " . $this->table_name . " WHERE api_key = ? LIMIT 1";
-        $stmt = $this->conn->prepare($query);
-        if (!$stmt) {
-            return ["success" => false, "message" => "Errorea kontsulta prestatzean: " . $this->conn->error];
-        }
-        $stmt->bind_param("s", $api_key);
-        $stmt->execute();
-        $result = $stmt->get_result();
-        if ($result && $result->num_rows > 0) {
-            $row = $result->fetch_assoc();
-            return ["success" => true, "user" => $row];
-        }
-
-        return ["success" => false, "message" => "Erabiltzailea ez da aurkitu."];
     }
 
     // Obtener usuario por nan
