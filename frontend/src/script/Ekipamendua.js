@@ -32,12 +32,11 @@ try {
     toast = null;
   }
 } catch (e) {
-  // Don't let toast init break the rest of the script
   console.warn('Toast init failed:', e);
   toast = null;
 }
 
-// Show toast notification (uses Bootstrap toast if available, otherwise falls back)
+// Show toast notification
 function showToast(message, type = 'success') {
   const icons = {
     success: '✅',
@@ -52,7 +51,6 @@ function showToast(message, type = 'success') {
     info: 'Informazioa'
   };
 
-  // If toast DOM elements exist, update and show bootstrap toast
   if (toast && toastElement && toastTitle && toastMessage && toastIcon) {
     try {
       toastIcon.textContent = icons[type] || '';
@@ -77,7 +75,7 @@ function showToast(message, type = 'success') {
     }
   }
   console.log(`${type.toUpperCase()}: ${message}`);
-  try { window.alert(message); } catch (e) { /* ignore */ }
+  try { window.alert(message); } catch (e) { }
 }
 
 async function fetchEkipamenduak() {
@@ -151,10 +149,7 @@ async function loadKategoriak() {
       return;
     }
 
-    // Clear existing options except the first one
     kategoriaSelect.innerHTML = '<option value="">Aukeratu kategoria</option>';
-
-    // Add new options
     data.kategoriak.forEach(kategoria => {
       const option = document.createElement('option');
       option.value = kategoria.id;
@@ -168,8 +163,6 @@ async function loadKategoriak() {
 
 async function openModal(id = null) {
   const api_key = getApiKey();
-
-  // Load categories first
   await loadKategoriak();
 
   if (id) {
@@ -197,19 +190,13 @@ async function openModal(id = null) {
     stockField.value = data.ekipamendua.stock;
     document.getElementById('ekipModalLabel').textContent = 'Editatu';
 
-    // Ensure fields are editable (remove accidental disabled/readonly)
     [izenaField, deskrField, markaField, modeloField, kategoriaField, stockField].forEach(f => {
-      if (f) {
-        f.removeAttribute('disabled');
-        f.removeAttribute('readonly');
-        f.style.pointerEvents = '';
-      }
+      if (f) { f.removeAttribute('disabled'); f.removeAttribute('readonly'); f.style.pointerEvents = ''; }
     });
   } else {
     form.reset();
     document.getElementById('ekipId').value = '';
     document.getElementById('ekipModalLabel').textContent = 'Sortu';
-    // Ensure fields are enabled for creation
     ['izena', 'deskribapena', 'marka', 'modelo', 'kategoria', 'stock'].forEach(id => {
       const el = document.getElementById(id);
       if (el) { el.removeAttribute('disabled'); el.removeAttribute('readonly'); el.style.pointerEvents = ''; }

@@ -1,4 +1,3 @@
-/* --- Estilo de botones personalizados --- */
 .btn-custom {
   border-radius: 1.5rem;
   padding: 0.4rem 1rem;
@@ -8,14 +7,13 @@
   border: none;
 }
 
-/* --- Estilo de tarjetas que contienen tablas --- */
 .card {
   border-radius: 1rem;
-  box-shadow: 0 0.125rem 0.25rem rgba(0,0,0,0.1);
+  box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.1);
 }
 
-/* --- Estilo de celdas y encabezados de tabla --- */
-table th, table td {
+table th,
+table td {
   vertical-align: middle !important;
 }
 
@@ -23,7 +21,6 @@ table th, table td {
   background-color: #f1f2f6;
 }
 
-/* --- Botones de acción en las tablas --- */
 .btn-action {
   width: 32px;
   height: 32px;
@@ -39,7 +36,6 @@ table th, table td {
   margin-right: 4px;
 }
 
-/* --- Inputs de búsqueda estandarizados --- */
 .table-search-input {
   border-radius: 1.5rem;
   padding: 0.4rem 1rem;

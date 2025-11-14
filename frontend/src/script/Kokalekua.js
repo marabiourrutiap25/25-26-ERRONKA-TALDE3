@@ -43,10 +43,16 @@
 
     if (toastEl && toast) {
       toastEl.className = 'toast';
-      if (type === 'success') toastEl.classList.add('bg-success', 'text-white');
-      else if (type === 'error') toastEl.classList.add('bg-danger', 'text-white');
-      else if (type === 'warning') toastEl.classList.add('bg-warning');
-      else toastEl.classList.add('bg-info', 'text-white');
+
+      if (type === 'success') {
+        toastEl.classList.add('bg-success', 'text-white');
+      } else if (type === 'error') {
+        toastEl.classList.add('bg-danger', 'text-white');
+      } else if (type === 'warning') {
+        toastEl.classList.add('bg-warning');
+      } else {
+        toastEl.classList.add('bg-info', 'text-white');
+      }
 
       iconEl.textContent = icons[type] || '';
       titleEl.textContent = titles[type] || '';
@@ -59,8 +65,8 @@
 
   function escapeHtml(str) {
     if (!str) return '';
-    return String(str).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')
-      .replace(/"/g,'&quot;').replace(/'/g,'&#39;');
+    return String(str).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
+      .replace(/"/g, '&quot;').replace(/'/g, '&#39;');
   }
 
   async function fetchKokalekuak() {
@@ -99,41 +105,40 @@
     }
   }
 
-async function loadSelectOptions() {
-  const api_key = getApiKey();
-  if (!api_key) return;
+  async function loadSelectOptions() {
+    const api_key = getApiKey();
+    if (!api_key) return;
 
-  // Inventarioak
-  try {
-    const res = await fetch(`${inventoryUrl}?action=getAll`, { headers: { 'Authorization': 'Bearer ' + api_key } });
-    const data = await res.json();
-    selectEtiketa.innerHTML = '';
-    if (data.success && data.inbentarioak) {
-      data.inbentarioak.forEach(inv => {
-        const opt = document.createElement('option');
-        opt.value = inv.inbentarioa.etiketa;           // valor del select
-        opt.textContent = `${inv.inbentarioa.etiketa} (${inv.ekipamendu_izena})`; // texto mostrado
-        selectEtiketa.appendChild(opt);
-      });
-    }
-  } catch (err) { console.warn(err); }
+    // Inventarioak
+    try {
+      const res = await fetch(`${inventoryUrl}?action=getAll`, { headers: { 'Authorization': 'Bearer ' + api_key } });
+      const data = await res.json();
+      selectEtiketa.innerHTML = '';
+      if (data.success && data.inbentarioak) {
+        data.inbentarioak.forEach(inv => {
+          const opt = document.createElement('option');
+          opt.value = inv.inbentarioa.etiketa;
+          opt.textContent = `${inv.inbentarioa.etiketa} (${inv.ekipamendu_izena})`;
+          selectEtiketa.appendChild(opt);
+        });
+      }
+    } catch (err) { console.warn(err); }
 
-  // Gelak
-  try {
-    const res = await fetch(`${gelaUrl}?action=getAll`, { headers: { 'Authorization': 'Bearer ' + api_key } });
-    const data = await res.json();
-    selectGela.innerHTML = '';
-    if (data.success && data.gelak) {
-      data.gelak.forEach(g => {
-        const opt = document.createElement('option');
-        opt.value = g.id;      // valor del select
-        opt.textContent = g.izena; // texto mostrado
-        selectGela.appendChild(opt);
-      });
-    }
-  } catch (err) { console.warn(err); }
-}
-
+    // Gelak
+    try {
+      const res = await fetch(`${gelaUrl}?action=getAll`, { headers: { 'Authorization': 'Bearer ' + api_key } });
+      const data = await res.json();
+      selectGela.innerHTML = '';
+      if (data.success && data.gelak) {
+        data.gelak.forEach(g => {
+          const opt = document.createElement('option');
+          opt.value = g.id;
+          opt.textContent = g.izena;
+          selectGela.appendChild(opt);
+        });
+      }
+    } catch (err) { console.warn(err); }
+  }
 
   async function openModal(etiketa = null, hasieraData = null) {
     await loadSelectOptions();
@@ -216,7 +221,6 @@ async function loadSelectOptions() {
   });
 
   async function deleteKokalekua(etiketa, hasieraData) {
-    
     const api_key = getApiKey();
     try {
       const res = await fetch(`${apiUrl}?action=delete&etiketa=${encodeURIComponent(etiketa)}&hasieraData=${encodeURIComponent(hasieraData)}`, {
