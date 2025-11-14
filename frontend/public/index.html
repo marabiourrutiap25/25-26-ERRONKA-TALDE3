@@ -99,7 +99,7 @@
             const savedApiKey = localStorage.getItem("api_key") || getCookie("api_key_session");
             if (savedApiKey) {
                 const encoded = encodeURIComponent(savedApiKey);
-                window.location.href = `../src/pages/Kudeaketa.html?api_key=${encoded}`;
+                window.location.href = `../src/pages/Kudeaketa.html`;
             }
 
             // Cargar credenciales guardadas si existe la cookie
