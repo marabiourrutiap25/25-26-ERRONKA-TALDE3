@@ -182,6 +182,21 @@ class KategoriaService
             return ["success" => false, "message" => "Kategoria ez da existitzen."];
         }
 
+        // Comprobar dependencias en ekipamendua
+        $dependencyQuery = "SELECT COUNT(*) as total FROM ekipamendua WHERE idKategoria = ?";
+        $dependencyStmt = $this->conn->prepare($dependencyQuery);
+        if ($dependencyStmt) {
+            $dependencyStmt->bind_param("i", $id);
+            $dependencyStmt->execute();
+            $dependencyResult = $dependencyStmt->get_result();
+            $dependencyRow = $dependencyResult->fetch_assoc();
+            if (!empty($dependencyRow['total']) && intval($dependencyRow['total']) > 0) {
+                return ["success" => false, "message" => "Ezin da ezabatu: kategoria honek ekipamenduak lotuta ditu."];
+            }
+        } else {
+            return ["success" => false, "message" => "Errorea mendekotasunak egiaztatzean."];
+        }
+
         $query = "DELETE FROM " . $this->table_name . " WHERE id = ?";
         $stmt = $this->conn->prepare($query);
         if (!$stmt) {
