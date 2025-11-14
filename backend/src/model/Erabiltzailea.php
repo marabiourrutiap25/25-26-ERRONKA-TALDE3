@@ -8,18 +8,7 @@ class Erabiltzailea {
     public $rola;
     public $api_key;
 
-    public function __construct($nan=null, $izena=null, $abizena=null, $erabiltzailea=null, $pasahitza=null, $rola=null) {
-        $this->nan = $nan;
-        $this->izena = $izena;
-        $this->abizena = $abizena;
-        $this->erabiltzailea = $erabiltzailea;
-        $this->pasahitza = $pasahitza;
-        $this->rola = $rola;
-    }
-
-
-
-    public function sortu_erabiltzaile_array_asociativo($row = null){
+    public function __construct($row = null) {
         if ($row) {
             $this->nan = $row['nan'];
             $this->izena = $row['izena'];
@@ -30,6 +19,7 @@ class Erabiltzailea {
             $this->api_key = $row['api_key'] ?? null;
         }
     }
+
 
 
 
