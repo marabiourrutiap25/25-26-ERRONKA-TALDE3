@@ -25,7 +25,7 @@ class CustomHeader extends HTMLElement {
 
             <div class="user-menu" id="userMenu">
               <a href="profila.html" data-i18n="profile-header">Profila</a>
-              <a href="../../public/index.html" data-i18n="logout-header" id="logout">Saioa itxi</a>
+              <a href="../../index.html" data-i18n="logout-header" id="logout">Saioa itxi</a>
             </div>
           </div>
         </div>
