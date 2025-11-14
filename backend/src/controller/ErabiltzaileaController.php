@@ -41,6 +41,19 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET' && $action === 'getAll') {
     exit;
 }
 
+//GET -> obtener por api_key
+if($_SERVER['REQUEST_METHOD']=== 'GET' && $action==='getByApi'){
+    $api_key = getApiKeyFromHeaders();
+    if (!$api_key) {
+        http_response_code(400);
+        echo json_encode(["success" => false, "message" => "No estas autorizado."]);
+        exit;
+    }
+    $resultado=$service->getByApiKey($api_key);
+    echo json_encode($resultado);
+    exit;
+}
+
 // GET -> obtener por nan
 if ($_SERVER['REQUEST_METHOD'] === 'GET' && $action === 'getById') {
     $api_key = getApiKeyFromHeaders();
@@ -74,6 +87,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && $action === 'update') {
     $api_key = getApiKeyFromHeaders();
     $data = json_decode(file_get_contents("php://input"));
     $nan = $_GET['nan'] ?? null; // preferir query param
+    if(!$nan){
+        $nan=$data->nan;
+    }
     if (!$api_key || !$data || !$nan) {
         http_response_code(400);
         echo json_encode(["success" => false, "message" => "Faltan parámetros (Authorization, nan en query o cuerpo JSON)."]);

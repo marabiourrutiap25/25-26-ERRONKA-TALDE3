@@ -1,11 +1,17 @@
+html {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  overflow: hidden; /* evita el scroll */
+}
 body.fondo {
   margin: 0;
   font-family: Arial, sans-serif;
   background-image: url('../assets/img/fondo.jpg');
+  /* height: 250px; */
   background-size: cover;
   background-position: center;
 }
-
 #lang-popup {
     position: fixed;
     top: 10px;

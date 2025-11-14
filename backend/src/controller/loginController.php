@@ -5,12 +5,10 @@ header("Content-Type: application/json; charset=UTF-8");
 require_once __DIR__ . '/../../config/DB.php';
 require_once __DIR__ . '/../service/ErabiltzaileaService.php';
 
-$dbObj = new DB();
-$conn = $dbObj->konektatu();
-
-$service = new ErabiltzaileaService($conn);
+$service = new ErabiltzaileaService();
 
 $data = json_decode(file_get_contents("php://input"));
+
 
 if (!empty($data->erabiltzailea) && !empty($data->pasahitza)) {
     $user = $service->logina_kontsultatu($data->erabiltzailea, $data->pasahitza);
