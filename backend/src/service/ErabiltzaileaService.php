@@ -30,9 +30,7 @@ class ErabiltzaileaService
         if ($result && $result->num_rows > 0) {
             $row = $result->fetch_assoc();
 
-            $newErabiltzaile=new Erabiltzailea();
-            $newErabiltzaile->sortu_erabiltzaile_array_asociativo($row); 
-            return $newErabiltzaile;
+            return new Erabiltzailea($row);
         }
         return null;
     }
