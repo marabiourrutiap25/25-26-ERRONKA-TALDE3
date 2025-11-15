@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html  lang="eu">
+<html lang="eu">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -12,7 +13,7 @@
 <body class="fondo">
     <custom-header></custom-header>
     <main class="d-flex justify-content-center align-items-center vh-100">
-        
+
         <section class="login-popup text-center rounded">
             <header class="text-center mb-3">
                 <figure class="mb-2">
@@ -28,35 +29,40 @@
                         <label for="izena" class="form-label text-start w-100" data-i18n="name-label">
                             Izena:
                         </label>
-                        <input type="text" id="izena" name="izena" class="form-control mb-3" data-i18n-placeholder="name-placeholder">
-                        
+                        <input type="text" id="izena" name="izena" class="form-control mb-3"
+                            data-i18n-placeholder="name-placeholder">
+
                         <label for="erabiltzailea" class="form-label text-start w-100" data-i18n="username-label">
                             Erabiltzailea:
                         </label>
-                        <input type="text" id="erabiltzailea" name="erabiltzailea" class="form-control mb-3" data-i18n-placeholder="username-placeholder">
+                        <input type="text" id="erabiltzailea" name="erabiltzailea" class="form-control mb-3"
+                            data-i18n-placeholder="username-placeholder">
                     </nav>
                     <nav class="col">
                         <label for="abizena" class="form-label text-start w-100" data-i18n="surname-label">
                             Abizena:
                         </label>
-                        <input type="text" id="abizena" name="abizena" class="form-control mb-3" data-i18n-placeholder="surname-placeholder">
-                        
+                        <input type="text" id="abizena" name="abizena" class="form-control mb-3"
+                            data-i18n-placeholder="surname-placeholder">
+
                         <label for="pasahitza" class="form-label text-start w-100" data-i18n="password-label">
                             Pasahitza:
                         </label>
-                        <input type="password" id="pasahitza" name="pasahitza" class="form-control mb-3" data-i18n-placeholder="password-placeholder" disabled>
-                        <label for="checkPasahitza" class="form-label text-start w-100" >
+                        <input type="password" id="pasahitza" name="pasahitza" class="form-control mb-3"
+                            data-i18n-placeholder="password-placeholder" disabled>
+                        <label for="checkPasahitza" class="form-label text-start w-100">
                             ¿Quieres cambiar la contraseña?
-                             <input type="checkbox" id="checkPasahitza" name="checkPasahitza" >
+                            <input type="checkbox" id="checkPasahitza" name="checkPasahitza">
                         </label>
-                       
+
                     </nav>
-                </nav> 
-                
-                <button type="submit" class="submit-btn btn btn-primary w-100" data-i18n="changeProfileButton">Aldatu</button>
+                </nav>
+
+                <button type="submit" class="submit-btn btn btn-primary w-100"
+                    data-i18n="changeProfileButton">Aldatu</button>
             </form>
 
-            
+
         </section>
     </main>
 
@@ -64,4 +70,5 @@
     <script type="module" src="../components/Header.js"></script>
     <script src="../js/lang.js"></script>
 </body>
+
 </html>
