@@ -334,5 +334,17 @@ class ErabiltzaileaService
         return ["success" => false, "message" => "Errorea erabiltzailea sortzean."];
     }
 
+    public function getRoleByApiKey($api_key) {
+    // Obtener usuario por API key
+    $user = $this->select_ApiKey($api_key);
+
+    if (!$user) {
+        return ["success" => false, "message" => "API key ez da baliozkoa."];
+    }
+
+    return ["success" => true, "rola" => $user->rola];
+}
+
+
 }
 ?>
