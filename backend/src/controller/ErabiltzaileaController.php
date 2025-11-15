@@ -128,6 +128,19 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && $action === 'delete') {
     exit;
 }
 
+if ($_SERVER['REQUEST_METHOD'] === 'GET' && $action === 'getRole') {
+    $api_key = getApiKeyFromHeaders();
+    if (!$api_key) {
+        http_response_code(400);
+        echo json_encode(["success" => false, "message" => "Authorization header falta."]);
+        exit;
+    }
+    $resultado = $service->getRoleByApiKey($api_key);
+    echo json_encode($resultado);
+    exit;
+}
+
+
 http_response_code(404);
 echo json_encode(["success" => false, "message" => "Ekintza ez da aurkitu."]);
 ?>
