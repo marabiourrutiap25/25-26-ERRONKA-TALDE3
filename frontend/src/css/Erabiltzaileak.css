@@ -1,0 +1,60 @@
+body {
+  background-color: #f8f9fa;
+  font-family: 'Segoe UI', sans-serif;
+}
+
+h1 {
+  font-weight: 600;
+  font-size: 1.8rem;
+}
+
+.btn-custom {
+  border-radius: 1.5rem;
+  padding: 0.4rem 1rem;
+  font-weight: 500;
+  background-color: #009888;
+  color: white;
+  border: none;
+}
+
+.card {
+  border-radius: 1rem;
+  box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.1);
+}
+
+table th,
+table td {
+  vertical-align: middle !important;
+}
+
+.table thead {
+  background-color: #f1f2f6;
+}
+
+.btn-action {
+  width: 32px;
+  height: 32px;
+  padding: 0;
+  font-size: 16px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #009888;
+  color: white;
+  border: none;
+  border-radius: 0.5rem;
+  margin-right: 4px;
+}
+
+#searchInput {
+  border-radius: 1.5rem;
+  padding: 0.4rem 1rem;
+  border: 1px solid #009888;
+  outline: none;
+  width: 200px;
+}
+
+#searchInput:focus {
+  box-shadow: 0 0 5px #009888;
+  border-color: #009888;
+}
