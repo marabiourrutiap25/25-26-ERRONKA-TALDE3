@@ -10,12 +10,12 @@ class DB {
     {
         $this->user = "root";
         $this->host = "localhost";
-        $this->pass = "";
+        $this->pass = "abcd*1234";
         $this->db = "Erronka1";
     }
 
     public function konektatu() {
-        $this->konexioa = new mysqli($this->host,$this->user,$this->pass,$this->db, 3307);
+        $this->konexioa = new mysqli($this->host,$this->user,$this->pass,$this->db, 3306);
         if ($this->konexioa->connect_errno) {
             printf("Konexio errorea: %s\n", $this->konexioa->connect_error);
             die();
