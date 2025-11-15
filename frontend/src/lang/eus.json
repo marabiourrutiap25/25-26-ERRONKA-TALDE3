@@ -5,6 +5,8 @@
   "users-header": "ERABILTZAILEAK",
   "profile-header": "profila",
   "logout-header": "saioa itxi",
+  
+
   "username-label": "Erabiltzailea:",
   "username-placeholder": "Sartu zure erabiltzaile izena",
   "password-label": "Pasahitza:",
@@ -21,5 +23,74 @@
   "remember": "Nire kontua gogoratu",
   "submit": "Sartu",
   "contact": "Ez duzu konturik? Jarri harremanetarako: adibide@fpsanturtzilh.eus",
-  "errore_mezua": "Erabiltzailea edo pasahitza ez dira zuzenak."
+  "errore_mezua": "Erabiltzailea edo pasahitza ez dira zuzenak.",
+
+
+
+  "search-placeholder-ekipamendua": "Bilatu...",
+  "equipment-ekipamendua": "EKIPAMENDUA",
+  "name-ekipamendua": "Izena",
+  "description-ekipamendua": "Deskribapena",
+  "brand-ekipamendua": "Marka",
+  "model-ekipamendua": "Modeloa",
+  "category-ekipamendua": "Kategoria",
+  "stock-ekipamendua": "Stock",
+  "edit-delete-ekipamendua": "Editatu / Ezabatu",
+
+  "create-edit-ekipamendua-modal": "Sortu / Editatu",
+  "name-ekipamendua-modal": "Izena",
+  "description-ekipamendua-modal": "Deskribapena",
+  "brand-ekipamendua-modal": "Marka",
+  "model-ekipamendua-modal": "Modeloa",
+  "category-ekipamendua-modal": "Kategoria",
+  "stock-ekipamendua-modal": "Stock",
+  "ok-ekipamendua-modal": "OK",
+
+  "title-toast-ekipamendua": "Notifikazioa",
+
+
+
+  "search-placeholder-inbentarioa": "Bilatu...",
+  "inventory-inbentarioa": "INBENTARIOA",
+  "etiketa-inbentarioa": "Etiketa",
+  "equipment-inbentarioa": "Ekipamendua",
+  "purchase-date-inbentarioa": "Erosketa data",
+  "edit-delete-inbentarioa": "Editatu / Ezabatu",
+
+  "create-edit-inbentarioa-modal": "Sortu / Editatu",
+  "etiketa-inbentarioa-modal": "Etiketa",
+  "equipment-inbentarioa-modal": "Ekipamendua",
+  "select-equipment-inbentarioa-modal": "Hautatu ekipamendua",
+  "purchase-date-inbentarioa-modal": "Erosketa data",
+  "ok-inbentarioa-modal": "OK",
+
+  "title-toast-inbentarioa": "Notifikazioa",
+
+
+
+  "search-placeholder-erabiltzaileak": "Bilatu...",
+  "users-erabiltzaileak": "ERABILTZAILEAK",
+  "name-erabiltzaileak": "Izena",
+  "surname-erabiltzaileak": "Abizena",
+  "username-erabiltzaileak": "Erabiltzailea",
+  "password-erabiltzaileak": "Pasahitza",
+  "role-erabiltzaileak": "Rola",
+  "api-key-erabiltzaileak": "API Gakoa",
+  "edit-delete-erabiltzaileak": "Editatu / Ezabatu",
+
+  "create-edit-erabiltzaileak-modal": "Sortu / Editatu",
+  "name-erabiltzaileak-modal": "Izena",
+  "surname-erabiltzaileak-modal": "Abizena",
+  "username-erabiltzaileak-modal": "Erabiltzailea",
+  "password-erabiltzaileak-modal": "Pasahitza",
+  "role-erabiltzaileak-modal": "Rola",
+  "select-role-erabiltzaileak-modal": "Hautatu rola",
+  "admin-role-erabiltzaileak-modal": "Administratzailea",
+  "user-role-erabiltzaileak-modal": "Erabiltzailea",
+  "api-key-erabiltzaileak-modal": "API Gakoa",
+  "ok-erabiltzaileak-modal": "OK",
+
+  "title-toast-erabiltzaileak": "Notifikazioa"
+
+
 }

@@ -19,10 +19,10 @@
 
       <!-- Encabezado de la sección principal -->
       <header class="d-flex justify-content-between align-items-center mb-4">
-        <h1 class="m-0">EKIPAMENDUA</h1>
+        <h1 class="m-0" data-i18n="equipment-ekipamendua">EKIPAMENDUA</h1>
 
         <div class="d-flex align-items-center">
-          <input type="text" id="searchInput" placeholder="Bilatu..." class="me-2">
+          <input type="text" id="searchInput" placeholder="Bilatu..." class="me-2" data-i18n-placeholder="search-placeholder-ekipamendua">
           <button id="addBtn" class="btn btn-custom">+</button>
         </div>
       </header>
@@ -34,13 +34,13 @@
             <thead class="table-light">
               <tr>
                 <th>ID</th>
-                <th>Izena</th>
-                <th>Deskribapena</th>
-                <th>Marka</th>
-                <th>Modelo</th>
-                <th>Kategoria</th>
-                <th>Stock</th>
-                <th>Editatu / Ezabatu</th>
+                <th data-i18n="name-ekipamendua">Izena</th>
+                <th data-i18n="description-ekipamendua">Deskribapena</th>
+                <th data-i18n="brand-ekipamendua">Marka</th>
+                <th data-i18n="model-ekipamendua">Modeloa</th>
+                <th data-i18n="category-ekipamendua">Kategoria</th>
+                <th data-i18n="stock-ekipamendua">Stock</th>
+                <th data-i18n="edit-delete-ekipamendua">Editatu / Ezabatu</th>
               </tr>
             </thead>
             <tbody>
@@ -59,7 +59,7 @@
       <div class="modal-dialog">
         <article class="modal-content">
           <header class="modal-header">
-            <h5 class="modal-title" id="ekipModalLabel">Sortu / Editatu</h5>
+            <h5 class="modal-title" id="ekipModalLabel" data-i18n="create-edit-ekipamendua-modal">Sortu/Editatu</h5>
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Itxi"></button>
           </header>
 
@@ -69,44 +69,44 @@
 
               <div class="row mb-3">
                 <div class="col-6">
-                  <label for="izena" class="form-label">Izena</label>
+                  <label for="izena" class="form-label" data-i18n="name-ekipamendua-modal">Izena</label>
                   <input type="text" class="form-control" id="izena" required>
                 </div>
 
                 <div class="col-6">
-                  <label for="deskribapena" class="form-label">Deskribapena</label>
+                  <label for="deskribapena" class="form-label" data-i18n="description-ekipamendua-modal">Deskribapena</label>
                   <input type="text" class="form-control" id="deskribapena">
                 </div>
               </div>
 
               <div class="row mb-3">
                 <div class="col-6">
-                  <label for="marka" class="form-label">Marka</label>
+                  <label for="marka" class="form-label" data-i18n="brand-ekipamendua-modal">Marka</label>
                   <input type="text" class="form-control" id="marka">
                 </div>
 
                 <div class="col-6">
-                  <label for="modelo" class="form-label">Modeloa</label>
+                  <label for="modelo" class="form-label" data-i18n="model-ekipamendua-modal">Modeloa</label>
                   <input type="text" class="form-control" id="modelo">
                 </div>
               </div>
 
               <div class="row mb-3">
                 <div class="col-6">
-                  <label for="kategoria" class="form-label">Kategoria</label>
+                  <label for="kategoria" class="form-label" data-i18n="category-ekipamendua-modal">Kategoria</label>
                   <select class="form-select" id="kategoria" required>
                     <option value="">Aukeratu kategoria</option>
                   </select>
                 </div>
 
                 <div class="col-6">
-                  <label for="stock" class="form-label">Stock-a</label>
+                  <label for="stock" class="form-label" data-i18n="stock-ekipamendua-modal">Stock-a</label>
                   <input type="number" class="form-control" id="stock" value="0">
                 </div>
               </div>
 
               <div class="text-end">
-                <button type="submit" class="btn btn-success">OK</button>
+                <button type="submit" class="btn btn-success" data-i18n="ok-ekipamendua-modal">OK</button>
               </div>
             </form>
           </div>
@@ -120,7 +120,7 @@
     <div id="notificationToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
       <header class="toast-header">
         <div id="toastIcon" class="me-2">🔔</div>
-        <strong class="me-auto" id="toastTitle">Notifikazioa</strong>
+        <strong class="me-auto" id="toastTitle" data-i18n="title-toast-ekipamendua">Notifikazioa</strong>
         <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
       </header>
       <div class="toast-body" id="toastMessage"></div>

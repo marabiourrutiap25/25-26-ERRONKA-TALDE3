@@ -5,6 +5,8 @@
   "users-header": "USERS",
   "profile-header": "profile",
   "logout-header": "logout",
+
+
   "username-label": "Username:",
   "username-placeholder": "Enter your username",
   "password-label": "Password:",
@@ -15,12 +17,80 @@
   "surname-placeholder": "Enter your surname",
   
   
-  
   "passwordChangeCheckBox": "¿Do you want to change the password?",
   "changeProfileButton": "Change",
   
   "remember": "Remember me",
   "submit": "Login",
   "contact": "No account? Contact: example@fpsanturtzilh.eus",
-  "errore_mezua": "User or password is invalid."
+  "errore_mezua": "User or password is invalid.",
+
+
+
+  "search-placeholder-ekipamendua": "Search...",
+  "equipment-ekipamendua": "EQUIPMENT",
+  "name-ekipamendua": "Name",
+  "description-ekipamendua": "Description",
+  "brand-ekipamendua": "Brand",
+  "model-ekipamendua": "Model",
+  "category-ekipamendua": "Category",
+  "stock-ekipamendua": "Stock",
+  "edit-delete-ekipamendua": "Edit / Delete",
+
+  "create-edit-ekipamendua-modal": "Create / Edit",
+  "name-ekipamendua-modal": "Name",
+  "description-ekipamendua-modal": "Description",
+  "brand-ekipamendua-modal": "Brand",
+  "model-ekipamendua-modal": "Model",
+  "category-ekipamendua-modal": "Category",
+  "stock-ekipamendua-modal": "Stock",
+  "ok-ekipamendua-modal": "OK",
+
+  "title-toast-ekipamendua": "Notification",
+
+
+
+
+  "search-placeholder-inbentarioa": "Search...",
+  "inventory-inbentarioa": "INVENTORY",
+  "etiketa-inbentarioa": "Label",
+  "equipment-inbentarioa": "Equipment",
+  "purchase-date-inbentarioa": "Purchase date",
+  "edit-delete-inbentarioa": "Edit / Delete",
+
+  "create-edit-inbentarioa-modal": "Create / Edit",
+  "etiketa-inbentarioa-modal": "Label",
+  "equipment-inbentarioa-modal": "Equipment",
+  "select-equipment-inbentarioa-modal": "Select equipment",
+  "purchase-date-inbentarioa-modal": "Purchase date",
+  "ok-inbentarioa-modal": "OK",
+
+  "title-toast-inbentarioa": "Notification",
+
+
+
+  "search-placeholder-erabiltzaileak": "Search...",
+  "users-erabiltzaileak": "USERS",
+  "name-erabilztailea": "Name",
+  "surname-erabiltzailea": "Surname",
+  "user-erabiltzailea": "User",
+  "password-erabiltzailea": "Password",
+  "role-erabiltzailea": "Role",
+  "api-key-erabiltzailea": "API Key",
+  "edit-delete-erabiltzailea": "Edit / Delete",
+
+  "create-edit-erabiltzaileak-modal": "Create / Edit",
+  "name-erabiltzailea-modal": "Name",
+  "surname-erabiltzailea-modal": "Surname",
+  "user-erabiltzailea-modal": "User",
+  "password-erabiltzailea-modal": "Password",
+  "role-erabiltzailea-modal": "Role",
+  "select-role-erabiltzailea-modal": "Select role",
+  "admin-role-erabiltzailea-modal": "Administrator",
+  "user-role-erabiltzailea-modal": "User",
+  "api-key-erabiltzailea-modal": "API Key",
+  "ok-erabiltzaileak-modal": "OK",
+
+  "title-toast-erabiltzaileak": "Notification"
+
 }

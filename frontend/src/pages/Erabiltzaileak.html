@@ -78,10 +78,10 @@ window.addEventListener("pageshow", (event) => {
 
       <!-- Encabezado de la sección principal -->
       <header class="d-flex justify-content-between align-items-center mb-4">
-        <h1 class="m-0">ERABILTZAILEAK</h1>
+        <h1 class="m-0" data-i18n="users-erabiltzaileak">ERABILTZAILEAK</h1>
 
         <div class="d-flex align-items-center">
-          <input type="text" id="searchInput" placeholder="Bilatu..." class="me-2">
+          <input type="text" id="searchInput" placeholder="Bilatu..." class="me-2" data-i18n-placeholder="search-placeholder-erabiltzaileak">
           <button id="addBtn" class="btn btn-custom">+</button>
         </div>
       </header>
@@ -93,13 +93,13 @@ window.addEventListener("pageshow", (event) => {
             <thead class="table-light">
               <tr>
                 <th>NAN</th>
-                <th>Izena</th>
-                <th>Abizena</th>
-                <th>Erabiltzailea</th>
-                <th>Pasahitza</th>
-                <th>Rola</th>
-                <th>API Key</th>
-                <th>Editatu / Ezabatu</th>
+                <th data-i18n="name-erabilztailea">Izena</th>
+                <th data-i18n="surname-erabiltzailea">Abizena</th>
+                <th data-i18n="user-erabiltzailea">Erabiltzailea</th>
+                <th data-i18n="password-erabiltzailea">Pasahitza</th>
+                <th data-i18n="role-erabiltzailea">Rola</th>
+                <th data-i18n="api-key-erabiltzailea">API Key</th>
+                <th data-i18n="edit-delete-erabiltzailea">Editatu / Ezabatu</th>
               </tr>
             </thead>
             <tbody>
@@ -120,7 +120,7 @@ window.addEventListener("pageshow", (event) => {
         <article class="modal-content">
 
           <header class="modal-header">
-            <h5 class="modal-title" id="erabiltzaileaModalLabel">Sortu / Editatu</h5>
+            <h5 class="modal-title" id="erabiltzaileaModalLabel" data-i18n="create-edit-erabiltzaileak-modal">Sortu / Editatu</h5>
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Itxi"></button>
           </header>
 
@@ -134,46 +134,46 @@ window.addEventListener("pageshow", (event) => {
                   <input type="text" class="form-control" id="nan" maxlength="12" required>
                 </div>
                 <div class="col-6">
-                  <label for="izena" class="form-label">Izena</label>
+                  <label for="izena" class="form-label" data-i18n="name-erabilztailea-modal">Izena</label>
                   <input type="text" class="form-control" id="izena" required>
                 </div>
               </div>
 
               <div class="row mb-3">
                 <div class="col-6">
-                  <label for="abizena" class="form-label">Abizena</label>
+                  <label for="abizena" class="form-label" data-i18n="surname-erabiltzailea-modal">Abizena</label>
                   <input type="text" class="form-control" id="abizena" required>
                 </div>
                 <div class="col-6">
-                  <label for="erabiltzailea" class="form-label">Erabiltzailea</label>
+                  <label for="erabiltzailea" class="form-label" data-i18n="user-erabiltzailea-modal">Erabiltzailea</label>
                   <input type="text" class="form-control" id="erabiltzailea" required>
                 </div>
               </div>
 
               <div class="row mb-3">
                 <div class="col-6">
-                  <label for="pasahitza" class="form-label">Pasahitza</label>
+                  <label for="pasahitza" class="form-label" data-i18n="password-erabiltzailea-modal">Pasahitza</label>
                   <input type="password" class="form-control" id="pasahitza" placeholder="••••••••">
                 </div>
                 <div class="col-6">
-                  <label for="rola" class="form-label">Rola</label>
+                  <label for="rola" class="form-label" data-i18n="role-erabiltzailea-modal">Rola</label>
                   <select class="form-select" id="rola" required>
-                    <option value="">Aukeratu rola</option>
-                    <option value="admin">Administratzailea</option>
-                    <option value="user">Erabiltzailea</option>
+                    <option value="" data-i18n="select-role-erabiltzailea-modal">Aukeratu rola</option>
+                    <option value="admin" data-i18n="admin-role-erabiltzailea-modal">Administratzailea</option>
+                    <option value="user" data-i18n="user-role-erabiltzailea-modal">Erabiltzailea</option>
                   </select>
                 </div>
               </div>
 
               <div class="row mb-3">
                 <div class="col-12">
-                  <label for="api_key" class="form-label">API Key</label>
+                  <label for="api_key" class="form-label" data-i18n="api-key-erabiltzailea-modal">API Key</label>
                   <input type="text" class="form-control" id="api_key" placeholder="••••••••" readonly>
                 </div>
               </div>
 
               <div class="text-end">
-                <button type="submit" class="btn btn-success">OK</button>
+                <button type="submit" class="btn btn-success" data-i18n="ok-erabiltzaileak-modal">OK</button>
               </div>
             </form>
           </div>
@@ -188,7 +188,7 @@ window.addEventListener("pageshow", (event) => {
     <div id="notificationToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
       <header class="toast-header">
         <div id="toastIcon" class="me-2">🔔</div>
-        <strong class="me-auto" id="toastTitle">Notifikazioa</strong>
+        <strong class="me-auto" id="toastTitle" data-i18n="title-toast-erabiltzaileak">Notifikazioa</strong>
         <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
       </header>
       <div class="toast-body" id="toastMessage"></div>
@@ -199,7 +199,7 @@ window.addEventListener("pageshow", (event) => {
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
   <script src="../script/Erabiltzailea.js"></script>
   <script type="module" src="../components/Header.js"></script>
-<script src="../js/lang.js"></script>
+  <script src="../js/lang.js"></script>
 </body>
 
 </html>

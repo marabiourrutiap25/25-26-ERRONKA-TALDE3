@@ -5,6 +5,8 @@
   "users-header": "USUARIOS",
   "profile-header": "perfil",
   "logout-header": "cerrar sesión",
+
+
   "username-label": "Usuario:",
   "username-placeholder": "Introduce tu usuario",
   "password-label": "Contraseña:",
@@ -21,5 +23,72 @@
   "remember": "Recordarme",
   "submit": "Entrar",
   "contact": "¿No tienes cuenta? Contacta: ejemplo@fpsanturtzilh.eus",
-  "errore_mezua": "El usuario o contraseña no son correctos."
+  "errore_mezua": "El usuario o contraseña no son correctos.",
+
+
+
+  "search-placeholder-ekipamendua": "Buscar...",
+  "equipment-ekipamendua": "EQUIPAMENTO",
+  "name-ekipamendua": "Nombre",
+  "description-ekipamendua": "Descripción",
+  "brand-ekipamendua": "Marca",
+  "model-ekipamendua": "Modelo",
+  "category-ekipamendua": "Categoría",
+  "stock-ekipamendua": "Stock",
+  "edit-delete-ekipamendua": "Editar / Eliminar",
+
+  "create-edit-ekipamendua-modal": "Crear / Editar",
+  "name-ekipamendua-modal": "Nombre",
+  "description-ekipamendua-modal": "Descripción",
+  "brand-ekipamendua-modal": "Marca",
+  "model-ekipamendua-modal": "Modelo",
+  "category-ekipamendua-modal": "Categoría",
+  "stock-ekipamendua-modal": "Stock",
+  "ok-ekipamendua-modal": "OK",
+
+  "title-toast-ekipamendua": "Notificación",
+
+
+
+  "search-placeholder-inbentarioa": "Buscar...",
+  "inventory-inbentarioa": "INVENTARIO",
+  "etiketa-inbentarioa": "Etiqueta",
+  "equipment-inbentarioa": "Equipamiento",
+  "purchase-date-inbentarioa": "Fecha de compra",
+  "edit-delete-inbentarioa": "Editar / Eliminar",
+
+  "create-edit-inbentarioa-modal": "Crear / Editar",
+  "etiketa-inbentarioa-modal": "Etiqueta",
+  "equipment-inbentarioa-modal": "Equipamiento",
+  "select-equipment-inbentarioa-modal": "Seleccionar equipamiento",
+  "purchase-date-inbentarioa-modal": "Fecha de compra",
+  "ok-inbentarioa-modal": "OK",
+
+  "title-toast-inbentarioa": "Notificación",
+
+
+
+  "search-placeholder-erabiltzaileak": "Buscar...",
+  "users-erabiltzaileak": "USUARIOS",
+  "name-erabiltzaileak": "Nombre",
+  "surname-erabiltzaileak": "Apellido",
+  "username-erabiltzaileak": "Usuario",
+  "password-erabiltzaileak": "Contraseña",
+  "role-erabiltzaileak": "Rol",
+  "api-key-erabiltzaileak": "Clave API",
+  "edit-delete-erabiltzaileak": "Editar / Eliminar",
+
+  "create-edit-erabiltzaileak-modal": "Crear / Editar",
+  "name-erabiltzailea-modal": "Nombre",
+  "surname-erabiltzailea-modal": "Apellido",
+  "username-erabiltzailea-modal": "Usuario",
+  "password-erabiltzailea-modal": "Contraseña",
+  "role-erabiltzailea-modal": "Rol",
+  "select-role-erabiltzailea-modal": "Seleccionar rol",
+  "admin-role-erabiltzailea-modal": "Administrador",
+  "user-role-erabiltzailea-modal": "Usuario",
+  "api-key-erabiltzailea-modal": "Clave API",
+  "ok-erabiltzaileak-modal": "OK",
+
+  "title-toast-erabiltzaileak": "Notificación"
 }
