@@ -50,7 +50,6 @@
 
 
 
-
   "search-placeholder-inbentarioa": "Search...",
   "inventory-inbentarioa": "INVENTORY",
   "etiketa-inbentarioa": "Label",
@@ -71,26 +70,66 @@
 
   "search-placeholder-erabiltzaileak": "Search...",
   "users-erabiltzaileak": "USERS",
-  "name-erabilztailea": "Name",
-  "surname-erabiltzailea": "Surname",
-  "user-erabiltzailea": "User",
-  "password-erabiltzailea": "Password",
-  "role-erabiltzailea": "Role",
-  "api-key-erabiltzailea": "API Key",
-  "edit-delete-erabiltzailea": "Edit / Delete",
+  "name-erabilztaileak": "Name",
+  "surname-erabiltzaileak": "Surname",
+  "user-erabiltzaileak": "User",
+  "password-erabiltzaileak": "Password",
+  "role-erabiltzaileak": "Role",
+  "api-key-erabiltzaileak": "API Key",
+  "edit-delete-erabiltzaileak": "Edit / Delete",
 
   "create-edit-erabiltzaileak-modal": "Create / Edit",
-  "name-erabiltzailea-modal": "Name",
-  "surname-erabiltzailea-modal": "Surname",
-  "user-erabiltzailea-modal": "User",
-  "password-erabiltzailea-modal": "Password",
-  "role-erabiltzailea-modal": "Role",
-  "select-role-erabiltzailea-modal": "Select role",
-  "admin-role-erabiltzailea-modal": "Administrator",
-  "user-role-erabiltzailea-modal": "User",
-  "api-key-erabiltzailea-modal": "API Key",
+  "name-erabiltzaileak-modal": "Name",
+  "surname-erabiltzaileak-modal": "Surname",
+  "user-erabiltzaileak-modal": "User",
+  "password-erabiltzaileak-modal": "Password",
+  "role-erabiltzaileak-modal": "Role",
+  "select-role-erabiltzaileak-modal": "Select role",
+  "admin-role-erabiltzaileak-modal": "Administrator",
+  "user-role-erabiltzaileak-modal": "User",
+  "api-key-erabiltzaileak-modal": "API Key",
   "ok-erabiltzaileak-modal": "OK",
 
-  "title-toast-erabiltzaileak": "Notification"
+  "title-toast-erabiltzaileak": "Notification",
+
+
+
+  "search-placeholder-kudeaketa": "Search...",
+  "rooms-kudeaketa": "ROOMS",
+  "categories-kudeaketa": "CATEGORIES",
+  "locations-kudeaketa": "LOCATIONS",
+
+  "id-gela-kudeaketa": "ID",
+  "name-gela-kudeaketa": "Name",
+  "team-gela-kudeaketa": "Team",
+  "edit-delete-gela-kudeaketa": "Edit / Delete",
+
+  "create-edit-gela-kudeaketa-modal": "Create / Edit",
+  "name-gela-kudeaketa-modal": "Name",
+  "team-gela-kudeaketa-modal": "Team",
+  "ok-gela-kudeaketa-modal": "OK",
+
+  "id-kategoria-kudeaketa": "ID",
+  "name-kategoria-kudeaketa": "Name",
+  "edit-delete-kategoria-kudeaketa": "Edit / Delete",
+
+  "create-edit-kategoria-kudeaketa-modal": "Create / Edit",
+  "name-kategoria-kudeaketa-modal": "Name",
+  "ok-kategoria-kudeaketa-modal": "OK",
+
+  "etiketa-kokalekua-kudeaketa": "Label",
+  "room-kokalekua-kudeaketa": "Room",
+  "start-kokalekua-kudeaketa": "Start",
+  "end-kokalekua-kudeaketa": "End",
+  "edit-delete-kokalekua-kudeaketa": "Edit / Delete",
+
+  "create-edit-kokalekua-kudeaketa-modal": "Create / Edit",
+  "name-label-kokalekua-kudeaketa-modal": "Name (label)",
+  "room-kokalekua-kudeaketa-modal": "Room",
+  "start-date-kokalekua-kudeaketa-modal": "Start Date",
+  "end-date-kokalekua-kudeaketa-modal": "End Date",
+  "ok-kokalekua-kudeaketa-modal": "OK",
+
+  "title-toast-kudeaketa": "Notification"
 
 }

@@ -47,10 +47,10 @@
           <article class="card p-3">
 
             <header class="d-flex justify-content-between align-items-center mb-3">
-              <h2 class="m-0">GELAK</h2>
+              <h2 class="m-0" data-i18n="rooms-kudeaketa">GELAK</h2>
 
               <div class="d-flex align-items-center">
-                <input type="text" id="searchGelaInput" placeholder="Bilatu..." class="me-2 table-search-input">
+                <input type="text" id="searchGelaInput" placeholder="Bilatu..." class="me-2 table-search-input" data-i18n-placeholder="search-placeholder-kudeaketa">
                 <button id="addGelaBtn" class="btn btn-custom btn-primary btn-sm">+</button>
               </div>
             </header>
@@ -59,10 +59,10 @@
               <table id="gelaTable" class="table table-hover table-striped align-middle">
                 <thead class="table-light">
                   <tr>
-                    <th>ID</th>
-                    <th>Izena</th>
-                    <th>Taldea</th>
-                    <th>Editatu / Ezabatu</th>
+                    <th data-i18n="id-gela-kudeaketa">ID</th>
+                    <th data-i18n="name-gela-kudeaketa">Izena</th>
+                    <th data-i18n="team-gela-kudeaketa">Taldea</th>
+                    <th data-i18n="edit-delete-gela-kudeaketa">Editatu / Ezabatu</th>
                   </tr>
                 </thead>
                 <tbody><!-- dinamikoa --></tbody>
@@ -78,7 +78,7 @@
                 <article class="modal-content">
 
                   <header class="modal-header">
-                    <h5 class="modal-title" id="gelaModalLabel">Sortu / Editatu</h5>
+                    <h5 class="modal-title" id="gelaModalLabel" data-i18n="create-edit-gela-kudeaketa-modal">Sortu / Editatu</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Itxi"></button>
                   </header>
 
@@ -87,17 +87,17 @@
                       <input type="hidden" id="gelaId">
 
                       <div class="mb-3">
-                        <label for="gelaIzena" class="form-label">Izena</label>
+                        <label for="gelaIzena" class="form-label" data-i18n="name-gela-kudeaketa-modal">Izena</label>
                         <input type="text" class="form-control" id="gelaIzena" required>
                       </div>
 
                       <div class="mb-3">
-                        <label for="gelaTaldea" class="form-label">Taldea</label>
+                        <label for="gelaTaldea" class="form-label" data-i18n="team-gela-kudeaketa-modal">Taldea</label>
                         <input type="text" class="form-control" id="gelaTaldea">
                       </div>
 
                       <div class="text-end">
-                        <button type="submit" class="btn btn-success">OK</button>
+                        <button type="submit" class="btn btn-success" data-i18n="ok-gela-kudeaketa-modal">OK</button>
                       </div>
                     </form>
                   </div>
@@ -117,10 +117,10 @@
           <article class="card p-3">
 
             <header class="d-flex justify-content-between align-items-center mb-3">
-              <h2 class="m-0">KATEGORIAK</h2>
+              <h2 class="m-0" data-i18n="categories-kudeaketa">KATEGORIAK</h2>
 
               <div class="d-flex align-items-center">
-                <input type="text" id="searchKategoriaInput" placeholder="Bilatu..." class="me-2 table-search-input">
+                <input type="text" id="searchKategoriaInput" placeholder="Bilatu..." class="me-2 table-search-input" data-i18n-placeholder="search-placeholder-kudeaketa">
                 <button id="addKategoriaBtn" class="btn btn-custom btn-primary btn-sm">+</button>
               </div>
             </header>
@@ -129,9 +129,9 @@
               <table id="kategoriaTable" class="table table-hover table-striped align-middle">
                 <thead class="table-light">
                   <tr>
-                    <th>ID</th>
-                    <th>Izena</th>
-                    <th>Editatu / Ezabatu</th>
+                    <th data-i18n="id-kategoria-kudeaketa">ID</th>
+                    <th data-i18n="name-kategoria-kudeaketa">Izena</th>
+                    <th data-i18n="edit-delete-kategoria-kudeaketa">Editatu / Ezabatu</th>
                   </tr>
                 </thead>
                 <tbody><!-- dinamikoa --></tbody>
@@ -148,7 +148,7 @@
                 <article class="modal-content">
 
                   <header class="modal-header">
-                    <h5 class="modal-title" id="kategoriaModalLabel">Sortu / Editatu</h5>
+                    <h5 class="modal-title" id="kategoriaModalLabel" data-i18n="create-edit-kategoria-kudeaketa-modal">Sortu / Editatu</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Itxi"></button>
                   </header>
 
@@ -157,12 +157,12 @@
                       <input type="hidden" id="kategoriaId">
 
                       <div class="mb-3">
-                        <label for="kategoriaIzena" class="form-label">Izena</label>
+                        <label for="kategoriaIzena" class="form-label" data-i18n="name-kategoria-kudeaketa-modal">Izena</label>
                         <input type="text" class="form-control" id="kategoriaIzena" required>
                       </div>
 
                       <div class="text-end">
-                        <button type="submit" class="btn btn-success">OK</button>
+                        <button type="submit" class="btn btn-success" data-i18n="ok-kategoria-kudeaketa-modal">OK</button>
                       </div>
                     </form>
                   </div>
@@ -182,10 +182,10 @@
           <article class="card p-3">
 
             <header class="d-flex justify-content-between align-items-center mb-3">
-              <h2 class="m-0">KOKALEKUAK</h2>
+              <h2 class="m-0" data-i18n="locations-kudeaketa">KOKALEKUAK</h2>
 
               <div class="d-flex align-items-center">
-                <input type="text" id="searchKokalekuaInput" placeholder="Bilatu..." class="me-2 table-search-input">
+                <input type="text" id="searchKokalekuaInput" placeholder="Bilatu..." class="me-2 table-search-input" data-i18n-placeholder="search-placeholder-kudeaketa">
                 <button id="addKokalekuaBtn" class="btn btn-custom btn-primary btn-sm">+</button>
               </div>
             </header>
@@ -194,11 +194,11 @@
               <table id="kokalekuaTable" class="table table-hover table-striped align-middle">
                 <thead class="table-light">
                   <tr>
-                    <th>Etiketa</th>
-                    <th>Gela</th>
-                    <th>Hasiera</th>
-                    <th>Amaiera</th>
-                    <th>Editatu / Ezabatu</th>
+                    <th data-i18n="etiketa-kokalekua-kudeaketa">Etiketa</th>
+                    <th data-i18n="room-kokalekua-kudeaketa">Gela</th>
+                    <th data-i18n="start-kokalekua-kudeaketa">Hasiera</th>
+                    <th data-i18n="end-kokalekua-kudeaketa">Amaiera</th>
+                    <th data-i18n="edit-delete-kokalekua-kudeaketa">Editatu / Ezabatu</th>
                   </tr>
                 </thead>
                 <tbody><!-- dinamikoa --></tbody>
@@ -215,7 +215,7 @@
                 <article class="modal-content">
 
                   <header class="modal-header">
-                    <h5 class="modal-title" id="kokalekuaModalLabel">Sortu / Editatu</h5>
+                    <h5 class="modal-title" id="kokalekuaModalLabel" data-i18n="create-edit-kokalekua-kudeaketa-modal">Sortu / Editatu</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Itxi"></button>
                   </header>
 
@@ -225,27 +225,27 @@
                       <input type="hidden" id="kokalekuaHasieraDataOriginal">
 
                       <div class="mb-3">
-                        <label for="kokalekuaEtiketa" class="form-label">Izena (etiketa)</label>
+                        <label for="kokalekuaEtiketa" class="form-label" data-i18n="name-label-kokalekua-kudeaketa-modal">Izena (etiketa)</label>
                         <select id="kokalekuaEtiketa" class="form-select" required></select>
                       </div>
 
                       <div class="mb-3">
-                        <label for="kokalekuaGela" class="form-label">Gela</label>
+                        <label for="kokalekuaGela" class="form-label" data-i18n="room-kokalekua-kudeaketa-modal">Gela</label>
                         <select id="kokalekuaGela" class="form-select" required></select>
                       </div>
 
                       <div class="mb-3">
-                        <label for="kokalekuaHasieraData" class="form-label">Hasiera Data</label>
+                        <label for="kokalekuaHasieraData" class="form-label" data-i18n="start-date-kokalekua-kudeaketa-modal">Hasiera Data</label>
                         <input type="date" class="form-control" id="kokalekuaHasieraData" required>
                       </div>
 
                       <div class="mb-3">
-                        <label for="kokalekuaAmaieraData" class="form-label">Amaiera Data</label>
+                        <label for="kokalekuaAmaieraData" class="form-label" data-i18n="end-date-kokalekua-kudeaketa-modal">Amaiera Data</label>
                         <input type="date" class="form-control" id="kokalekuaAmaieraData">
                       </div>
 
                       <div class="text-end">
-                        <button type="submit" class="btn btn-success">OK</button>
+                        <button type="submit" class="btn btn-success" data-i18n="ok-kokalekua-kudeaketa-modal">OK</button>
                       </div>
                     </form>
                   </div>
@@ -266,7 +266,7 @@
     <div id="notificationToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
       <header class="toast-header">
         <div id="toastIcon" class="me-2">🔔</div>
-        <strong class="me-auto" id="toastTitle">Notifikazioa</strong>
+        <strong class="me-auto" id="toastTitle" data-i18n="title-toast-kudeaketa">Notifikazioa</strong>
         <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
       </header>
       <div class="toast-body" id="toastMessage"></div>

@@ -90,7 +90,46 @@
   "api-key-erabiltzaileak-modal": "API Gakoa",
   "ok-erabiltzaileak-modal": "OK",
 
-  "title-toast-erabiltzaileak": "Notifikazioa"
+  "title-toast-erabiltzaileak": "Notifikazioa",
 
+
+
+  "search-placeholder-kudeaketa": "Bilatu...",
+  "rooms-kudeaketa": "GELAK",
+  "categories-kudeaketa": "KATEGORIAK",
+  "locations-kudeaketa": "KOKALEKUAK",
+
+  "id-gela-kudeaketa": "ID",
+  "name-gela-kudeaketa": "Izena",
+  "team-gela-kudeaketa": "Taldea",
+  "edit-delete-gela-kudeaketa": "Editatu / Ezabatu",
+
+  "create-edit-gela-kudeaketa-modal": "Sortu / Editatu",
+  "name-gela-kudeaketa-modal": "Izena",
+  "team-gela-kudeaketa-modal": "Taldea",
+  "ok-gela-kudeaketa-modal": "OK",
+
+  "id-kategoria-kudeaketa": "ID",
+  "name-kategoria-kudeaketa": "Izena",
+  "edit-delete-kategoria-kudeaketa": "Editatu / Ezabatu",
+
+  "create-edit-kategoria-kudeaketa-modal": "Sortu / Editatu",
+  "name-kategoria-kudeaketa-modal": "Izena",
+  "ok-kategoria-kudeaketa-modal": "OK",
+
+  "etiketa-kokalekua-kudeaketa": "Etiketa",
+  "room-kokalekua-kudeaketa": "Gela",
+  "start-kokalekua-kudeaketa": "Hasiera",
+  "end-kokalekua-kudeaketa": "Amaiera",
+  "edit-delete-kokalekua-kudeaketa": "Editatu / Ezabatu",
+
+  "create-edit-kokalekua-kudeaketa-modal": "Sortu / Editatu",
+  "name-label-kokalekua-kudeaketa-modal": "Izena (etiketa)",
+  "room-kokalekua-kudeaketa-modal": "Gela",
+  "start-date-kokalekua-kudeaketa-modal": "Hasiera Data",
+  "end-date-kokalekua-kudeaketa-modal": "Amaiera Data",
+  "ok-kokalekua-kudeaketa-modal": "OK",
+
+  "title-toast-kudeaketa": "Notifikazioa"
 
 }
