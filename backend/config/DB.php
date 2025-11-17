@@ -8,28 +8,27 @@ class DB {
     
     public function __construct()
     {
-        $this->user = "root";
-        $this->host = "localhost";
-        $this->pass = "1234";
-        $this->db = "Erronka1";
+        $env = require __DIR__ . '/../../config.php';
+
+        $this->user = $env['DB_USER'];
+        $this->host = $env['DB_HOST'];
+        $this->pass = $env['DB_PASS'];
+        $this->db   = $env['DB_DATABASE'];
     }
 
     public function konektatu() {
-        $this->konexioa = new mysqli($this->host,$this->user,$this->pass,$this->db, 3306);
+        $this->konexioa = new mysqli(
+            $this->host,
+            $this->user,
+            $this->pass,
+            $this->db,
+            3306
+        );
+
         if ($this->konexioa->connect_errno) {
-            printf("Konexio errorea: %s\n", $this->konexioa->connect_error);
-            die();
+            die("Konexio errorea: " . $this->konexioa->connect_error);
         }
-        else {
-            return $this->konexioa;
-        }       
-    }
-    public function getKonexioa() {
+
         return $this->konexioa;
-    }
-    public function __destruct() {
-        if ($this->konexioa) {
-            $this->konexioa->close();
-        }
     }
 }
