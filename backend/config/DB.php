@@ -8,7 +8,7 @@ class DB {
     
     public function __construct()
     {
-        $env = require __DIR__ . '/../../config.php';
+        $env = require __DIR__ . '/../config.php';
 
         $this->user = $env['DB_USER'];
         $this->host = $env['DB_HOST'];
