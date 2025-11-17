@@ -1,4 +1,5 @@
- function getCookie(name) {
+import ENV from '../../config.js';
+function getCookie(name) {
     const value = `; ${document.cookie}`;
     const parts = value.split(`; ${name}=`);
     if (parts.length === 2) return decodeURIComponent(parts.pop().split(';').shift());
@@ -23,9 +24,9 @@ window.onload=function(){
     });
     console.log(api_key);
 
-    fetch("http://localhost/25-26-ERRONKA-TALDE3/backend/src/controller/ErabiltzaileaController.php?action=getByApi",{
-        method:"GET",
-        headers:{
+    fetch(`${ENV.API_BASE_URL}src/controller/ErabiltzaileaController.php?action=getByApi`, {
+        method: "GET",
+        headers: {
             "Authorization": "Bearer " + api_key
         }
     })
@@ -73,19 +74,14 @@ document.addEventListener("submit", function (event) {
         datos.pasahitza=pasahitza
     }
 
-    fetch("http://localhost/25-26-ERRONKA-TALDE3/backend/src/controller/ErabiltzaileaController.php?action=update",{
-        method:"POST",
-        headers:{
+    fetch(`${ENV.API_BASE_URL}src/controller/ErabiltzaileaController.php?action=update`, {
+        method: "POST",
+        headers: {
             "Authorization": "Bearer " + api_key,
             "Content-Type": "application/json"
         },
         body: JSON.stringify(datos)
-
     })
     .then(res => res.json())
     .then(data => console.log(data));
-
-
-
-
 });

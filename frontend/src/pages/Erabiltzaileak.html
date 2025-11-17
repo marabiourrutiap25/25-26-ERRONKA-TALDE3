@@ -13,7 +13,8 @@
   <link rel="stylesheet" href="../css/Erabiltzaileak.css">
 </head>
 
-<script>
+<script type ="module">
+  import ENV from '../../../config.js';
   document.addEventListener("DOMContentLoaded", async () => {
     const apiKey = localStorage.getItem("api_key") || getCookie("api_key_session");
 
@@ -32,7 +33,7 @@
 
     try {
       const response = await fetch(
-        "http://localhost/25-26-ERRONKA-TALDE3/backend/src/controller/ErabiltzaileaController.php?action=getRole",
+        `${ENV.API_BASE_URL}src/controller/ErabiltzaileaController.php?action=getRole`,
         {
           method: "GET",
           headers: {
@@ -220,7 +221,7 @@
   </script>
   <script src="../script/Erabiltzailea.js"></script>
   <script type="module" src="../components/Header.js"></script>
-  <script src="../js/lang.js"></script>
+  <script type="module" src="../js/lang.js"></script>
 </body>
 
 </html>
