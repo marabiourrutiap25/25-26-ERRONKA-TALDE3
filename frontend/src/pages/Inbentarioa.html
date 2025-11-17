@@ -24,10 +24,10 @@
 
       <!-- Encabezado de la sección principal -->
       <header class="d-flex justify-content-between align-items-center mb-4">
-        <h1 class="m-0">INBENTARIOA</h1>
+        <h1 class="m-0" data-i18n="inventory-inbentarioa">INBENTARIOA</h1>
 
         <div class="d-flex align-items-center">
-          <input type="text" id="searchInput" placeholder="Bilatu..." class="me-2">
+          <input type="text" id="searchInput" placeholder="Bilatu..." class="me-2" data-i18n-placeholder="search-placeholder-inbentarioa">
           <button id="addBtn" class="btn btn-custom">+</button>
         </div>
       </header>
@@ -38,10 +38,10 @@
           <table id="inbentarioaTable" class="table table-hover table-striped align-middle">
             <thead class="table-light">
               <tr>
-                <th>Etiketa</th>
-                <th>Ekipamendua</th>
-                <th>Erosketa data</th>
-                <th>Editatu / Ezabatu</th>
+                <th data-i18n="etiketa-inbentarioa">Etiketa</th>
+                <th data-i18n="equipment-inbentarioa">Ekipamendua</th>
+                <th data-i18n="purchase-date-inbentarioa">Erosketa data</th>
+                <th data-i18n="edit-delete-inbentarioa">Editatu / Ezabatu</th>
               </tr>
             </thead>
             <tbody>
@@ -62,7 +62,7 @@
         <article class="modal-content">
 
           <header class="modal-header">
-            <h5 class="modal-title" id="inbentarioaModalLabel">Sortu / Editatu</h5>
+            <h5 class="modal-title" id="inbentarioaModalLabel" data-i18n="create-edit-inbentarioa-modal">Sortu / Editatu</h5>
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Itxi"></button>
           </header>
 
@@ -72,27 +72,27 @@
 
               <div class="row mb-3">
                 <div class="col-6">
-                  <label for="etiketa" class="form-label">Etiketa</label>
+                  <label for="etiketa" class="form-label" data-i18n="etiketa-inbentarioa-modal">Etiketa</label>
                   <input type="text" class="form-control" id="etiketa" maxlength="10" required>
                 </div>
 
                 <div class="col-6">
-                  <label for="idEkipamendu" class="form-label">Ekipamendua</label>
+                  <label for="idEkipamendu" class="form-label" data-i18n="equipment-inbentarioa-modal">Ekipamendua</label>
                   <select class="form-select" id="idEkipamendu" required>
-                    <option value="">Aukeratu ekipamendua</option>
+                    <option value="" data-i18n="select-equipment-inbentarioa-modal">Aukeratu ekipamendua</option>
                   </select>
                 </div>
               </div>
 
               <div class="row mb-3">
                 <div class="col-6">
-                  <label for="erosketaData" class="form-label">Erosketa data</label>
+                  <label for="erosketaData" class="form-label" data-i18n="purchase-date-inbentarioa-modal">Erosketa data</label>
                   <input type="date" class="form-control" id="erosketaData" required>
                 </div>
               </div>
 
               <div class="text-end">
-                <button type="submit" class="btn btn-success">OK</button>
+                <button type="submit" class="btn btn-success" data-i18n="ok-inbentarioa-modal">OK</button>
               </div>
             </form>
           </div>
@@ -107,7 +107,7 @@
     <div id="notificationToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
       <header class="toast-header">
         <div id="toastIcon" class="me-2">🔔</div>
-        <strong class="me-auto" id="toastTitle">Notifikazioa</strong>
+        <strong class="me-auto" id="toastTitle" data-i18n="title-toast-inbentarioa">Notifikazioa</strong>
         <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
       </header>
       <div class="toast-body" id="toastMessage"></div>
@@ -139,6 +139,7 @@
   </script>
   <script src="../script/Inbentarioa.js"></script>
   <script type="module" src="../components/Header.js"></script>
+  <script src="../js/lang.js"></script>
 
 </body>
 

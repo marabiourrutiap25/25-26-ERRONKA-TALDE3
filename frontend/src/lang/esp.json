@@ -5,6 +5,8 @@
   "users-header": "USUARIOS",
   "profile-header": "perfil",
   "logout-header": "cerrar sesión",
+
+
   "username-label": "Usuario:",
   "username-placeholder": "Introduce tu usuario",
   "password-label": "Contraseña:",
@@ -21,5 +23,112 @@
   "remember": "Recordarme",
   "submit": "Entrar",
   "contact": "¿No tienes cuenta? Contacta: ejemplo@fpsanturtzilh.eus",
-  "errore_mezua": "El usuario o contraseña no son correctos."
+  "errore_mezua": "El usuario o contraseña no son correctos.",
+
+
+
+  "search-placeholder-ekipamendua": "Buscar...",
+  "equipment-ekipamendua": "EQUIPAMENTO",
+  "name-ekipamendua": "Nombre",
+  "description-ekipamendua": "Descripción",
+  "brand-ekipamendua": "Marca",
+  "model-ekipamendua": "Modelo",
+  "category-ekipamendua": "Categoría",
+  "stock-ekipamendua": "Stock",
+  "edit-delete-ekipamendua": "Editar / Eliminar",
+
+  "create-edit-ekipamendua-modal": "Crear / Editar",
+  "name-ekipamendua-modal": "Nombre",
+  "description-ekipamendua-modal": "Descripción",
+  "brand-ekipamendua-modal": "Marca",
+  "model-ekipamendua-modal": "Modelo",
+  "category-ekipamendua-modal": "Categoría",
+  "stock-ekipamendua-modal": "Stock",
+  "ok-ekipamendua-modal": "OK",
+
+  "title-toast-ekipamendua": "Notificación",
+
+
+
+  "search-placeholder-inbentarioa": "Buscar...",
+  "inventory-inbentarioa": "INVENTARIO",
+  "etiketa-inbentarioa": "Etiqueta",
+  "equipment-inbentarioa": "Equipamiento",
+  "purchase-date-inbentarioa": "Fecha de compra",
+  "edit-delete-inbentarioa": "Editar / Eliminar",
+
+  "create-edit-inbentarioa-modal": "Crear / Editar",
+  "etiketa-inbentarioa-modal": "Etiqueta",
+  "equipment-inbentarioa-modal": "Equipamiento",
+  "select-equipment-inbentarioa-modal": "Seleccionar equipamiento",
+  "purchase-date-inbentarioa-modal": "Fecha de compra",
+  "ok-inbentarioa-modal": "OK",
+
+  "title-toast-inbentarioa": "Notificación",
+
+
+
+  "search-placeholder-erabiltzaileak": "Buscar...",
+  "users-erabiltzaileak": "USUARIOS",
+  "name-erabiltzaileak": "Nombre",
+  "surname-erabiltzaileak": "Apellido",
+  "username-erabiltzaileak": "Usuario",
+  "password-erabiltzaileak": "Contraseña",
+  "role-erabiltzaileak": "Rol",
+  "api-key-erabiltzaileak": "Clave API",
+  "edit-delete-erabiltzaileak": "Editar / Eliminar",
+
+  "create-edit-erabiltzaileak-modal": "Crear / Editar",
+  "name-erabiltzaileak-modal": "Nombre",
+  "surname-erabiltzaileak-modal": "Apellido",
+  "username-erabiltzaileak-modal": "Usuario",
+  "password-erabiltzaileak-modal": "Contraseña",
+  "role-erabiltzaileak-modal": "Rol",
+  "select-role-erabiltzaileak-modal": "Seleccionar rol",
+  "admin-role-erabiltzaileak-modal": "Administrador",
+  "user-role-erabiltzaileak-modal": "Usuario",
+  "api-key-erabiltzaileak-modal": "Clave API",
+  "ok-erabiltzaileak-modal": "OK",
+
+  "title-toast-erabiltzaileak": "Notificación",
+
+
+
+  "search-placeholder-kudeaketa": "Buscar...",
+  "rooms-kudeaketa": "SALAS",
+  "categories-kudeaketa": "CATEGORÍAS",
+  "locations-kudeaketa": "UBICACIONES",
+
+  "id-gela-kudeaketa": "ID",
+  "name-gela-kudeaketa": "Nombre",
+  "team-gela-kudeaketa": "Equipo",
+  "edit-delete-gela-kudeaketa": "Editar / Eliminar",
+
+  "create-edit-gela-kudeaketa-modal": "Crear / Editar",
+  "name-gela-kudeaketa-modal": "Nombre",
+  "team-gela-kudeaketa-modal": "Equipo",
+  "ok-gela-kudeaketa-modal": "OK",
+
+  "id-kategoria-kudeaketa": "ID",
+  "name-kategoria-kudeaketa": "Nombre",
+  "edit-delete-kategoria-kudeaketa": "Editar / Eliminar",
+
+  "create-edit-kategoria-kudeaketa-modal": "Crear / Editar",
+  "name-kategoria-kudeaketa-modal": "Nombre",
+  "ok-kategoria-kudeaketa-modal": "OK",
+
+  "etiketa-kokalekua-kudeaketa": "Etiqueta",
+  "room-kokalekua-kudeaketa": "Sala",
+  "start-kokalekua-kudeaketa": "Inicio",
+  "end-kokalekua-kudeaketa": "Fin",
+  "edit-delete-kokalekua-kudeaketa": "Editar / Eliminar",
+
+  "create-edit-kokalekua-kudeaketa-modal": "Crear / Editar",
+  "name-label-kokalekua-kudeaketa-modal": "Nombre (etiqueta)",
+  "room-kokalekua-kudeaketa-modal": "Sala",
+  "start-date-kokalekua-kudeaketa-modal": "Fecha de Inicio",
+  "end-date-kokalekua-kudeaketa-modal": "Fecha de Fin",
+  "ok-kokalekua-kudeaketa-modal": "OK",
+
+  "title-toast-kudeaketa": "Notificación"
 }
