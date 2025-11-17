@@ -26,7 +26,7 @@
 
     if (!apiKey) {
       alert("🚫 Ez duzu baimenik. Hasi saioa lehenik.");
-      window.location.href = "../Login.html";
+      window.location.href = "../../index.html";
       return;
     }
 
@@ -46,7 +46,7 @@
       // Comprobamos si rol === 'a' (admin)
       if (!data.success || data.rola !== "a") {
         alert("🚫 Ez duzu baimen nahikorik.");
-        window.location.href = "../Login.html";
+        window.location.href = "../../index.html";
         return;
       }
 
@@ -55,7 +55,7 @@
     } catch (error) {
       console.error("Errorea rol egiaztatzean:", error);
       alert("Errorea gertatu da. Saiatu berriro.");
-      window.location.href = "../Login.html";
+      window.location.href = "../../index.html";
     }
   });
 
