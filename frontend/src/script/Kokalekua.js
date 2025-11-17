@@ -1,3 +1,4 @@
+// Comportamiento dinámico para asignar ubicaciones a etiquetas
 (function () {
   const apiUrl = window.location.origin + '/25-26-ERRONKA-TALDE3/backend/src/controller/KokalekuaController.php';
   const inventoryUrl = window.location.origin + '/25-26-ERRONKA-TALDE3/backend/src/controller/InbentarioaController.php';

@@ -1,4 +1,8 @@
 <?php
+/**
+ * Endpoint auxiliar para recuperar los datos del usuario a partir de una API key.
+ * Se admite tanto query param como cuerpo JSON para mayor flexibilidad.
+ */
 header("Access-Control-Allow-Origin: *");
 header("Content-Type: application/json; charset=UTF-8");
 

@@ -2,19 +2,27 @@
 require_once __DIR__ . '/../model/Kategoria.php';
 require_once __DIR__ . '/ErabiltzaileaService.php';
 
+/**
+ * Componente de negocio para CRUD de categorías.
+ */
 class KategoriaService
 {
     private $conn;
     private $table_name = "kategoria";
     private $erabiltzaileaService;
 
+    /**
+     * Reutiliza la conexión del controlador y el servicio de usuarios.
+     */
     public function __construct($db)
     {
         $this->conn = $db;
         $this->erabiltzaileaService = new ErabiltzaileaService($db);
     }
 
-    // Validar API key usando ErabiltzaileaService
+    /**
+     * Comprueba si la API key corresponde a un usuario existente.
+     */
     private function validateApiKey($api_key)
     {
         $user = $this->erabiltzaileaService->select_ApiKey($api_key);
@@ -24,7 +32,9 @@ class KategoriaService
         return $user;
     }
 
-    // Obtener todas las categorías
+    /**
+     * Devuelve listado completo de categorías disponibles.
+     */
     public function getAllKategoriak($api_key)
     {
         if (!$this->validateApiKey($api_key)) {
@@ -47,7 +57,9 @@ class KategoriaService
         return ["success" => true, "count" => count($items), "kategoriak" => $items];
     }
 
-    // Obtener categoría por ID
+    /**
+     * Recupera una categoría concreta por identificador.
+     */
     public function getById($api_key, $id)
     {
         if (!$this->validateApiKey($api_key)) {
@@ -72,7 +84,9 @@ class KategoriaService
         return ["success" => false, "message" => "Kategoria ez da aurkitu."];
     }
 
-    // Crear nueva categoría
+    /**
+     * Inserta una nueva categoría validando nombre único.
+     */
     public function createKategoria($api_key, $data)
     {
         if (!$this->validateApiKey($api_key)) {
@@ -114,7 +128,9 @@ class KategoriaService
         return ["success" => false, "message" => "Errorea kategoria sortzean."];
     }
 
-    // Actualizar categoría
+    /**
+     * Actualiza el nombre de la categoría indicada.
+     */
     public function updateKategoria($api_key, $id, $data)
     {
         if (!$this->validateApiKey($api_key)) {
@@ -164,7 +180,9 @@ class KategoriaService
         return ["success" => false, "message" => "Errorea kategoria eguneratzean."];
     }
 
-    // Eliminar categoría
+    /**
+     * Elimina una categoría si no existen equipos asociados.
+     */
     public function deleteKategoria($api_key, $id)
     {
         if (!$this->validateApiKey($api_key)) {

@@ -1,4 +1,9 @@
 <?php
+/**
+ * Controlador procedimental que expone la API REST de Ekipamendua.
+ * Todas las rutas esperan una cabecera Authorization con un token Bearer
+ * y delegan la lógica de negocio en el servicio correspondiente.
+ */
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
 
@@ -10,13 +15,18 @@ header("Access-Control-Allow-Headers: Content-Type, Authorization");
 require_once __DIR__ . '/../../config/DB.php';
 require_once __DIR__ . '/../service/EkipamenduaService.php';
 
+// Inicialización básica del servicio y la conexión
 $dbObj = new DB();
 $conn = $dbObj->konektatu();
 $service = new EkipamenduaService($conn);
 
 $action = $_GET['action'] ?? null;
 
-// Extraer API key desde header Authorization: Bearer <key>
+/**
+ * Lee la cabecera Authorization y devuelve únicamente el token Bearer.
+ *
+ * @return string|null API key extraída de la petición o null si no existe.
+ */
 function getApiKeyFromHeaders()
 {
     $headers = getallheaders();

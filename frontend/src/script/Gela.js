@@ -1,3 +1,4 @@
+// Módulo autoejecutable para operar con la entidad gela desde la UI
 (function () {
 
   /* ============================================================

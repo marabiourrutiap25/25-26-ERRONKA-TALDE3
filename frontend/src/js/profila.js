@@ -1,3 +1,4 @@
+// Lógica de perfil: lectura de datos personales y actualización
  function getCookie(name) {
     const value = `; ${document.cookie}`;
     const parts = value.split(`; ${name}=`);

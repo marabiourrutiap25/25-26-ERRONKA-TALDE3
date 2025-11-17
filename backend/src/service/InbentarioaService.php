@@ -3,6 +3,10 @@ require_once __DIR__ . '/../model/Inbentarioa.php';
 require_once __DIR__ . '/ErabiltzaileaService.php';
 require_once __DIR__ . '/EkipamenduaService.php';
 
+/**
+ * Servicio dedicado a la tabla `inbentarioa`, con validaciones cruzadas
+ * contra usuarios, equipamientos y ubicaciones.
+ */
 class InbentarioaService
 {
     private $conn;
@@ -10,6 +14,9 @@ class InbentarioaService
     private $erabiltzaileaService;
     private $ekipamenduaService;
 
+    /**
+     * Recibe la conexión y construye los servicios auxiliares.
+     */
     public function __construct($db)
     {
         $this->conn = $db;
@@ -17,6 +24,9 @@ class InbentarioaService
         $this->ekipamenduaService = new EkipamenduaService($db);
     }
 
+    /**
+     * Comprueba si la API key pertenece a un usuario válido.
+     */
     private function validateApiKey($api_key)
     {
         $user = $this->erabiltzaileaService->select_ApiKey($api_key);
@@ -26,7 +36,9 @@ class InbentarioaService
         return $user;
     }
 
-    // Validar que existe el equipamiento
+    /**
+     * Garantiza que un equipo existe antes de referenciarlo.
+     */
     private function validateEkipamendua($idEkipamendu)
     {
         $query = "SELECT COUNT(*) as total FROM ekipamendua WHERE id = ?";
@@ -38,7 +50,9 @@ class InbentarioaService
         return $row['total'] > 0;
     }
 
-    // Obtener todos los inventarios
+    /**
+     * Devuelve cada unidad física junto con el nombre del equipamiento.
+     */
     public function getAllInbentarioak($api_key)
     {
         if (!$this->validateApiKey($api_key)) {
@@ -66,7 +80,9 @@ class InbentarioaService
         return ["success" => true, "count" => count($items), "inbentarioak" => $items];
     }
 
-    // Obtener inventario por etiqueta
+    /**
+     * Localiza una etiqueta concreta.
+     */
     public function getByEtiketa($api_key, $etiketa)
     {
         if (!$this->validateApiKey($api_key)) {
@@ -96,7 +112,9 @@ class InbentarioaService
         return ["success" => false, "message" => "Inbentarioa ez da aurkitu."];
     }
 
-    // Crear nuevo inventario
+    /**
+     * Inserta una nueva etiqueta en inventario validando negocio.
+     */
     public function createInbentarioa($api_key, $data)
     {
         if (!$this->validateApiKey($api_key)) {
@@ -149,7 +167,9 @@ class InbentarioaService
         return ["success" => false, "message" => "Errorea inbentarioa sortzean."];
     }
 
-    // Actualizar inventario
+    /**
+     * Actualiza campos opcionales asociados a la etiqueta.
+     */
     public function updateInbentarioa($api_key, $etiketa, $data)
     {
         if (!$this->validateApiKey($api_key)) {
@@ -221,7 +241,9 @@ class InbentarioaService
         return ["success" => false, "message" => "Errorea inbentarioa eguneratzean."];
     }
 
-    // Eliminar inventario
+    /**
+     * Elimina definitivamente una entrada del inventario.
+     */
     public function deleteInbentarioa($api_key, $etiketa)
     {
         if (!$this->validateApiKey($api_key)) {

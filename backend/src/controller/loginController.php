@@ -1,4 +1,8 @@
 <?php
+/**
+ * Endpoint público de login. Valida credenciales y devuelve los datos básicos
+ * del usuario junto con la API key para futuras llamadas.
+ */
 header("Access-Control-Allow-Origin: *");
 header("Content-Type: application/json; charset=UTF-8");
 

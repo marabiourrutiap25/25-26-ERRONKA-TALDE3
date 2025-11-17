@@ -4,6 +4,9 @@ require_once __DIR__ . '/ErabiltzaileaService.php';
 require_once __DIR__ . '/InbentarioaService.php';
 require_once __DIR__ . '/GelaService.php';
 
+/**
+ * Servicio de negocio para las ubicaciones de cada equipo.
+ */
 class KokalekuaService
 {
     private $conn;
@@ -12,6 +15,9 @@ class KokalekuaService
     private $inbentarioaService;
     private $gelaService;
 
+    /**
+     * Inyecta la conexión común y servicios auxiliares para validaciones.
+     */
     public function __construct($db)
     {
         $this->conn = $db;
@@ -20,6 +26,9 @@ class KokalekuaService
         $this->gelaService = new GelaService($db);
     }
 
+    /**
+     * Comprueba que el token pertenezca a un usuario válido.
+     */
     private function validateApiKey($api_key)
     {
         $user = $this->erabiltzaileaService->select_ApiKey($api_key);
@@ -29,7 +38,9 @@ class KokalekuaService
         return $user;
     }
 
-    // Validar que existe el inventario y la gela
+    /**
+     * Confirma la existencia previa de inventario y aula.
+     */
     private function validateReferences($etiketa, $idGela)
     {
         // Validar inventario
@@ -57,7 +68,9 @@ class KokalekuaService
         return ["valid" => true];
     }
 
-    // Obtener todas las ubicaciones
+    /**
+     * Devuelve el histórico de ubicaciones con nombre de aula.
+     */
     public function getAllKokalekuak($api_key)
     {
         if (!$this->validateApiKey($api_key)) {
@@ -86,7 +99,9 @@ class KokalekuaService
         return ["success" => true, "count" => count($items), "kokalekuak" => $items];
     }
 
-    // Obtener ubicaciones por etiqueta
+    /**
+     * Lista las ubicaciones asociadas a una etiqueta concreta.
+     */
     public function getByEtiketa($api_key, $etiketa)
     {
         if (!$this->validateApiKey($api_key)) {
@@ -122,7 +137,9 @@ class KokalekuaService
         return ["success" => false, "message" => "Ez dira kokalekuak aurkitu etiketa honentzat."];
     }
 
-    // Crear nueva ubicación
+    /**
+     * Crea un nuevo registro de ubicación validando solapamientos.
+     */
     public function createKokalekua($api_key, $data)
     {
         if (!$this->validateApiKey($api_key)) {
@@ -176,7 +193,9 @@ class KokalekuaService
         return ["success" => false, "message" => "Errorea kokalekua sortzean."];
     }
 
-    // Actualizar ubicación
+    /**
+     * Permite modificar aula o fecha de fin de una asignación.
+     */
     public function updateKokalekua($api_key, $etiketa, $hasieraData, $data)
     {
         if (!$this->validateApiKey($api_key)) {
@@ -259,7 +278,9 @@ class KokalekuaService
         return ["success" => false, "message" => "Errorea kokalekua eguneratzean."];
     }
 
-    // Eliminar ubicación
+    /**
+     * Elimina una asignación concreta identificada por etiqueta+inicio.
+     */
     public function deleteKokalekua($api_key, $etiketa, $hasieraData)
     {
         if (!$this->validateApiKey($api_key)) {

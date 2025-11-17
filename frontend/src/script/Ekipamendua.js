@@ -1,3 +1,4 @@
+// Lógica de interfaz para listar y CRUD de equipamiento
 const apiUrl = window.location.origin + '/25-26-ERRONKA-TALDE3/backend/src/controller/EkipamenduaController.php';
 const kategoriaApiUrl = window.location.origin + '/25-26-ERRONKA-TALDE3/backend/src/controller/KategoriaController.php';
 const tbody = document.querySelector('#ekipTable tbody');

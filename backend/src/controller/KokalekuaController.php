@@ -1,4 +1,8 @@
 <?php
+/**
+ * Controlador para la gestión de ubicaciones (kokalekua). Orquesta todas las
+ * acciones en torno a ?action y valida parámetros mínimos.
+ */
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
 

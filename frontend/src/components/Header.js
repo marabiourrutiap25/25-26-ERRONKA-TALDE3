@@ -1,3 +1,4 @@
+// Componente Web que pinta el encabezado reutilizable con idioma y sesión
 class CustomHeader extends HTMLElement {
   connectedCallback() {
     this.innerHTML = `
