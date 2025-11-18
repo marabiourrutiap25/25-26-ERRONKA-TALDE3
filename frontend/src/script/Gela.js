@@ -2,7 +2,7 @@
 (function () {
 
   /* ============================================================
-   *  🧩 KONFIGURAZIOA ETA ELEMENTUEN ERREFERENTZIAK
+   *  KONFIGURAZIOA ETA ELEMENTUEN ERREFERENTZIAK
    * ============================================================ */
 
   const apiUrl = window.location.origin + '/25-26-ERRONKA-TALDE3/backend/src/controller/GelaController.php';
@@ -17,7 +17,7 @@
 
 
   /* ============================================================
-   *  🧩 EGIAZTATU ELEMENTUAK EXISTITZEN DIREN
+   *  EGIAZTATU ELEMENTUAK EXISTITZEN DIREN
    * ============================================================ */
 
   if (!tbody || !form || !searchInput || !modalElement || !addBtn) {
@@ -27,7 +27,7 @@
 
 
   /* ============================================================
-   *  🧩 BOOTSTRAP MODALA HASIERATZEA
+   *  BOOTSTRAP MODALA HASIERATZEA
    * ============================================================ */
 
   if (window.bootstrap && typeof window.bootstrap.Modal === 'function') {
@@ -40,7 +40,7 @@
 
 
   /* ============================================================
-   *  🧩 SAIOAREN API KEY ESkuratzea
+   *  SAIOAREN API KEY ESkuratzea
    * ============================================================ */
 
   function getCookie(name) {
@@ -58,7 +58,7 @@
 
 
   /* ============================================================
-   *  🧩 TOAST (NOTIFIKAZIOA) KONFIGURAZIOA
+   *  TOAST (NOTIFIKAZIOA) KONFIGURAZIOA
    * ============================================================ */
 
   let toast = null;
@@ -126,7 +126,7 @@
 
 
   /* ============================================================
-   *  🧩 HTML SIGURANTZIA: TEXTUA IHES EGITEA
+   *  HTML SIGURANTZIA: TEXTUA IHES EGITEA
    * ============================================================ */
   function escapeHtml(str) {
     if (!str) return '';
@@ -141,7 +141,7 @@
 
 
   /* ============================================================
-   *  🧩 GELAK KARGATU (GET ALL)
+   *  GELAK KARGATU (GET ALL)
    * ============================================================ */
 
   async function fetchGelak() {
@@ -190,7 +190,7 @@
 
 
   /* ============================================================
-   *  🧩 MODALA IREKI (Sortu / Editatu)
+   *  MODALA IREKI (Sortu / Editatu)
    * ============================================================ */
 
   async function openModal(id = null) {
@@ -237,7 +237,7 @@
 
 
   /* ============================================================
-   *  🧩 FORM-AREN SUBMIT (CREATE / UPDATE)
+   *  FORM-AREN SUBMIT (CREATE / UPDATE)
    * ============================================================ */
 
   form.addEventListener('submit', async e => {
@@ -286,7 +286,7 @@
 
 
   /* ============================================================
-   *  🧩 TAULAKO BOTOIAK (EDIT / DELETE)
+   *  TAULAKO BOTOIAK (EDIT / DELETE)
    * ============================================================ */
 
   tbody.addEventListener('click', event => {
@@ -305,7 +305,7 @@
 
 
   /* ============================================================
-   *  🧩 EZABATU (DELETE)
+   *  EZABATU (DELETE)
    * ============================================================ */
 
   async function deleteGela(id) {
@@ -339,7 +339,7 @@
 
 
   /* ============================================================
-   *  🧩 EKITALDIAK
+   *  EKITALDIAK
    * ============================================================ */
 
   addBtn.addEventListener('click', () => openModal());

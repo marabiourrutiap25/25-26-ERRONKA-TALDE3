@@ -17,6 +17,7 @@
 
 <body class="fondo">
     <custom-header></custom-header>
+    <!-- Página: perfil de usuario — permite ver y editar datos personales -->
     <main class="d-flex justify-content-center align-items-center vh-100">
 
         <section class="login-popup text-center rounded">
@@ -72,6 +73,7 @@
     </main>
     <!-- Función que detecta si se ha iniciado o no la sesión. -->
     <script>
+        // Obtiene el valor de una cookie
         function getCookie(name) {
             const value = `; ${document.cookie}`;
             const parts = value.split(`; ${name}=`);

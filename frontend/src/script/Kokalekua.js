@@ -33,6 +33,7 @@
     return cookie ? decodeURIComponent(cookie[1]) : localStorage.getItem('api_key');
   }
 
+  // Muestra notificaciones breves al usuario (toast o alert)
   function showToast(message, type = 'success') {
     const toastEl = document.getElementById('notificationToast');
     const iconEl = document.getElementById('toastIcon');
@@ -64,6 +65,7 @@
     }
   }
 
+  // Escapa HTML para evitar inyección en el DOM
   function escapeHtml(str) {
     if (!str) return '';
     return String(str).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
@@ -71,6 +73,7 @@
   }
 
   async function fetchKokalekuak() {
+    // Carga la tabla de kokalekua
     tbody.innerHTML = '<tr><td colspan="5">Kargatzen...</td></tr>';
     const api_key = getApiKey();
     if (!api_key) return;
@@ -107,6 +110,7 @@
   }
 
   async function loadSelectOptions() {
+    // Rellena los <select> con inventario y gelak disponibles
     const api_key = getApiKey();
     if (!api_key) return;
 
@@ -142,6 +146,7 @@
   }
 
   async function openModal(etiketa = null, hasieraData = null) {
+    // Prepara y abre el modal para crear o editar un kokalekua
     await loadSelectOptions();
     if (etiketa && hasieraData) {
       const api_key = getApiKey();
@@ -172,6 +177,7 @@
   }
 
   form.addEventListener('submit', async e => {
+    // Envía formulario para crear o actualizar un kokalekua
     e.preventDefault();
     const api_key = getApiKey();
     if (!api_key) return;
@@ -222,6 +228,7 @@
   });
 
   async function deleteKokalekua(etiketa, hasieraData) {
+    // Elimina un kokalekua existente
     const api_key = getApiKey();
     try {
       const res = await fetch(`${apiUrl}?action=delete&etiketa=${encodeURIComponent(etiketa)}&hasieraData=${encodeURIComponent(hasieraData)}`, {
