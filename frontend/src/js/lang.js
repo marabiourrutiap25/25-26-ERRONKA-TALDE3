@@ -1,4 +1,5 @@
 let currentLang = "eus";
+import ENV from '../../config.js';
 
 try {
   const storedLang = localStorage.getItem("selectedLang");
@@ -11,7 +12,8 @@ async function loadLang(lang) {
   console.log("Intentando cargar idioma:", lang);
 
   try {
-    const response = await fetch("http://localhost/25-26-ERRONKA-TALDE3/frontend/src/lang/"+lang+".json");
+    const response = await fetch(`${ENV.API_BASE_URL2}src/lang/${lang}.json`);
+
     console.log("Respuesta fetch:", response);
 
     if (!response.ok) throw new Error("No se pudo cargar el JSON");

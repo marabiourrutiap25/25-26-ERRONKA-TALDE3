@@ -225,7 +225,8 @@ class InbentarioaService
     public function deleteInbentarioa($api_key, $etiketa)
     {
         if (!$this->validateApiKey($api_key)) {
-            return ["success" => false, "message" => "API key ez da baliozkoa."];
+            return ["success" => false, "message" => "API key ez da baliozkoa111111."];
+            
         }
 
         // Verificar si existe

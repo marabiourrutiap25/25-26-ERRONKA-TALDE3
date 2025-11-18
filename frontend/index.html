@@ -59,7 +59,8 @@
         </section>
     </main>
 
-    <script>
+    <script type="module">
+        import ENV from './config.js';
         // ===== COOKIE FUNCTIONS =====
         function setCookie(name, value, days) {
             const date = new Date();
@@ -99,7 +100,7 @@
             const savedApiKey = localStorage.getItem("api_key") || getCookie("api_key_session");
             if (savedApiKey) {
                 const encoded = encodeURIComponent(savedApiKey);
-                window.location.href = `../frontend/src/pages/Kudeaketa.html`;
+                window.location.href = `src/pages/Kudeaketa.html`;
             }
 
             // Cargar credenciales guardadas si existe la cookie
@@ -136,7 +137,8 @@
                     deleteCookie("password");
                 }
 
-                fetch("http://localhost/25-26-ERRONKA-TALDE3/backend/src/controller/loginController.php", {
+
+                fetch(`${ENV.API_BASE_URL}src/controller/loginController.php`, {
                     method: "POST",
                     headers: { "Content-Type": "application/json" },
                     body: JSON.stringify(jsonData)
@@ -159,7 +161,7 @@
                             }
 
                             const apiKey = encodeURIComponent(data.user.api_key);
-                            window.location.href = `../frontend/src/pages/kudeaketa.html`;
+                            window.location.href = `src/pages/kudeaketa.html`;
                         } else {
                             console.warn("❌ Login error:", data.message);
                             const errorTemplate = document.getElementById("error-template");
@@ -177,7 +179,7 @@
         });
     </script>
 
-    <script src="src/js/lang.js"></script>
+    <script type="module" src="src/js/lang.js"></script>
 </body>
 
 </html>
