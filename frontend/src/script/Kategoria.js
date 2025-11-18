@@ -1,8 +1,8 @@
-// Rutinas de UI para la tabla de categorías
+// Kategoria-taularen UI errutinak
 (function () {
 
   /* =========================================================
-   *  ELEMENTOS DEL DOM
+   *  DOM ELEMENTUAK
    * ========================================================= */
   const apiUrl = window.location.origin +
     '/25-26-ERRONKA-TALDE3/backend/src/controller/KategoriaController.php';
@@ -23,7 +23,7 @@
   }
 
   /* =========================================================
-   *  INIT MODAL
+   *  MODAL-A HASIERATU
    * ========================================================= */
   if (modalElement && window.bootstrap?.Modal) {
     try {
@@ -37,7 +37,7 @@
   }
 
   /* =========================================================
-   *  UTILIDADES
+   *  LAGUNTZAILEAK
    * ========================================================= */
 
   function getCookie(name) {
@@ -129,7 +129,7 @@
   }
 
   /* =========================================================
-   *  FETCH: LISTAR
+   *  FETCH: ZERRENDA
    * ========================================================= */
   async function fetchKategoriak() {
     tbody.innerHTML = '<tr><td colspan="3">Kargatzen...</td></tr>';
@@ -171,7 +171,7 @@
         </tr>
       `).join('');
 
-      // Añadir eventos en botones
+      // Botonen gertaerak gehitu
       tbody.querySelectorAll('.editBtn-kategoria').forEach(btn =>
         btn.addEventListener('click', () => openModal(btn.dataset.id))
       );
@@ -186,7 +186,7 @@
   }
 
   /* =========================================================
-   *  MODAL: ABRIR PARA CREAR/EDITAR
+   *  MODAL: SORTU/EDITATU IREKI
    * ========================================================= */
   async function openModal(id = null) {
     const api_key = getApiKey();
@@ -217,7 +217,7 @@
   }
 
   /* =========================================================
-   *  FORM: CREAR O EDITAR
+   *  FORM: SORTU EDO EDITATU
    * ========================================================= */
   form.addEventListener('submit', async e => {
     e.preventDefault();
@@ -255,7 +255,7 @@
   });
 
   /* =========================================================
-   *  ELIMINAR
+   *  EZABATU
    * ========================================================= */
   async function deleteKategoria(id) {
     const api_key = getApiKey();
@@ -280,7 +280,7 @@
   }
 
   /* =========================================================
-   *  EVENTOS
+   *  GERTAERAK
    * ========================================================= */
   addBtn.addEventListener('click', () => openModal());
 

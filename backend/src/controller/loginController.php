@@ -1,7 +1,7 @@
 <?php
 /**
- * Endpoint público de login. Valida credenciales y devuelve los datos básicos
- * del usuario junto con la API key para futuras llamadas.
+ * Login endpoint publikoa. Kredentzialak egiaztatzen ditu eta erabiltzailearen
+ * datu oinarrizkoak itzultzen ditu etorkizuneko deiak egiteko API key-arekin.
  */
 header("Access-Control-Allow-Origin: *");
 header("Content-Type: application/json; charset=UTF-8");

@@ -1,4 +1,4 @@
-// Lógica de interfaz para listar y CRUD de equipamiento (comentarios breves)
+// Ekipamenduak zerrendatu eta CRUD egiteko interfazearen logika (iruzkin laburrak)
 const apiUrl = window.location.origin + '/25-26-ERRONKA-TALDE3/backend/src/controller/EkipamenduaController.php';
 const kategoriaApiUrl = window.location.origin + '/25-26-ERRONKA-TALDE3/backend/src/controller/KategoriaController.php';
 const tbody = document.querySelector('#ekipTable tbody');
@@ -7,7 +7,7 @@ const form = document.getElementById('ekipForm');
 const searchInput = document.getElementById('searchInput');
 const kategoriaSelect = document.getElementById('kategoria');
 
-// Cookie helper: obtiene y decodifica el valor de una cookie
+// Cookie laguntzailea: cookie baten balioa lortzen eta dekodetzen du
 function getCookie(name) {
   const value = `; ${document.cookie}`;
   const parts = value.split(`; ${name}=`);
@@ -15,12 +15,12 @@ function getCookie(name) {
   return "";
 }
 
-// Obtener api_key desde cookie de sesión o localStorage
+// `api_key` lortu saio-cookie-etik edo `localStorage`-etik
 function getApiKey() {
   return getCookie('api_key_session') || localStorage.getItem('api_key');
 }
 
-// Inicializa el toast de notificaciones si Bootstrap y elementos están presentes
+// Jakinarazpen toast-a hasieratu (Bootstrap eta elementuak badaude)
 let toast = null;
 let toastElement = document.getElementById('notificationToast');
 let toastTitle = document.getElementById('toastTitle');
@@ -37,8 +37,7 @@ try {
   toast = null;
 }
 
-// Show toast notification
-// Muestra una notificación breve al usuario
+// Toast jakinarazpena erakutsi (erabiltzaileari mezu laburra erakusteko)
 function showToast(message, type = 'success') {
   const icons = {
     success: '✅',
@@ -80,7 +79,7 @@ function showToast(message, type = 'success') {
   try { window.alert(message); } catch (e) { }
 }
 
-// Carga la lista de equipamientos en la tabla
+// Ekipamendu zerrenda kargatu taulan
 async function fetchEkipamenduak() {
   tbody.innerHTML = '<tr><td colspan="8">Kargatzen...</td></tr>';
   const api_key = getApiKey();
@@ -134,14 +133,14 @@ async function fetchEkipamenduak() {
   }
 }
 
-// Escapa texto para evitar inyección en el DOM
+// DOM-era injezioak saihesteko testua ihes egitea
 function escapeHtml(str) {
   if (!str) return '';
   return String(str).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
     .replace(/"/g, '&quot;').replace(/'/g, '&#39;');
 }
 
-// Rellena el select de categorías
+// Kategoria-select-a betetzen du
 async function loadKategoriak() {
   const api_key = getApiKey();
   try {
@@ -166,7 +165,7 @@ async function loadKategoriak() {
   }
 }
 
-// Abre el modal para crear o editar un equipo; carga datos si `id` existe
+// Modal-a ireki ekipamendua sortu/eguneratzeko; `id` badago datuak kargatzen ditu
 async function openModal(id = null) {
   const api_key = getApiKey();
   await loadKategoriak();
@@ -211,7 +210,7 @@ async function openModal(id = null) {
   modal.show();
 }
 
-// Maneja el envío del formulario para crear/actualizar un equipamiento
+// Formularioko bidalketa kudeatu: ekipamendua sortu/eguneratu
 form.addEventListener('submit', async e => {
   e.preventDefault();
   const api_key = getApiKey();
@@ -241,7 +240,7 @@ form.addEventListener('submit', async e => {
   fetchEkipamenduak();
 });
 
-// Elimina un equipamiento por `id`
+// Ekipamendua `id` bidez ezabatu
 async function deleteEkipamendua(id) {
   const api_key = getApiKey();
   const res = await fetch(`${apiUrl}?action=delete&id=${id}`, {
@@ -260,6 +259,7 @@ async function deleteEkipamendua(id) {
 document.getElementById('addBtn').addEventListener('click', () => openModal());
 window.addEventListener('DOMContentLoaded', fetchEkipamenduak);
 
+// Gertaera entzuleak: bilaketa eta botoiak
 searchInput.addEventListener('input', () => {
   const filter = searchInput.value.toLowerCase();
   document.querySelectorAll('#ekipTable tbody tr').forEach(row => {

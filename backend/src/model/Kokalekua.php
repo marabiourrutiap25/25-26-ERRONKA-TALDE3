@@ -1,6 +1,6 @@
 <?php
 /**
- * Modelo para los movimientos/ubicaciones de un equipo concreto.
+ * Ekipamendu konkretu baten mugimendu/kokaleku modeloa.
  */
 class Kokalekua {
     public $etiketa;
@@ -9,7 +9,7 @@ class Kokalekua {
     public $amaieraData;
 
     /**
-     * Mapear automáticamente las columnas devueltas por mysqli.
+     * mysqli-k itzultzen dituen zutabeak automatikoki mapatzen ditu.
      *
      * @param array|null $row
      */

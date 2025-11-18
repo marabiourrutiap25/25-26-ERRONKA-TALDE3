@@ -3,7 +3,7 @@ require_once __DIR__ . '/../model/Kategoria.php';
 require_once __DIR__ . '/ErabiltzaileaService.php';
 
 /**
- * Componente de negocio para CRUD de categorías.
+ * Negozio osagaia kategorien CRUD-erako.
  */
 class KategoriaService
 {
@@ -12,7 +12,7 @@ class KategoriaService
     private $erabiltzaileaService;
 
     /**
-     * Reutiliza la conexión del controlador y el servicio de usuarios.
+     * Kontroladorearen konexioa eta erabiltzaile zerbitzua berrerabiltzen ditu.
      */
     public function __construct($db)
     {
@@ -21,7 +21,7 @@ class KategoriaService
     }
 
     /**
-     * Comprueba si la API key corresponde a un usuario existente.
+     * Egiaztatzen du API key-ak erabiltzaile bat dagokion.
      */
     private function validateApiKey($api_key)
     {
@@ -33,7 +33,7 @@ class KategoriaService
     }
 
     /**
-     * Devuelve listado completo de categorías disponibles.
+     * Eskuragarri dauden kategoriak itzultzen ditu.
      */
     public function getAllKategoriak($api_key)
     {
@@ -58,7 +58,7 @@ class KategoriaService
     }
 
     /**
-     * Recupera una categoría concreta por identificador.
+     * Identifikatzailearen bidez kategoria bat berreskuratzen du.
      */
     public function getById($api_key, $id)
     {
@@ -85,7 +85,7 @@ class KategoriaService
     }
 
     /**
-     * Inserta una nueva categoría validando nombre único.
+     * Kategoria berri bat txertatzen du, izen bakarra egiaztatuta.
      */
     public function createKategoria($api_key, $data)
     {
@@ -97,7 +97,7 @@ class KategoriaService
             return ["success" => false, "message" => "Izena beharrezkoa da."];
         }
 
-        // Comprobar si ya existe una categoría con ese nombre
+        // Izen hori duen kategoria dagoen egiaztatu
         $checkQuery = "SELECT COUNT(*) as total FROM " . $this->table_name . " WHERE izena = ?";
         $stmt = $this->conn->prepare($checkQuery);
         $stmt->bind_param("s", $data->izena);
@@ -108,7 +108,7 @@ class KategoriaService
             return ["success" => false, "message" => "Kategoria hau existitzen da."];
         }
 
-        // Obtener el siguiente ID disponible
+        // Hurrengo eskuragarri dagoen ID-a lortu
         $maxIdQuery = "SELECT MAX(id) as max_id FROM " . $this->table_name;
         $result = $this->conn->query($maxIdQuery);
         $row = $result->fetch_assoc();
@@ -129,7 +129,7 @@ class KategoriaService
     }
 
     /**
-     * Actualiza el nombre de la categoría indicada.
+     * Adierazitako kategoriaren izena eguneratzen du.
      */
     public function updateKategoria($api_key, $id, $data)
     {
@@ -141,7 +141,7 @@ class KategoriaService
             return ["success" => false, "message" => "Izena beharrezkoa da."];
         }
 
-        // Comprobar si existe la categoría
+        // Kategoria existitzen den egiaztatu
         $checkQuery = "SELECT COUNT(*) as total FROM " . $this->table_name . " WHERE id = ?";
         $stmt = $this->conn->prepare($checkQuery);
         $stmt->bind_param("i", $id);
@@ -152,7 +152,7 @@ class KategoriaService
             return ["success" => false, "message" => "Kategoria ez da existitzen."];
         }
 
-        // Comprobar si ya existe otra categoría con ese nombre
+        // Beste kategoria batek izen hori erabiltzen duen egiaztatu
         $checkNameQuery = "SELECT COUNT(*) as total FROM " . $this->table_name . " WHERE izena = ? AND id != ?";
         $stmt = $this->conn->prepare($checkNameQuery);
         $stmt->bind_param("si", $data->izena, $id);
@@ -181,7 +181,7 @@ class KategoriaService
     }
 
     /**
-     * Elimina una categoría si no existen equipos asociados.
+     * Kategoria ezabatzen du, ekipamendu loturik ez badagoen bitartean.
      */
     public function deleteKategoria($api_key, $id)
     {
@@ -189,7 +189,7 @@ class KategoriaService
             return ["success" => false, "message" => "API key ez da baliozkoa."];
         }
 
-        // Primero verificar si existe
+        // Lehenik eta behin existitzen den egiaztatu
         $checkQuery = "SELECT COUNT(*) as total FROM " . $this->table_name . " WHERE id = ?";
         $stmt = $this->conn->prepare($checkQuery);
         $stmt->bind_param("i", $id);
@@ -200,7 +200,7 @@ class KategoriaService
             return ["success" => false, "message" => "Kategoria ez da existitzen."];
         }
 
-        // Comprobar dependencias en ekipamendua
+        // Ekipamendu taulan mendekotasunak egiaztatu
         $dependencyQuery = "SELECT COUNT(*) as total FROM ekipamendua WHERE idKategoria = ?";
         $dependencyStmt = $this->conn->prepare($dependencyQuery);
         if ($dependencyStmt) {

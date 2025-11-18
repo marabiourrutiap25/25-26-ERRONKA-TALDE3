@@ -1,7 +1,7 @@
 <?php
 /**
- * API procedimental para la entidad Gela. Expone operaciones CRUD mediante
- * el parámetro ?action y valida la API key enviada en la cabecera.
+ * `Gela` entitaterako API prozedurala. ?action parametroaren bitartez CRUD eragiketak
+ * exposatzen ditu eta Authorization header-ean bidalitako API key-a egiaztatzen du.
  */
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
@@ -36,7 +36,7 @@ function getApiKeyFromHeaders()
     return $api_key;
 }
 
-// GET -> obtener todas las gelak
+// GET -> gelak guztiak lortu
 if ($_SERVER['REQUEST_METHOD'] === 'GET' && $action === 'getAll') {
     $api_key = getApiKeyFromHeaders();
     if (!$api_key) {
@@ -49,7 +49,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET' && $action === 'getAll') {
     exit;
 }
 
-// GET -> obtener gela por id
+// GET -> gela id bidez lortu
 if ($_SERVER['REQUEST_METHOD'] === 'GET' && $action === 'getById') {
     $api_key = getApiKeyFromHeaders();
     $id = isset($_GET['id']) ? intval($_GET['id']) : null;
@@ -63,7 +63,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET' && $action === 'getById') {
     exit;
 }
 
-// POST -> crear gela
+// POST -> gela sortu
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && $action === 'create') {
     $api_key = getApiKeyFromHeaders();
     $data = json_decode(file_get_contents("php://input"));
@@ -77,7 +77,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && $action === 'create') {
     exit;
 }
 
-// POST -> actualizar gela
+// POST -> gela eguneratu
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && $action === 'update') {
     $api_key = getApiKeyFromHeaders();
     $id = isset($_GET['id']) ? intval($_GET['id']) : null;
@@ -92,7 +92,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && $action === 'update') {
     exit;
 }
 
-// DELETE -> eliminar gela
+// DELETE -> gela ezabatu
 if ($_SERVER['REQUEST_METHOD'] === 'DELETE' && $action === 'delete') {
     $api_key = getApiKeyFromHeaders();
     $id = isset($_GET['id']) ? intval($_GET['id']) : null;
@@ -109,7 +109,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'DELETE' && $action === 'delete') {
     exit;
 }
 
-// POST -> eliminar gela (compatibilidad)
+// POST -> gela ezabatu (kompatibilitatea)
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && $action === 'delete') {
     $api_key = getApiKeyFromHeaders();
     $id = isset($_GET['id']) ? intval($_GET['id']) : null;

@@ -5,7 +5,7 @@ require_once __DIR__ . '/InbentarioaService.php';
 require_once __DIR__ . '/GelaService.php';
 
 /**
- * Servicio de negocio para las ubicaciones de cada equipo.
+ * Negozio zerbitzua ekipamenduen kokalekuentzat.
  */
 class KokalekuaService
 {
@@ -16,7 +16,7 @@ class KokalekuaService
     private $gelaService;
 
     /**
-     * Inyecta la conexión común y servicios auxiliares para validaciones.
+     * Konexioa eta egiaztapenetarako laguntza-zerbitzuak inprimatzen ditu.
      */
     public function __construct($db)
     {
@@ -27,7 +27,7 @@ class KokalekuaService
     }
 
     /**
-     * Comprueba que el token pertenezca a un usuario válido.
+     * Egiaztatzen du token-a erabiltzaile baliozko bati dagokiola.
      */
     private function validateApiKey($api_key)
     {
@@ -39,11 +39,11 @@ class KokalekuaService
     }
 
     /**
-     * Confirma la existencia previa de inventario y aula.
+     * Inbentarioaren eta gelaren existencia aurretik egiaztatzen du.
      */
     private function validateReferences($etiketa, $idGela)
     {
-        // Validar inventario
+        // Inbentarioa egiaztatu
         $query = "SELECT COUNT(*) as total FROM inbentarioa WHERE etiketa = ?";
         $stmt = $this->conn->prepare($query);
         $stmt->bind_param("s", $etiketa);
@@ -54,7 +54,7 @@ class KokalekuaService
             return ["valid" => false, "message" => "Inbentarioa ez da existitzen."];
         }
 
-        // Validar gela
+        // Gela egiaztatu
         $query = "SELECT COUNT(*) as total FROM gela WHERE id = ?";
         $stmt = $this->conn->prepare($query);
         $stmt->bind_param("i", $idGela);
@@ -69,7 +69,7 @@ class KokalekuaService
     }
 
     /**
-     * Devuelve el histórico de ubicaciones con nombre de aula.
+     * Kokaleku historikoa itzultzen du, gelaren izenarekin.
      */
     public function getAllKokalekuak($api_key)
     {
@@ -100,7 +100,7 @@ class KokalekuaService
     }
 
     /**
-     * Lista las ubicaciones asociadas a una etiqueta concreta.
+     * Etiketa jakin batekin lotutako kokalekuak zerrendatzen ditu.
      */
     public function getByEtiketa($api_key, $etiketa)
     {
@@ -138,7 +138,7 @@ class KokalekuaService
     }
 
     /**
-     * Crea un nuevo registro de ubicación validando solapamientos.
+     * Kokaleku berri bat sortzen du, estaldurak egiaztatuta.
      */
     public function createKokalekua($api_key, $data)
     {
@@ -150,13 +150,13 @@ class KokalekuaService
             return ["success" => false, "message" => "Derrigorrezko eremuak falta dira."];
         }
 
-        // Validar referencias
+        // Erreferentziak egiaztatu
         $validation = $this->validateReferences($data->etiketa, $data->idGela);
         if (!$validation['valid']) {
             return ["success" => false, "message" => $validation['message']];
         }
 
-        // Verificar si hay una ubicación activa (sin fecha fin) para esta etiqueta
+        // Etiketa honentzat kokaleku aktibo bat (amaieraData gabekoa) dagoen egiaztatu
         $checkQuery = "SELECT COUNT(*) as total FROM " . $this->table_name . " 
                       WHERE etiketa = ? AND amaieraData IS NULL";
         $stmt = $this->conn->prepare($checkQuery);
@@ -194,7 +194,7 @@ class KokalekuaService
     }
 
     /**
-     * Permite modificar aula o fecha de fin de una asignación.
+     * Aularen edo hasierako/amaierako dataren modifikazioa baimentzen du.
      */
     public function updateKokalekua($api_key, $etiketa, $hasieraData, $data)
     {
@@ -202,7 +202,7 @@ class KokalekuaService
             return ["success" => false, "message" => "API key ez da baliozkoa."];
         }
 
-        // Verificar que existe
+        // Existitzen den egiaztatu
         $checkQuery = "SELECT COUNT(*) as total FROM " . $this->table_name . " 
                       WHERE etiketa = ? AND hasieraData = ?";
         $stmt = $this->conn->prepare($checkQuery);
@@ -214,7 +214,7 @@ class KokalekuaService
             return ["success" => false, "message" => "Kokalekua ez da existitzen."];
         }
 
-        // Si se actualiza la gela, validar que existe
+        // Gela eguneratzen bada, existitzen den egiaztatu
         if (isset($data->idGela)) {
             $query = "SELECT COUNT(*) as total FROM gela WHERE id = ?";
             $stmt = $this->conn->prepare($query);
@@ -253,12 +253,12 @@ class KokalekuaService
             return ["success" => false, "message" => "Errorea kontsulta prestatzean."];
         }
 
-        // Añadir etiketa y hasieraData al final
+        // Azkenean etiketa eta hasieraData gehitu
         $types .= 'ss';
         $values[] = $etiketa;
         $values[] = $hasieraData;
 
-        // bind_param requiere referencias
+        // bind_param erreferentziak behar ditu
         $bind_names[] = $types;
         for ($i = 0; $i < count($values); $i++) {
             $bind_name = 'bind' . $i;
@@ -279,7 +279,7 @@ class KokalekuaService
     }
 
     /**
-     * Elimina una asignación concreta identificada por etiqueta+inicio.
+     * Etiketa+hasiera arabera identifikatutako esleipen bat ezabatzen du.
      */
     public function deleteKokalekua($api_key, $etiketa, $hasieraData)
     {

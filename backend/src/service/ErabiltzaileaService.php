@@ -2,8 +2,8 @@
 require_once __DIR__ . '/../model/Erabiltzailea.php';
 
 /**
- * Servicio de acceso a datos para la tabla `erabiltzailea`.
- * Centraliza validaciones compartidas y generación de API keys.
+ * `erabiltzailea` taularako datu-atzealde zerbitzua.
+ * Baldintza partekatuak eta API key sortzeak zentralizatzen ditu.
  */
 class ErabiltzaileaService
 {
@@ -12,8 +12,8 @@ class ErabiltzaileaService
     private $conn;
 
     /**
-     * Abre su propia conexión porque este servicio se usa también desde
-     * otros servicios y controladores estáticos.
+     * Bere konexioa irekitzen du, zerbitzu hau beste zerbitzu eta kontroladoreetatik
+     * ere erabiltzen baita.
      */
     public function __construct(){
         $this->dbObj = new DB();
@@ -25,7 +25,7 @@ class ErabiltzaileaService
 
 
     /**
-     * Recupera un usuario por su nombre de login.
+     * Erabiltzaile bat lortzen du bere login izenaren arabera.
      *
      * @param string $username
      */
@@ -50,7 +50,7 @@ class ErabiltzaileaService
     }
 
     /**
-     * Verifica las credenciales y genera una API key si no existe.
+     * Kredentzialak egiaztatzen ditu eta API key bat sortzen du baldin eta ez badago.
      */
     public function logina_kontsultatu($username, $password)
     {
@@ -76,7 +76,7 @@ class ErabiltzaileaService
     }
 
     /**
-     * Devuelve el usuario asociado a la API key recibida.
+     * Jasotako API key-arekin lotutako erabiltzailea itzultzen du.
      */
     public function select_ApiKey($api_key)
     {
@@ -98,7 +98,7 @@ class ErabiltzaileaService
     }
 
     /**
-     * Genera una API key aleatoria garantizando unicidad.
+     * API key ausazko bat sortzen du, bakartasuna bermatuz.
      */
     private function sortuApiKeyBerria()
     {
@@ -116,7 +116,7 @@ class ErabiltzaileaService
     }
 
     /**
-     * Ejemplo de actualización directa de un único campo.
+     * Eremu bakar baten eguneratze zuzena adibidez.
      */
     public function aldatuIzena($api_key, $izena_berria) // Esta es la prueba.
     {
@@ -137,7 +137,7 @@ class ErabiltzaileaService
     }
 
     /**
-     * Devuelve el listado completo de usuarios para la administración.
+     * Administraziorako erabiltzaileen zerrenda osoa itzultzen du.
      */
     public function getAllErabiltzaileak($api_key)
     {
@@ -161,7 +161,7 @@ class ErabiltzaileaService
         return ["success" => true, "count" => count($items), "users" => $items];
     }
     /**
-     * Obtiene los datos básicos asociados a una API key.
+     * API key bati lotutako datu oinarrizkoak lortzen ditu.
      */
     public function getByApiKey($api_key){
         $user = $this->select_ApiKey($api_key);
@@ -185,7 +185,7 @@ class ErabiltzaileaService
     }
 
     /**
-     * Busca un usuario concreto a partir de su NAN.
+     * NAN-aren arabera erabiltzaile zehatz bat bilatzen du.
      */
     public function getByNan($api_key, $nan)
     {
@@ -211,7 +211,7 @@ class ErabiltzaileaService
     }
 
     /**
-     * Elimina un usuario siempre que el llamante esté autenticado.
+     * Erabiltzaile bat ezabatzen du, deitzailea autentikatuta badago.
      */
     public function deleteByNan($api_key, $nan)
     {
@@ -238,7 +238,7 @@ class ErabiltzaileaService
     }
 
     /**
-     * Actualiza de manera dinámica los campos enviados en el payload.
+     * Payload-ean bidalitako eremuak modu dinamikoan eguneratzen ditu.
      */
     public function updateErabiltzailea($api_key, $data, $nanParam = null)
     {
@@ -318,7 +318,7 @@ class ErabiltzaileaService
     }
 
     /**
-     * Inserta un nuevo usuario validando los campos únicos y obligatorios.
+     * Erabiltzaile berri bat txertatzen du, eta eremu bakarrak eta derrigorrezkoak egiaztatzen ditu.
      */
     public function createErabiltzailea($api_key, $data)
     {
@@ -373,7 +373,7 @@ class ErabiltzaileaService
     }
 
     /**
-     * Atajo para recuperar únicamente el rol a partir de la API key.
+     * API key-etik rol-a bakarrik berreskuratzeko atajoa.
      */
     public function getRoleByApiKey($api_key) {
     // Obtener usuario por API key

@@ -1,6 +1,6 @@
 <?php
 /**
- * Representación de un usuario tal y como se almacena en la base de datos.
+ * Datu-basetan gordetzen den bezala erabiltzaile baten errepresentazioa.
  */
 class Erabiltzailea {
     public $nan;
@@ -12,7 +12,7 @@ class Erabiltzailea {
     public $api_key;
 
     /**
-     * Rellena las propiedades desde un array asociativo, útil para mysqli.
+     * Propietateak array elkarrekinlotu batetik betetzen ditu, mysqli-rentzat erabilgarria.
      *
      * @param array|null $row
      */

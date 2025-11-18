@@ -4,8 +4,8 @@ require_once __DIR__ . '/ErabiltzaileaService.php';
 require_once __DIR__ . '/KategoriaService.php';
 
 /**
- * Servicio encargado de orquestar todas las operaciones relacionadas con
- * la tabla `ekipamendua`, incluyendo validaciones auxiliares.
+ * `ekipamendua` taulari lotutako operazioak orkestratzen dituen zerbitzua.
+ * Laguntza-egiaztapenak barne.
  */
 class EkipamenduaService
 {
@@ -15,8 +15,8 @@ class EkipamenduaService
     private $kategoriaService;
 
     /**
-     * Recibe la conexión abierta para ejecutar todas las consultas y
-     * construye los servicios auxiliares reutilizados en las validaciones.
+     * Irekitako konexioa jasotzen du kontsultak exekutatzeko eta
+     * egiaztapenerako zerbitzu lagunak sortzen ditu.
      *
      * @param mysqli $db
      */
@@ -28,7 +28,7 @@ class EkipamenduaService
     }
 
     /**
-     * Valida la API key contra la tabla de usuarios.
+     * API key-a erabiltzaileen taulan egiaztatzen du.
      *
      * @param string $api_key
      * @return object|false
@@ -43,7 +43,7 @@ class EkipamenduaService
     }
 
     /**
-     * Verifica que la categoría referenciada exista antes de insertar/actualizar.
+     * Aipatutako kategoria existitzen den egiaztatzen du insert/update aurretik.
      *
      * @param int $idKategoria
      * @return bool
@@ -60,7 +60,7 @@ class EkipamenduaService
     }
 
     /**
-     * Calcula el siguiente ID manualmente cuando no hay auto_increment.
+     * Hurrengo ID-a kalkulatzen du eskuz, auto_increment ez dagoenean.
      *
      * @return int
      */
@@ -73,7 +73,7 @@ class EkipamenduaService
     }
 
     /**
-     * Devuelve todo el catálogo de equipamiento con su categoría asociada.
+     * Ekipamendu katalogoa itzultzen du, bere kategoria izenarekin.
      */
     public function getAllEkipamenduak($api_key)
     {
@@ -100,7 +100,7 @@ class EkipamenduaService
     }
 
     /**
-     * Busca un equipamiento concreto por id.
+     * Ekipamendu bat id bidez bilatzen du.
      *
      * @param string $api_key
      * @param int $id
@@ -133,7 +133,7 @@ class EkipamenduaService
     }
 
     /**
-     * Inserta un nuevo registro aplicando validaciones básicas de negocio.
+     * Erregistro berri bat txertatzen du, negozio-baldintzak egiaztatuta.
      *
      * @param string $api_key
      * @param object $data
@@ -144,17 +144,17 @@ class EkipamenduaService
             return ["success" => false, "message" => "API key ez da baliozkoa."];
         }
 
-        // Validar campos requeridos
+        // Beharrezko eremuak egiaztatu
         if (!isset($data->izena) || !isset($data->deskribapena) || !isset($data->stock) || !isset($data->idKategoria)) {
             return ["success" => false, "message" => "Derrigorrezko eremuak falta dira."];
         }
 
-        // Validar que existe la categoría
+        // Kategoria existitzen den egiaztatu
         if (!$this->validateKategoria($data->idKategoria)) {
             return ["success" => false, "message" => "Kategoria ez da existitzen."];
         }
 
-        // Obtener siguiente ID
+        // Hurrengo ID lortu
         $nextId = $this->getNextId();
 
         $query = "INSERT INTO " . $this->table_name . " 
@@ -189,7 +189,7 @@ class EkipamenduaService
     }
 
     /**
-     * Actualiza los campos enviados dinámicamente.
+     * Bidalitako eremu dinamikoak eguneratzen ditu.
      *
      * @param string $api_key
      * @param int $id
@@ -201,7 +201,7 @@ class EkipamenduaService
             return ["success" => false, "message" => "API key ez da baliozkoa."];
         }
 
-        // Verificar que existe
+        // Existitzen den egiaztatu
         $checkQuery = "SELECT COUNT(*) as total FROM " . $this->table_name . " WHERE id = ?";
         $stmt = $this->conn->prepare($checkQuery);
         $stmt->bind_param("i", $id);
@@ -212,7 +212,7 @@ class EkipamenduaService
             return ["success" => false, "message" => "Ekipamendua ez da existitzen."];
         }
 
-        // Si se actualiza la categoría, validar que existe
+        // Kategoria eguneratzen bada, existitzen den egiaztatu
         if (isset($data->idKategoria) && !$this->validateKategoria($data->idKategoria)) {
             return ["success" => false, "message" => "Kategoria ez da existitzen."];
         }
@@ -262,11 +262,11 @@ class EkipamenduaService
             return ["success" => false, "message" => "Errorea kontsulta prestatzean."];
         }
 
-        // Añadir el id al final de los parámetros
+        // Parametroen amaieran id gehitu
         $types .= 'i';
         $values[] = $id;
 
-        // bind_param requiere referencias
+        // bind_param erreferentzia bidezko argudioak behar ditu
         $bind_names[] = $types;
         for ($i = 0; $i < count($values); $i++) {
             $bind_name = 'bind' . $i;
@@ -287,7 +287,7 @@ class EkipamenduaService
     }
 
     /**
-     * Elimina un registro si no existe relación en inventario.
+     * Erregistro bat ezabatzen du, inbentarioarekin erlaziorik ez badago.
      *
      * @param string $api_key
      * @param int $id
@@ -298,7 +298,7 @@ class EkipamenduaService
             return ["success" => false, "message" => "API key ez da baliozkoa."];
         }
 
-        // Primero verificar si existe
+        // Lehenik existitzen den egiaztatu
         $checkQuery = "SELECT COUNT(*) as total FROM " . $this->table_name . " WHERE id = ?";
         $stmt = $this->conn->prepare($checkQuery);
         $stmt->bind_param("i", $id);
@@ -309,7 +309,7 @@ class EkipamenduaService
             return ["success" => false, "message" => "Ekipamendua ez da existitzen."];
         }
 
-        // Verificar si hay registros relacionados en inbentarioa
+        // Inbentarioan erregistro loturik dauden egiaztatu
         $checkInbQuery = "SELECT COUNT(*) as total FROM inbentarioa WHERE idEkipamendu = ?";
         $stmt = $this->conn->prepare($checkInbQuery);
         $stmt->bind_param("i", $id);

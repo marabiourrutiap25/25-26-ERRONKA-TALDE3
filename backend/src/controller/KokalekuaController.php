@@ -1,7 +1,7 @@
 <?php
 /**
- * Controlador para la gestión de ubicaciones (kokalekua). Orquesta todas las
- * acciones en torno a ?action y valida parámetros mínimos.
+ * Kokalekuen kudeaketarako kontroladorea. ?action inguruan eragiketak
+ * orkestratzen ditu eta parametro minimoak egiaztatzen ditu.
  */
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
@@ -20,7 +20,7 @@ $service = new KokalekuaService($conn);
 
 $action = $_GET['action'] ?? null;
 
-// Extraer API key desde header Authorization: Bearer <key>
+// Authorization header-etik API key atera: Bearer <key>
 function getApiKeyFromHeaders()
 {
     $headers = getallheaders();
@@ -34,7 +34,7 @@ function getApiKeyFromHeaders()
     return $api_key;
 }
 
-// GET -> obtener todas las ubicaciones
+// GET -> kokaleku guztiak lortu
 if ($_SERVER['REQUEST_METHOD'] === 'GET' && $action === 'getAll') {
     $api_key = getApiKeyFromHeaders();
     if (!$api_key) {
@@ -47,7 +47,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET' && $action === 'getAll') {
     exit;
 }
 
-// GET -> obtener ubicaciones por etiqueta
+// GET -> kokalekuak etiketa bidez lortu
 if ($_SERVER['REQUEST_METHOD'] === 'GET' && $action === 'getByEtiketa') {
     $api_key = getApiKeyFromHeaders();
     $etiketa = $_GET['etiketa'] ?? null;
@@ -61,7 +61,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET' && $action === 'getByEtiketa') {
     exit;
 }
 
-// POST -> crear ubicación
+// POST -> kokalekua sortu
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && $action === 'create') {
     $api_key = getApiKeyFromHeaders();
     $data = json_decode(file_get_contents("php://input"));
@@ -75,7 +75,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && $action === 'create') {
     exit;
 }
 
-// POST -> actualizar ubicación
+// POST -> kokalekua eguneratu
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && $action === 'update') {
     $api_key = getApiKeyFromHeaders();
     $etiketa = $_GET['etiketa'] ?? null;
@@ -91,7 +91,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && $action === 'update') {
     exit;
 }
 
-// DELETE -> eliminar ubicación
+// DELETE -> kokalekua ezabatu
 if ($_SERVER['REQUEST_METHOD'] === 'DELETE' && $action === 'delete') {
     $api_key = getApiKeyFromHeaders();
     $etiketa = $_GET['etiketa'] ?? null;
@@ -106,7 +106,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'DELETE' && $action === 'delete') {
     exit;
 }
 
-// POST -> eliminar ubicación (compatibilidad)
+// POST -> kokalekua ezabatu (kompatibilitatea)
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && $action === 'delete') {
     $api_key = getApiKeyFromHeaders();
     $etiketa = $_GET['etiketa'] ?? null;
