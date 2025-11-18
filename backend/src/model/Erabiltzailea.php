@@ -1,4 +1,7 @@
 <?php
+/**
+ * Representación de un usuario tal y como se almacena en la base de datos.
+ */
 class Erabiltzailea {
     public $nan;
     public $izena;
@@ -8,6 +11,11 @@ class Erabiltzailea {
     public $rola;
     public $api_key;
 
+    /**
+     * Rellena las propiedades desde un array asociativo, útil para mysqli.
+     *
+     * @param array|null $row
+     */
     public function __construct($row = null) {
         if ($row) {
             $this->nan = $row['nan'];

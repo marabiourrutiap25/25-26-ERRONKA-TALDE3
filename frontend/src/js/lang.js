@@ -1,3 +1,4 @@
+// Controlador simple de internacionalización basado en ficheros JSON
 let currentLang = "eus";
 import ENV from '../../config.js';
 

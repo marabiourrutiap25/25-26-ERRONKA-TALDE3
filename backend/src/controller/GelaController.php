@@ -1,4 +1,8 @@
 <?php
+/**
+ * API procedimental para la entidad Gela. Expone operaciones CRUD mediante
+ * el parámetro ?action y valida la API key enviada en la cabecera.
+ */
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
 
@@ -16,6 +20,9 @@ $service = new GelaService($conn);
 
 $action = $_GET['action'] ?? null;
 
+/**
+ * Recupera la API key de la cabecera Authorization (Bearer token).
+ */
 function getApiKeyFromHeaders()
 {
     $headers = getallheaders();

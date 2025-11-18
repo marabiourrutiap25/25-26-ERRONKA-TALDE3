@@ -1,3 +1,4 @@
+// Vista de inventario: muestra unidades y lanza CRUD contra la API
 // =======================
 // CONFIGURACIÓN DE API
 // =======================

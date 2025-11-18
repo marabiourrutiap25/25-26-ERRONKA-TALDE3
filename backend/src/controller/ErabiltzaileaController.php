@@ -1,4 +1,8 @@
 <?php
+/**
+ * Controlador de Erabiltzaileak (usuarios).
+ * Gestiona las operaciones CRUD básicas que se exponen desde el frontend.
+ */
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
 
@@ -8,13 +12,18 @@ header("Content-Type: application/json; charset=UTF-8");
 require_once __DIR__ . '/../../config/DB.php';
 require_once __DIR__ . '/../service/ErabiltzaileaService.php';
 
+// Se instancia el servicio con la conexión compartida
 $dbObj = new DB();
 $conn = $dbObj->konektatu();
 $service = new ErabiltzaileaService($conn);
 
 $action = $_GET['action'] ?? null;
 
-// Extraer API key desde header Authorization: Bearer <key>
+/**
+ * Devuelve la API key extraída de la cabecera Authorization.
+ *
+ * @return string|null
+ */
 function getApiKeyFromHeaders()
 {
     $headers = getallheaders();

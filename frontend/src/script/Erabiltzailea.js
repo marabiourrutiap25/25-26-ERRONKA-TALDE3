@@ -1,3 +1,4 @@
+// Script de administración de usuarios y sincronización con la API
 // =======================
 // CONFIGURACIÓN DE API
 // =======================

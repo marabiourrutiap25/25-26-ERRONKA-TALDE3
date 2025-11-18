@@ -1,4 +1,8 @@
 <?php
+/**
+ * Controlador de inventario. Ofrece endpoints CRUD para inbentarioak y
+ * protege cada operación con una API key en la cabecera Authorization.
+ */
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
 

@@ -1,4 +1,8 @@
 <?php
+/**
+ * Controlador CRUD para categorías. Centraliza la validación de la API key
+ * y delega toda la lógica en el servicio correspondiente.
+ */
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
 

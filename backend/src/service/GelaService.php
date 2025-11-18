@@ -2,18 +2,27 @@
 require_once __DIR__ . '/../model/Gela.php';
 require_once __DIR__ . '/ErabiltzaileaService.php';
 
+/**
+ * Servicio encargado de gestionar la entidad `gela`.
+ */
 class GelaService
 {
     private $conn;
     private $table_name = "gela";
     private $erabiltzaileaService;
 
+    /**
+     * Se inicializa con la conexión compartida del controlador.
+     */
     public function __construct($db)
     {
         $this->conn = $db;
         $this->erabiltzaileaService = new ErabiltzaileaService($db);
     }
 
+    /**
+     * Validación ligera que reutiliza el servicio de usuarios.
+     */
     private function validateApiKey($api_key)
     {
         $user = $this->erabiltzaileaService->select_ApiKey($api_key);
@@ -23,7 +32,9 @@ class GelaService
         return $user;
     }
 
-    // Obtener todas las gelak
+    /**
+     * Lista todas las aulas registradas.
+     */
     public function getAllGelak($api_key)
     {
         if (!$this->validateApiKey($api_key)) {
@@ -46,7 +57,9 @@ class GelaService
         return ["success" => true, "count" => count($items), "gelak" => $items];
     }
 
-    // Obtener gela por ID
+    /**
+     * Recupera una gela concreta mediante su identificador.
+     */
     public function getById($api_key, $id)
     {
         if (!$this->validateApiKey($api_key)) {
@@ -71,7 +84,9 @@ class GelaService
         return ["success" => false, "message" => "Gela ez da aurkitu."];
     }
 
-    // Crear nueva gela
+    /**
+     * Inserta una nueva gela garantizando unicidad de nombre e ID.
+     */
     public function createGela($api_key, $data)
     {
         if (!$this->validateApiKey($api_key)) {
@@ -114,7 +129,9 @@ class GelaService
         return ["success" => false, "message" => "Errorea gela sortzean."];
     }
 
-    // Actualizar gela
+    /**
+     * Actualiza nombre y grupo asociado de una gela.
+     */
     public function updateGela($api_key, $id, $data)
     {
         if (!$this->validateApiKey($api_key)) {
@@ -165,7 +182,9 @@ class GelaService
         return ["success" => false, "message" => "Errorea gela eguneratzean."];
     }
 
-    // Eliminar gela
+    /**
+     * Elimina una gela siempre que no existan kokaleku dependientes.
+     */
     public function deleteGela($api_key, $id)
     {
         if (!$this->validateApiKey($api_key)) {

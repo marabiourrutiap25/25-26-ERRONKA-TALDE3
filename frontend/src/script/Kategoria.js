@@ -1,3 +1,4 @@
+// Rutinas de UI para la tabla de categorías
 (function () {
 
   /* =========================================================

@@ -1,3 +1,4 @@
+// Lógica de perfil: lectura de datos personales y actualización
 import ENV from '../../config.js';
 function getCookie(name) {
     const value = `; ${document.cookie}`;

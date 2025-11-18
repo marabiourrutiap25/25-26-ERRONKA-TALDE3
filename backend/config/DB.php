@@ -1,11 +1,25 @@
 <?php
+/**
+ * Clase ligera para gestionar la conexión MySQL procedente de mysqli.
+ * Encapsula credenciales, apertura y cierre de la conexión para centralizar
+ * la configuración del backend.
+ */
 class DB {
+    /** @var mysqli|null Referencia al recurso de conexión activo */
     private $konexioa;
+    /** @var string Usuario configurado para la BD */
     private $user ;
+    /** @var string Host del servidor MySQL */
     private $host;
+    /** @var string Contraseña del usuario */
     private $pass ;
+    /** @var string Nombre de la base de datos */
     private $db;
     
+    /**
+     * Carga los parámetros de la conexión. Idealmente deberían venir de
+     * variables de entorno, pero por ahora se fijan en duro.
+     */
     public function __construct()
     {
         $env = require __DIR__ . '/../config.php';

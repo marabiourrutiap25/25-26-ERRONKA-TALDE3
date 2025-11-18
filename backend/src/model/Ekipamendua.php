@@ -1,4 +1,7 @@
 <?php
+/**
+ * DTO simple que representa la fila de la tabla `ekipamendua`.
+ */
 class Ekipamendua {
     public $id;
     public $izena;
@@ -9,6 +12,11 @@ class Ekipamendua {
     public $idKategoria;
     public $kategoria_izena;
 
+    /**
+     * Permite construir el objeto directamente desde un array asociativo.
+     *
+     * @param array|null $row
+     */
     public function __construct($row = null) {
         if ($row) {
             $this->id = $row['id'];

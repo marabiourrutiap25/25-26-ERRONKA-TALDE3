@@ -3,6 +3,10 @@ require_once __DIR__ . '/../model/Ekipamendua.php';
 require_once __DIR__ . '/ErabiltzaileaService.php';
 require_once __DIR__ . '/KategoriaService.php';
 
+/**
+ * Servicio encargado de orquestar todas las operaciones relacionadas con
+ * la tabla `ekipamendua`, incluyendo validaciones auxiliares.
+ */
 class EkipamenduaService
 {
     private $conn;
@@ -10,6 +14,12 @@ class EkipamenduaService
     private $erabiltzaileaService;
     private $kategoriaService;
 
+    /**
+     * Recibe la conexión abierta para ejecutar todas las consultas y
+     * construye los servicios auxiliares reutilizados en las validaciones.
+     *
+     * @param mysqli $db
+     */
     public function __construct($db)
     {
         $this->conn = $db;
@@ -17,7 +27,12 @@ class EkipamenduaService
         $this->kategoriaService = new KategoriaService($db);
     }
 
-    // Validar API key usando ErabiltzaileaService
+    /**
+     * Valida la API key contra la tabla de usuarios.
+     *
+     * @param string $api_key
+     * @return object|false
+     */
     private function validateApiKey($api_key)
     {
         $user = $this->erabiltzaileaService->select_ApiKey($api_key);
@@ -27,7 +42,12 @@ class EkipamenduaService
         return $user;
     }
 
-    // Validar que existe la categoría
+    /**
+     * Verifica que la categoría referenciada exista antes de insertar/actualizar.
+     *
+     * @param int $idKategoria
+     * @return bool
+     */
     private function validateKategoria($idKategoria)
     {
         $query = "SELECT COUNT(*) as total FROM kategoria WHERE id = ?";
@@ -39,7 +59,11 @@ class EkipamenduaService
         return $row['total'] > 0;
     }
 
-    // Obtener siguiente ID disponible
+    /**
+     * Calcula el siguiente ID manualmente cuando no hay auto_increment.
+     *
+     * @return int
+     */
     private function getNextId()
     {
         $maxIdQuery = "SELECT MAX(id) as max_id FROM " . $this->table_name;
@@ -48,7 +72,9 @@ class EkipamenduaService
         return ($row['max_id'] ?? 0) + 1;
     }
 
-    // Obtener todos los equipamientos
+    /**
+     * Devuelve todo el catálogo de equipamiento con su categoría asociada.
+     */
     public function getAllEkipamenduak($api_key)
     {
         if (!$this->validateApiKey($api_key)) {
@@ -73,7 +99,12 @@ class EkipamenduaService
         return ["success" => true, "count" => count($items), "ekipamenduak" => $items];
     }
 
-    // Obtener equipamiento por ID
+    /**
+     * Busca un equipamiento concreto por id.
+     *
+     * @param string $api_key
+     * @param int $id
+     */
     public function getById($api_key, $id)
     {
         if (!$this->validateApiKey($api_key)) {
@@ -101,7 +132,12 @@ class EkipamenduaService
         return ["success" => false, "message" => "Ekipamendua ez da aurkitu."];
     }
 
-    // Crear nuevo equipamiento
+    /**
+     * Inserta un nuevo registro aplicando validaciones básicas de negocio.
+     *
+     * @param string $api_key
+     * @param object $data
+     */
     public function createEkipamendua($api_key, $data)
     {
         if (!$this->validateApiKey($api_key)) {
@@ -152,7 +188,13 @@ class EkipamenduaService
         return ["success" => false, "message" => "Errorea ekipamendua sortzean."];
     }
 
-    // Actualizar equipamiento
+    /**
+     * Actualiza los campos enviados dinámicamente.
+     *
+     * @param string $api_key
+     * @param int $id
+     * @param object $data
+     */
     public function updateEkipamendua($api_key, $id, $data)
     {
         if (!$this->validateApiKey($api_key)) {
@@ -244,7 +286,12 @@ class EkipamenduaService
         return ["success" => false, "message" => "Errorea ekipamendua eguneratzean."];
     }
 
-    // Eliminar equipamiento
+    /**
+     * Elimina un registro si no existe relación en inventario.
+     *
+     * @param string $api_key
+     * @param int $id
+     */
     public function deleteEkipamendua($api_key, $id)
     {
         if (!$this->validateApiKey($api_key)) {

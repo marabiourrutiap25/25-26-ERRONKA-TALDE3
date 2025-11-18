@@ -1,11 +1,20 @@
 <?php
 require_once __DIR__ . '/../model/Erabiltzailea.php';
 
+/**
+ * Servicio de acceso a datos para la tabla `erabiltzailea`.
+ * Centraliza validaciones compartidas y generación de API keys.
+ */
 class ErabiltzaileaService
 {
 
     private $dbObj;
     private $conn;
+
+    /**
+     * Abre su propia conexión porque este servicio se usa también desde
+     * otros servicios y controladores estáticos.
+     */
     public function __construct(){
         $this->dbObj = new DB();
         $this->conn = $this->dbObj->konektatu();
@@ -15,6 +24,11 @@ class ErabiltzaileaService
     private $table_name = "erabiltzailea";
 
 
+    /**
+     * Recupera un usuario por su nombre de login.
+     *
+     * @param string $username
+     */
     public function select_Erabiltzailea($username)
     {
         $query = "SELECT * FROM " . $this->table_name . " WHERE erabiltzailea = ? LIMIT 1";
@@ -35,6 +49,9 @@ class ErabiltzaileaService
         return null;
     }
 
+    /**
+     * Verifica las credenciales y genera una API key si no existe.
+     */
     public function logina_kontsultatu($username, $password)
     {
         $user = $this->select_Erabiltzailea($username);
@@ -58,6 +75,9 @@ class ErabiltzaileaService
         return null;
     }
 
+    /**
+     * Devuelve el usuario asociado a la API key recibida.
+     */
     public function select_ApiKey($api_key)
     {
         $query = "SELECT * FROM " . $this->table_name . " WHERE api_key = ? LIMIT 1";
@@ -77,6 +97,9 @@ class ErabiltzaileaService
         return null;
     }
 
+    /**
+     * Genera una API key aleatoria garantizando unicidad.
+     */
     private function sortuApiKeyBerria()
     {
         do {
@@ -92,6 +115,9 @@ class ErabiltzaileaService
         return $api_key;
     }
 
+    /**
+     * Ejemplo de actualización directa de un único campo.
+     */
     public function aldatuIzena($api_key, $izena_berria) // Esta es la prueba.
     {
         $user = $this->select_ApiKey($api_key);
@@ -110,7 +136,9 @@ class ErabiltzaileaService
         }
     }
 
-    // Devuelve todos los usuarios (sin mostrar pasahitza)
+    /**
+     * Devuelve el listado completo de usuarios para la administración.
+     */
     public function getAllErabiltzaileak($api_key)
     {
         $user = $this->select_ApiKey($api_key);
@@ -132,7 +160,9 @@ class ErabiltzaileaService
 
         return ["success" => true, "count" => count($items), "users" => $items];
     }
-    // Obtener usuario por api_key
+    /**
+     * Obtiene los datos básicos asociados a una API key.
+     */
     public function getByApiKey($api_key){
         $user = $this->select_ApiKey($api_key);
         if (!$user) {
@@ -154,7 +184,9 @@ class ErabiltzaileaService
         return ["success" => false, "message" => "Erabiltzailea ez da aurkitu."];
     }
 
-    // Obtener usuario por nan
+    /**
+     * Busca un usuario concreto a partir de su NAN.
+     */
     public function getByNan($api_key, $nan)
     {
         $user = $this->select_ApiKey($api_key);
@@ -178,7 +210,9 @@ class ErabiltzaileaService
         return ["success" => false, "message" => "Erabiltzailea ez da aurkitu."];
     }
 
-    // Eliminar usuario por nan
+    /**
+     * Elimina un usuario siempre que el llamante esté autenticado.
+     */
     public function deleteByNan($api_key, $nan)
     {
         $user = $this->select_ApiKey($api_key);
@@ -203,7 +237,9 @@ class ErabiltzaileaService
         return ["success" => false, "message" => "Errorea erabiltzailea ezabatzean."];
     }
 
-    // Actualizar campos de usuario (izena, abizena, erabiltzailea, pasahitza, rola)
+    /**
+     * Actualiza de manera dinámica los campos enviados en el payload.
+     */
     public function updateErabiltzailea($api_key, $data, $nanParam = null)
     {
         $user = $this->select_ApiKey($api_key);
@@ -281,7 +317,9 @@ class ErabiltzaileaService
         return ["success" => false, "message" => "Errorea eguneratzean."];
     }
 
-    // Crear un nuevo usuario (todos los campos obligatorios menos api_key)
+    /**
+     * Inserta un nuevo usuario validando los campos únicos y obligatorios.
+     */
     public function createErabiltzailea($api_key, $data)
     {
         $user = $this->select_ApiKey($api_key);
@@ -334,6 +372,9 @@ class ErabiltzaileaService
         return ["success" => false, "message" => "Errorea erabiltzailea sortzean."];
     }
 
+    /**
+     * Atajo para recuperar únicamente el rol a partir de la API key.
+     */
     public function getRoleByApiKey($api_key) {
     // Obtener usuario por API key
     $user = $this->select_ApiKey($api_key);

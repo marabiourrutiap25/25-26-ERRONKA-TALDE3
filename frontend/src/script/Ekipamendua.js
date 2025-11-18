@@ -1,3 +1,4 @@
+// Lógica de interfaz para listar y CRUD de equipamiento (comentarios breves)
 const apiUrl = window.location.origin + '/25-26-ERRONKA-TALDE3/backend/src/controller/EkipamenduaController.php';
 const kategoriaApiUrl = window.location.origin + '/25-26-ERRONKA-TALDE3/backend/src/controller/KategoriaController.php';
 const tbody = document.querySelector('#ekipTable tbody');
@@ -6,7 +7,7 @@ const form = document.getElementById('ekipForm');
 const searchInput = document.getElementById('searchInput');
 const kategoriaSelect = document.getElementById('kategoria');
 
-// ===== COOKIE HELPER FUNCTION =====
+// Cookie helper: obtiene y decodifica el valor de una cookie
 function getCookie(name) {
   const value = `; ${document.cookie}`;
   const parts = value.split(`; ${name}=`);
@@ -19,7 +20,7 @@ function getApiKey() {
   return getCookie('api_key_session') || localStorage.getItem('api_key');
 }
 
-// Toast initialization (defensive)
+// Inicializa el toast de notificaciones si Bootstrap y elementos están presentes
 let toast = null;
 let toastElement = document.getElementById('notificationToast');
 let toastTitle = document.getElementById('toastTitle');
@@ -37,6 +38,7 @@ try {
 }
 
 // Show toast notification
+// Muestra una notificación breve al usuario
 function showToast(message, type = 'success') {
   const icons = {
     success: '✅',
@@ -78,6 +80,7 @@ function showToast(message, type = 'success') {
   try { window.alert(message); } catch (e) { }
 }
 
+// Carga la lista de equipamientos en la tabla
 async function fetchEkipamenduak() {
   tbody.innerHTML = '<tr><td colspan="8">Kargatzen...</td></tr>';
   const api_key = getApiKey();
@@ -131,12 +134,14 @@ async function fetchEkipamenduak() {
   }
 }
 
+// Escapa texto para evitar inyección en el DOM
 function escapeHtml(str) {
   if (!str) return '';
   return String(str).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
     .replace(/"/g, '&quot;').replace(/'/g, '&#39;');
 }
 
+// Rellena el select de categorías
 async function loadKategoriak() {
   const api_key = getApiKey();
   try {
@@ -161,6 +166,7 @@ async function loadKategoriak() {
   }
 }
 
+// Abre el modal para crear o editar un equipo; carga datos si `id` existe
 async function openModal(id = null) {
   const api_key = getApiKey();
   await loadKategoriak();
@@ -205,6 +211,7 @@ async function openModal(id = null) {
   modal.show();
 }
 
+// Maneja el envío del formulario para crear/actualizar un equipamiento
 form.addEventListener('submit', async e => {
   e.preventDefault();
   const api_key = getApiKey();
@@ -234,6 +241,7 @@ form.addEventListener('submit', async e => {
   fetchEkipamenduak();
 });
 
+// Elimina un equipamiento por `id`
 async function deleteEkipamendua(id) {
   const api_key = getApiKey();
   const res = await fetch(`${apiUrl}?action=delete&id=${id}`, {
