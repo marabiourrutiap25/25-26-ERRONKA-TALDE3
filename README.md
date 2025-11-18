@@ -1,9 +1,11 @@
 # 25-26-ERRONKA-TALDE2
 
 ##1️⃣ XAMPP instalatu.
+<br>
 https://www.apachefriends.org/
 
 ##2️⃣ Errepositorio XAMPP-en 'htdocs' karpetan klonatu:
+<br>
 git clone https://github.com/marabiourrutiap25/25-26-ERRONKA-TALDE3.git
 
 ##3️⃣ Apache eta MySQL-ren konfigurazio basikoak egin.
