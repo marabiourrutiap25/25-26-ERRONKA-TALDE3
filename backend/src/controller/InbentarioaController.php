@@ -1,7 +1,7 @@
 <?php
 /**
- * Controlador de inventario. Ofrece endpoints CRUD para inbentarioak y
- * protege cada operación con una API key en la cabecera Authorization.
+ * Inbentario kontroladorea. Inbentario-endpoint CRUDak eskaintzen ditu eta
+ * eragiketa bakoitza Authorization header-ean bidalitako API key-arekin babesten du.
  */
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
@@ -20,7 +20,7 @@ $service = new InbentarioaService($conn);
 
 $action = $_GET['action'] ?? null;
 
-// Extraer API key desde header Authorization: Bearer <key>
+// Authorization header-etik API key atera: Bearer <key>
 function getApiKeyFromHeaders()
 {
     $headers = getallheaders();
@@ -34,7 +34,7 @@ function getApiKeyFromHeaders()
     return $api_key;
 }
 
-// GET -> obtener todos los inventarios
+// GET -> inbentario guztiak lortu
 if ($_SERVER['REQUEST_METHOD'] === 'GET' && $action === 'getAll') {
     $api_key = getApiKeyFromHeaders();
     if (!$api_key) {
@@ -47,7 +47,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET' && $action === 'getAll') {
     exit;
 }
 
-// GET -> obtener inventario por etiqueta
+// GET -> inbentarioa etiketa bidez lortu
 if ($_SERVER['REQUEST_METHOD'] === 'GET' && $action === 'getByEtiketa') {
     $api_key = getApiKeyFromHeaders();
     $etiketa = $_GET['etiketa'] ?? null;
@@ -61,7 +61,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET' && $action === 'getByEtiketa') {
     exit;
 }
 
-// POST -> crear inventario
+// POST -> inbentarioa sortu
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && $action === 'create') {
     $api_key = getApiKeyFromHeaders();
     $data = json_decode(file_get_contents("php://input"));
@@ -75,7 +75,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && $action === 'create') {
     exit;
 }
 
-// POST -> actualizar inventario
+// POST -> inbentarioa eguneratu
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && $action === 'update') {
     $api_key = getApiKeyFromHeaders();
     $etiketa = $_GET['etiketa'] ?? null;
@@ -90,7 +90,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && $action === 'update') {
     exit;
 }
 
-// DELETE -> eliminar inventario
+// DELETE -> inbentarioa ezabatu
 if ($_SERVER['REQUEST_METHOD'] === 'DELETE' && $action === 'delete') {
     $api_key = getApiKeyFromHeaders();
     $etiketa = $_GET['etiketa'] ?? null;
@@ -104,7 +104,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'DELETE' && $action === 'delete') {
     exit;
 }
 
-// POST -> eliminar inventario (compatibilidad)
+// POST -> inbentarioa ezabatu (kompatibilitatea)
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && $action === 'delete') {
     $api_key = getApiKeyFromHeaders();
     $etiketa = $_GET['etiketa'] ?? null;

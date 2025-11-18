@@ -1,6 +1,6 @@
 <?php
 /**
- * Clase de transferencia que representa una fila de la tabla `gela`.
+ * `gela` taularen ilara bat ordezkatzen duen transferentzia klasea.
  */
 class Gela {
     public $id;
@@ -8,7 +8,7 @@ class Gela {
     public $taldea;
 
     /**
-     * Inicializa el objeto a partir de un array procedente de mysqli.
+     * mysqli-tik datorren array batetik objektua inicializatzen du.
      *
      * @param array|null $row
      */

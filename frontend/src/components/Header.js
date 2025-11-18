@@ -1,4 +1,4 @@
-// Componente Web que pinta el encabezado reutilizable con idioma y sesión
+// Web osagaia: hizkuntza eta saioa kudeatzen dituen berrerabilgarria den goiburuaren marrazketa
 class CustomHeader extends HTMLElement {
   connectedCallback() {
     this.innerHTML = `
@@ -57,13 +57,13 @@ class CustomHeader extends HTMLElement {
   attachStyles() {
     const style = document.createElement('style');
     style.textContent = `
-      /* ========================= TIPOGRAFÍA ========================= */
+      /* ========================= TIPOGRAFIA ========================= */
       header, nav a {
         font-family: 'Inter', sans-serif;
         font-weight: 600;
       }
 
-      /* ========================= HEADER ========================= */
+      /* ========================= GOIBURUA ========================= */
       #main-header {
         display: flex;
         align-items: center;
@@ -71,20 +71,20 @@ class CustomHeader extends HTMLElement {
         background-color: #009888;
         padding: 10px 20px;
         box-sizing: border-box;
-        flex-wrap: wrap;           /* permite salto de línea si no cabe */
-        overflow-x: hidden;        /* evita scroll horizontal */
-        white-space: normal;       /* texto ajustable */
+        flex-wrap: wrap;           /* lerro-itzelketa onartzen du */
+        overflow-x: hidden;        /* horizontal scroll-a saihesten du */
+        white-space: normal;       /* testua egokitu */
         gap: 15px;
       }
 
-      /* ========================= LOGO ========================= */
+      /* ========================= LOGOA ========================= */
       #main-header .logo {
         height: 50px;
         width: auto;
         flex-shrink: 0;
       }
 
-      /* ========================= NAVEGACIÓN ========================= */
+      /* ========================= NABIGAZIOA ========================= */
       #main-header nav {
         display: flex;
         align-items: center;
@@ -92,7 +92,7 @@ class CustomHeader extends HTMLElement {
         gap: 50px;
         flex: 1 1 auto;
         flex-shrink: 1;
-        min-width: 0; /* importante para permitir que nav se reduzca */
+        min-width: 0; /* nabigazioa txikitu ahal izateko garrantzitsua */
       }
 
       #main-header nav a {
@@ -100,7 +100,7 @@ class CustomHeader extends HTMLElement {
         text-decoration: none;
         transition: all 0.2s ease;
         padding-bottom: 2px;
-        white-space: nowrap; /* mantener cada enlace en una sola línea */
+        white-space: nowrap; /* esteka bakoitza lerro bakarrean mantendu */
       }
 
       nav a:hover {
@@ -112,16 +112,16 @@ class CustomHeader extends HTMLElement {
         text-underline-offset: 4px;
       }
 
-      /* ========================= BLOQUE DERECHO ========================= */
+      /* ========================= ESKUIN BLOKEA ========================= */
       #main-header .right-section {
         display: flex;
         align-items: center;
         gap: 12px;
-        margin-left: auto;         /* empuja el bloque hacia la derecha */
+        margin-left: auto;         /* bloke-a eskuinera bultzatzen du */
         flex-shrink: 0;
       }
 
-      /* ========================= SELECTOR DE IDIOMA ========================= */
+      /* ========================= HIZKUNTZA HAUTAGAILUA ========================= */
       #main-header .lang-switcher {
         display: flex;
         align-items: center;
@@ -142,7 +142,7 @@ class CustomHeader extends HTMLElement {
         color: #fff !important;
       }
 
-      /* ========================= USUARIO ========================= */
+      /* ========================= ERABILTZAILEA ========================= */
       #main-header .user-container {
         position: relative;
       }
@@ -171,7 +171,7 @@ class CustomHeader extends HTMLElement {
         border-radius: 50%;
       }
 
-      /* ========================= MENÚ USUARIO ========================= */
+      /* ========================= ERABILTZAILE MENUA ========================= */
       #main-header .user-menu {
         position: fixed;
         right: 20px;
@@ -203,7 +203,7 @@ class CustomHeader extends HTMLElement {
         display: flex;
       }
 
-      /* ========================= TABLAS (si las hay) ========================= */
+      /* ========================= TAULAK (badauden kasuan) ========================= */
       #main-header table {
         width: 100%;
         table-layout: auto;
@@ -243,32 +243,32 @@ class CustomHeader extends HTMLElement {
     this.prepend(style);
   }
 
-  // --- Menú usuario ---
+  // --- Erabiltzaile menua ---
   initUserMenu() {
     const userBtn = this.querySelector('#userBtn');
     const userMenu = this.querySelector('#userMenu');
     if (!userBtn || !userMenu) return;
 
     userBtn.addEventListener('click', (e) => {
-      e.stopPropagation(); // que no cierre al hacer clic en el propio botón
+      e.stopPropagation(); // botoiaren barruan klik egiterakoan ez ixteko
       userMenu.classList.toggle('show');
     });
 
-    // Cerrar si se hace click fuera
+    // Kanpoan klik egiten denean itxi
     document.addEventListener('click', (e) => {
-      // si el click no está dentro del componente, cerramos
+      // klik-a osagaiaren barruan ez badago, itxi
       if (!this.contains(e.target)) {
         userMenu.classList.remove('show');
       }
     });
 
-    // cerrar con Escape
+    // Escape-rekin itxi
     document.addEventListener('keydown', (e) => {
       if (e.key === 'Escape') userMenu.classList.remove('show');
     });
   }
 
-  // --- Botones de idioma ---
+  // --- Hizkuntza botoiak ---
   initLangButtons() {
     const langButtons = this.querySelectorAll('.lang-btn');
     if (!langButtons.length) return;
@@ -280,7 +280,7 @@ class CustomHeader extends HTMLElement {
         try {
           localStorage.setItem('selectedLang', btn.dataset.lang);
         } catch (err) {
-          // silent fail si storage no está disponible
+          // isilean huts egiten du storage erabilgarri ez badago
         }
       });
     });
@@ -299,7 +299,7 @@ class CustomHeader extends HTMLElement {
     }
   }
 
-  // --- Subrayar página activa ---
+  // --- Orri aktiboa azpimarratu ---
   highlightCurrentPage() {
     const currentFile = window.location.pathname.split('/').pop();
     const links = this.querySelectorAll('nav a');

@@ -1,4 +1,4 @@
-// Módulo autoejecutable para operar con la entidad gela desde la UI
+// UI-tik `gela` entitatearekin lan egiteko autoexekutatzen den modulu-a
 (function () {
 
   /* ============================================================
@@ -201,7 +201,7 @@
     }
 
     if (id) {
-      // EDIT MODE
+      // EDITATZE MODUA
       try {
         const res = await fetch(`${apiUrl}?action=getById&id=${encodeURIComponent(id)}`, {
           headers: { 'Authorization': 'Bearer ' + api_key }
@@ -226,7 +226,7 @@
       }
 
     } else {
-      // CREATE MODE
+      // SORTZE MODUA
       form.reset();
       document.getElementById('gelaId').value = '';
       document.getElementById('gelaModalLabel').textContent = 'Sortu';

@@ -1,7 +1,7 @@
 <?php
 /**
- * Endpoint auxiliar para recuperar los datos del usuario a partir de una API key.
- * Se admite tanto query param como cuerpo JSON para mayor flexibilidad.
+ * Laguntza-endpoint bat API key batetik erabiltzaile datuak berreskuratzeko.
+ * Query param edo JSON gorputza onartzen dira malgutasun handiagoa izateko.
  */
 header("Access-Control-Allow-Origin: *");
 header("Content-Type: application/json; charset=UTF-8");

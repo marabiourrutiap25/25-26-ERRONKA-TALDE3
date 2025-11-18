@@ -1,4 +1,4 @@
-// Comportamiento dinámico para asignar ubicaciones a etiquetas
+// Kokalekuak kudeatzeko portaera dinamikoa etiketen kokapenen asignaziorako
 (function () {
   const apiUrl = window.location.origin + '/25-26-ERRONKA-TALDE3/backend/src/controller/KokalekuaController.php';
   const inventoryUrl = window.location.origin + '/25-26-ERRONKA-TALDE3/backend/src/controller/InbentarioaController.php';
@@ -33,7 +33,7 @@
     return cookie ? decodeURIComponent(cookie[1]) : localStorage.getItem('api_key');
   }
 
-  // Muestra notificaciones breves al usuario (toast o alert)
+  // Erabiltzaileari notifikazio laburrak erakusten ditu (toast edo alert)
   function showToast(message, type = 'success') {
     const toastEl = document.getElementById('notificationToast');
     const iconEl = document.getElementById('toastIcon');
@@ -65,7 +65,7 @@
     }
   }
 
-  // Escapa HTML para evitar inyección en el DOM
+  // DOM-era injezioak saihesteko HTML ihes bihurtzen du
   function escapeHtml(str) {
     if (!str) return '';
     return String(str).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
@@ -73,7 +73,7 @@
   }
 
   async function fetchKokalekuak() {
-    // Carga la tabla de kokalekua
+    // Kokaleku-taula kargatu eta erakusten du
     tbody.innerHTML = '<tr><td colspan="5">Kargatzen...</td></tr>';
     const api_key = getApiKey();
     if (!api_key) return;
@@ -110,11 +110,11 @@
   }
 
   async function loadSelectOptions() {
-    // Rellena los <select> con inventario y gelak disponibles
+    // Select-ak betetzen ditu inbentario eta gelak erabilgarri daudenean
     const api_key = getApiKey();
     if (!api_key) return;
 
-    // Inventarioak
+    // Inbentarioak
     try {
       const res = await fetch(`${inventoryUrl}?action=getAll`, { headers: { 'Authorization': 'Bearer ' + api_key } });
       const data = await res.json();
@@ -146,7 +146,7 @@
   }
 
   async function openModal(etiketa = null, hasieraData = null) {
-    // Prepara y abre el modal para crear o editar un kokalekua
+    // Modal-a prestatu eta ireki kokalekua sortu/eguneratzeko
     await loadSelectOptions();
     if (etiketa && hasieraData) {
       const api_key = getApiKey();
@@ -177,7 +177,7 @@
   }
 
   form.addEventListener('submit', async e => {
-    // Envía formulario para crear o actualizar un kokalekua
+    // Formularioa bidaltzen du kokalekua sortu/eguneratu ahal izateko
     e.preventDefault();
     const api_key = getApiKey();
     if (!api_key) return;
@@ -228,7 +228,7 @@
   });
 
   async function deleteKokalekua(etiketa, hasieraData) {
-    // Elimina un kokalekua existente
+    // Existitzen den kokalekua ezabatzen du
     const api_key = getApiKey();
     try {
       const res = await fetch(`${apiUrl}?action=delete&etiketa=${encodeURIComponent(etiketa)}&hasieraData=${encodeURIComponent(hasieraData)}`, {

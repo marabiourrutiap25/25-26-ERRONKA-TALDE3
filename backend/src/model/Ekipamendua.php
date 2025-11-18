@@ -1,6 +1,6 @@
 <?php
 /**
- * DTO simple que representa la fila de la tabla `ekipamendua`.
+ * `ekipamendua` taularen ilara bat ordezkatzen duen DTO sinplea.
  */
 class Ekipamendua {
     public $id;
@@ -13,7 +13,7 @@ class Ekipamendua {
     public $kategoria_izena;
 
     /**
-     * Permite construir el objeto directamente desde un array asociativo.
+     * Objektua zuzenean array elkarrekinlotu batetik eraikitzeko aukera ematen du.
      *
      * @param array|null $row
      */

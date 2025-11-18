@@ -4,8 +4,8 @@ require_once __DIR__ . '/ErabiltzaileaService.php';
 require_once __DIR__ . '/EkipamenduaService.php';
 
 /**
- * Servicio dedicado a la tabla `inbentarioa`, con validaciones cruzadas
- * contra usuarios, equipamientos y ubicaciones.
+ * `inbentarioa` taulari dedikatutako zerbitzua, erabiltzaile, ekipamendu
+ * eta kokalekuen arteko egiaztaapenak barne.
  */
 class InbentarioaService
 {
@@ -15,7 +15,7 @@ class InbentarioaService
     private $ekipamenduaService;
 
     /**
-     * Recibe la conexión y construye los servicios auxiliares.
+     * Konexioa jasotzen du eta zerbitzu lagunak eraikitzen ditu.
      */
     public function __construct($db)
     {
@@ -25,7 +25,7 @@ class InbentarioaService
     }
 
     /**
-     * Comprueba si la API key pertenece a un usuario válido.
+     * Egiaztatzen du API key-a erabiltzaile baliozko bati dagokiola.
      */
     private function validateApiKey($api_key)
     {
@@ -37,7 +37,7 @@ class InbentarioaService
     }
 
     /**
-     * Garantiza que un equipo existe antes de referenciarlo.
+     * Ekipamendu bat existitzen dela bermatzen du aipuak egin aurretik.
      */
     private function validateEkipamendua($idEkipamendu)
     {
@@ -51,7 +51,7 @@ class InbentarioaService
     }
 
     /**
-     * Devuelve cada unidad física junto con el nombre del equipamiento.
+     * Unitate fisiko bakoitza itzultzen du, ekipamendu izenarekin.
      */
     public function getAllInbentarioak($api_key)
     {
@@ -81,7 +81,7 @@ class InbentarioaService
     }
 
     /**
-     * Localiza una etiqueta concreta.
+     * Etiketa konkretu bat bilatzen du.
      */
     public function getByEtiketa($api_key, $etiketa)
     {
@@ -113,7 +113,7 @@ class InbentarioaService
     }
 
     /**
-     * Inserta una nueva etiqueta en inventario validando negocio.
+     * Inbentarioan etiketa berri bat txertatzen du, negozio-baldintzak egiaztatuta.
      */
     public function createInbentarioa($api_key, $data)
     {
@@ -125,17 +125,17 @@ class InbentarioaService
             return ["success" => false, "message" => "Derrigorrezko eremuak falta dira."];
         }
 
-        // Validar formato de etiqueta (puedes ajustar según tus necesidades)
+        // Etiketaren formatua egiaztatu (behar izanez gero moldatu)
         if (!preg_match('/^[A-Za-z0-9-]{1,10}$/', $data->etiketa)) {
             return ["success" => false, "message" => "Etiketa formatu okerra."];
         }
 
-        // Validar que existe el equipamiento
+        // Ekipamendua existitzen dela egiaztatu
         if (!$this->validateEkipamendua($data->idEkipamendu)) {
             return ["success" => false, "message" => "Ekipamendua ez da existitzen."];
         }
 
-        // Validar que la etiqueta no existe
+        // Etiketa dagoeneko existitzen ez dela egiaztatu
         $checkQuery = "SELECT COUNT(*) as total FROM " . $this->table_name . " WHERE etiketa = ?";
         $stmt = $this->conn->prepare($checkQuery);
         $stmt->bind_param("s", $data->etiketa);
@@ -168,7 +168,7 @@ class InbentarioaService
     }
 
     /**
-     * Actualiza campos opcionales asociados a la etiqueta.
+     * Etiketarekin lotutako eremu aukerakoak eguneratzen ditu.
      */
     public function updateInbentarioa($api_key, $etiketa, $data)
     {
@@ -176,7 +176,7 @@ class InbentarioaService
             return ["success" => false, "message" => "API key ez da baliozkoa."];
         }
 
-        // Verificar que existe
+        // Existitzen den egiaztatu
         $checkQuery = "SELECT COUNT(*) as total FROM " . $this->table_name . " WHERE etiketa = ?";
         $stmt = $this->conn->prepare($checkQuery);
         $stmt->bind_param("s", $etiketa);
@@ -187,7 +187,7 @@ class InbentarioaService
             return ["success" => false, "message" => "Inbentarioa ez da existitzen."];
         }
 
-        // Si se actualiza el equipamiento, validar que existe
+        // Ekipamendua eguneratzen bada, existitzen den egiaztatu
         if (isset($data->idEkipamendu) && !$this->validateEkipamendua($data->idEkipamendu)) {
             return ["success" => false, "message" => "Ekipamendua ez da existitzen."];
         }
@@ -217,11 +217,11 @@ class InbentarioaService
             return ["success" => false, "message" => "Errorea kontsulta prestatzean."];
         }
 
-        // Añadir la etiqueta al final
+        // Azkenean etiketa gehitu
         $types .= 's';
         $values[] = $etiketa;
 
-        // bind_param requiere referencias
+        // bind_param erreferentziak behar ditu
         $bind_names[] = $types;
         for ($i = 0; $i < count($values); $i++) {
             $bind_name = 'bind' . $i;
@@ -242,7 +242,7 @@ class InbentarioaService
     }
 
     /**
-     * Elimina definitivamente una entrada del inventario.
+     * Inbentario sarrera bat betiko ezabatzen du.
      */
     public function deleteInbentarioa($api_key, $etiketa)
     {
@@ -251,7 +251,7 @@ class InbentarioaService
             
         }
 
-        // Verificar si existe
+        // Existitzen den egiaztatu
         $checkQuery = "SELECT COUNT(*) as total FROM " . $this->table_name . " WHERE etiketa = ?";
         $stmt = $this->conn->prepare($checkQuery);
         $stmt->bind_param("s", $etiketa);
@@ -262,7 +262,7 @@ class InbentarioaService
             return ["success" => false, "message" => "Inbentarioa ez da existitzen."];
         }
 
-        // Verificar si hay registros en kokalekua
+        // Kokalekuan erregistroak dauden egiaztatu
         $checkKokQuery = "SELECT COUNT(*) as total FROM kokalekua WHERE etiketa = ?";
         $stmt = $this->conn->prepare($checkKokQuery);
         $stmt->bind_param("s", $etiketa);

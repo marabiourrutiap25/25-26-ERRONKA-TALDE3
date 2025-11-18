@@ -1,13 +1,13 @@
 <?php
 /**
- * Representa una categoría de equipamiento.
+ * Ekipamendu kategoria bat adierazten du.
  */
 class Kategoria {
     public $id;
     public $izena;
 
     /**
-     * Permite mapear resultados mysqli a propiedades del objeto.
+     * mysqli emaitzak objektuaren propietateetara mapatzeko aukera ematen du.
      *
      * @param array|null $row
      */

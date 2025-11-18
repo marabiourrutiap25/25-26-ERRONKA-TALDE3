@@ -3,7 +3,7 @@ require_once __DIR__ . '/../model/Gela.php';
 require_once __DIR__ . '/ErabiltzaileaService.php';
 
 /**
- * Servicio encargado de gestionar la entidad `gela`.
+ * `gela` entitatea kudeatzeko zerbitzua.
  */
 class GelaService
 {
@@ -12,7 +12,7 @@ class GelaService
     private $erabiltzaileaService;
 
     /**
-     * Se inicializa con la conexión compartida del controlador.
+     * Kontroladorearen konexio partekatuarekin inicializatzen da.
      */
     public function __construct($db)
     {
@@ -21,7 +21,7 @@ class GelaService
     }
 
     /**
-     * Validación ligera que reutiliza el servicio de usuarios.
+     * Erabiltzaile zerbitzuaren berrerabilpen txiki baten bidez egiaztatze arina.
      */
     private function validateApiKey($api_key)
     {
@@ -33,7 +33,7 @@ class GelaService
     }
 
     /**
-     * Lista todas las aulas registradas.
+     * Erregistratutako gelak guztiak zerrendatzen ditu.
      */
     public function getAllGelak($api_key)
     {
@@ -58,7 +58,7 @@ class GelaService
     }
 
     /**
-     * Recupera una gela concreta mediante su identificador.
+     * Identifikatzailearen bidez gela bat berreskuratzen du.
      */
     public function getById($api_key, $id)
     {
@@ -85,7 +85,7 @@ class GelaService
     }
 
     /**
-     * Inserta una nueva gela garantizando unicidad de nombre e ID.
+     * Gela berri bat txertatzen du, izen eta ID bakartasuna bermatuta.
      */
     public function createGela($api_key, $data)
     {
@@ -97,7 +97,7 @@ class GelaService
             return ["success" => false, "message" => "Izena beharrezkoa da."];
         }
 
-        // Comprobar si ya existe una gela con ese nombre
+        // Izen horrekin gela dagoen egiaztatu
         $checkQuery = "SELECT COUNT(*) as total FROM " . $this->table_name . " WHERE izena = ?";
         $stmt = $this->conn->prepare($checkQuery);
         $stmt->bind_param("s", $data->izena);
@@ -108,7 +108,7 @@ class GelaService
             return ["success" => false, "message" => "Gela hau existitzen da."];
         }
 
-        // Obtener el siguiente ID disponible
+        // Hurrengo eskuragarri dagoen ID lortu
         $maxIdQuery = "SELECT MAX(id) as max_id FROM " . $this->table_name;
         $result = $this->conn->query($maxIdQuery);
         $row = $result->fetch_assoc();
@@ -130,7 +130,7 @@ class GelaService
     }
 
     /**
-     * Actualiza nombre y grupo asociado de una gela.
+     * Gelaren izena eta talde lotua eguneratzen ditu.
      */
     public function updateGela($api_key, $id, $data)
     {
@@ -142,7 +142,7 @@ class GelaService
             return ["success" => false, "message" => "Izena beharrezkoa da."];
         }
 
-        // Comprobar si existe la gela
+        // Gela existitzen den egiaztatu
         $checkQuery = "SELECT COUNT(*) as total FROM " . $this->table_name . " WHERE id = ?";
         $stmt = $this->conn->prepare($checkQuery);
         $stmt->bind_param("i", $id);
@@ -153,7 +153,7 @@ class GelaService
             return ["success" => false, "message" => "Gela ez da existitzen."];
         }
 
-        // Comprobar si ya existe otra gela con ese nombre
+        // Izen hori duen beste gela bat dagoen egiaztatu
         $checkNameQuery = "SELECT COUNT(*) as total FROM " . $this->table_name . " WHERE izena = ? AND id != ?";
         $stmt = $this->conn->prepare($checkNameQuery);
         $stmt->bind_param("si", $data->izena, $id);
@@ -183,7 +183,7 @@ class GelaService
     }
 
     /**
-     * Elimina una gela siempre que no existan kokaleku dependientes.
+     * Gela ezabatzen du, mendekotasunik (kokalekua) ez badagoen bitartean.
      */
     public function deleteGela($api_key, $id)
     {
@@ -191,7 +191,7 @@ class GelaService
             return ["success" => false, "message" => "API key ez da baliozkoa."];
         }
 
-        // Primero verificar si existe
+        // Lehenik existitzen den egiaztatu
         $checkQuery = "SELECT COUNT(*) as total FROM " . $this->table_name . " WHERE id = ?";
         $stmt = $this->conn->prepare($checkQuery);
         $stmt->bind_param("i", $id);
@@ -202,7 +202,7 @@ class GelaService
             return ["success" => false, "message" => "Gela ez da existitzen."];
         }
 
-        // Comprobar dependencias en kokalekua
+        // Kokalekuan mendekotasunak egiaztatu
         $dependencyQuery = "SELECT COUNT(*) as total FROM kokalekua WHERE idGela = ?";
         $dependencyStmt = $this->conn->prepare($dependencyQuery);
         if ($dependencyStmt) {

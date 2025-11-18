@@ -1,7 +1,7 @@
 <?php
 /**
- * Controlador de Erabiltzaileak (usuarios).
- * Gestiona las operaciones CRUD básicas que se exponen desde el frontend.
+ * `Erabiltzaileak` kontroladorea.
+ * Frontend-etik exekutatzen diren CRUD eragiketak kudeatzen ditu.
  */
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
@@ -12,7 +12,7 @@ header("Content-Type: application/json; charset=UTF-8");
 require_once __DIR__ . '/../../config/DB.php';
 require_once __DIR__ . '/../service/ErabiltzaileaService.php';
 
-// Se instancia el servicio con la conexión compartida
+// Zerbitzua konekzio partekatuarekin instantziatzen da
 $dbObj = new DB();
 $conn = $dbObj->konektatu();
 $service = new ErabiltzaileaService($conn);
@@ -20,7 +20,7 @@ $service = new ErabiltzaileaService($conn);
 $action = $_GET['action'] ?? null;
 
 /**
- * Devuelve la API key extraída de la cabecera Authorization.
+ * Authorization headerr-etik ateratako API key-a bueltatzen du.
  *
  * @return string|null
  */
@@ -37,7 +37,7 @@ function getApiKeyFromHeaders()
     return $api_key;
 }
 
-// GET -> obtener todos
+// GET -> guztiak lortu
 if ($_SERVER['REQUEST_METHOD'] === 'GET' && $action === 'getAll') {
     $api_key = getApiKeyFromHeaders();
     if (!$api_key) {
@@ -50,7 +50,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET' && $action === 'getAll') {
     exit;
 }
 
-//GET -> obtener por api_key
+// GET -> api_key-arekin lortu
 if($_SERVER['REQUEST_METHOD']=== 'GET' && $action==='getByApi'){
     $api_key = getApiKeyFromHeaders();
     if (!$api_key) {
@@ -63,7 +63,7 @@ if($_SERVER['REQUEST_METHOD']=== 'GET' && $action==='getByApi'){
     exit;
 }
 
-// GET -> obtener por nan
+// GET -> nan bidez lortu
 if ($_SERVER['REQUEST_METHOD'] === 'GET' && $action === 'getById') {
     $api_key = getApiKeyFromHeaders();
     $nan = $_GET['nan'] ?? null;
@@ -77,7 +77,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET' && $action === 'getById') {
     exit;
 }
 
-// POST -> crear usuario (action=create)
+// POST -> erabiltzailea sortu (action=create)
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && $action === 'create') {
     $api_key = getApiKeyFromHeaders();
     $data = json_decode(file_get_contents("php://input"));
@@ -91,7 +91,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && $action === 'create') {
     exit;
 }
 
-// POST -> actualizar usuario (action=update) - el nan se pasa por parámetro (query) preferiblemente
+// POST -> erabiltzailea eguneratu (action=update) - nan gehienetan query param bidez pasatu
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && $action === 'update') {
     $api_key = getApiKeyFromHeaders();
     $data = json_decode(file_get_contents("php://input"));
@@ -109,7 +109,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && $action === 'update') {
     exit;
 }
 
-// DELETE -> eliminar usuario por nan (action=delete) (nan por query param)
+// DELETE -> erabiltzailea nan-aren bidez ezabatu (action=delete) (nan query param-ean)
 if ($_SERVER['REQUEST_METHOD'] === 'DELETE' && $action === 'delete') {
     $api_key = getApiKeyFromHeaders();
     $nan = $_GET['nan'] ?? null;
@@ -123,7 +123,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'DELETE' && $action === 'delete') {
     exit;
 }
 
-// Para compatibilidad, aceptar también POST delete con nan en query
+// Kompatibilitateagatik, onartu POST delete nan-a query-n edukita ere
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && $action === 'delete') {
     $api_key = getApiKeyFromHeaders();
     $nan = $_GET['nan'] ?? null;

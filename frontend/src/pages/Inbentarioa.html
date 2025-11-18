@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- Vista con tarjetas del inventario físico -->
+<!-- Fisiko inbentarioaren txartelen ikuspegia -->
 <html lang="eu">
 
 <head>
@@ -23,7 +23,7 @@
   <main class="p-4">
     <section class="container-fluid">
 
-      <!-- Encabezado de la sección principal -->
+      <!-- Atal nagusiaren izenburua -->
       <header class="d-flex justify-content-between align-items-center mb-4">
         <h1 class="m-0" data-i18n="inventory-inbentarioa">INBENTARIOA</h1>
 
@@ -33,7 +33,7 @@
         </div>
       </header>
 
-      <!-- Tabla de inventario -->
+      <!-- Inbentarioaren taula -->
       <article class="card p-3">
         <div class="table-responsive">
           <table id="inbentarioaTable" class="table table-hover table-striped align-middle">
@@ -46,7 +46,7 @@
               </tr>
             </thead>
             <tbody>
-              <!-- Filas generadas dinámicamente -->
+              <!-- Errenkadak dinamikoki sortzen dira -->
             </tbody>
           </table>
         </div>
@@ -55,7 +55,7 @@
     </section>
   </main>
 
-  <!-- Modal de creación/edición -->
+  <!-- Sortu/editatzeko modala -->
   <section aria-label="Inbentarioaren modala">
     <div class="modal fade" id="inbentarioaModal" tabindex="-1" aria-labelledby="inbentarioaModalLabel"
       aria-hidden="true">
@@ -103,7 +103,7 @@
     </div>
   </section>
 
-  <!-- Toast de notificaciones -->
+  <!-- Jakinarazpenetarako toast -->
   <aside class="toast-container position-fixed bottom-0 end-0 p-3">
     <div id="notificationToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
       <header class="toast-header">
@@ -115,9 +115,9 @@
     </div>
   </aside>
 
-  <!-- Scripts -->
+  <!-- Scriptak -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-  <!-- Función que detecta si se ha iniciado o no la sesión. -->
+  <!-- Saioa hasi den ala ez detektatzen duen funtzioa. -->
   <script>
     function getCookie(name) {
       const value = `; ${document.cookie}`;

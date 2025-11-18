@@ -1,12 +1,12 @@
-// Vista de inventario: muestra unidades y lanza CRUD contra la API
+// Inbentarioaren ikuspegia: unitateak erakusten eta APIari CRUD deiak egiten
 // =======================
-// CONFIGURACIÓN DE API
+// API KONFIGURAZIOA
 // =======================
 const apiUrl = `${window.location.origin}/25-26-ERRONKA-TALDE3/backend/src/controller/InbentarioaController.php`;
 const ekipApiUrl = `${window.location.origin}/25-26-ERRONKA-TALDE3/backend/src/controller/EkipamenduaController.php`;
 
 // =======================
-// ELEMENTOS DEL DOM
+// DOM ELEMENTUAK
 // =======================
 const tbody = document.querySelector('#inbentarioaTable tbody');
 const modal = new bootstrap.Modal(document.getElementById('inbentarioaModal'));
@@ -15,7 +15,7 @@ const searchInput = document.getElementById('searchInput');
 const ekipamenduSelect = document.getElementById('idEkipamendu');
 
 // =======================
-// HELPER FUNCTIONS
+// LAGUNTZAILE FUNKTZIOAK
 // =======================
 function getCookie(name) {
   const value = `; ${document.cookie}`;
@@ -86,7 +86,7 @@ function showToast(message, type = 'success') {
 }
 
 // =======================
-// FETCH INVENTARIO
+// INBENTARIOA: ZERRENDA
 // =======================
 async function fetchInbentarioak() {
   tbody.innerHTML = '<tr><td colspan="4">Kargatzen...</td></tr>';
@@ -139,7 +139,7 @@ async function fetchInbentarioak() {
 }
 
 // =======================
-// LOAD EQUIPOS
+// EKIPAMENDUAK KARGATU
 // =======================
 async function loadEkipamenduak() {
   const api_key = getApiKey();
@@ -161,7 +161,7 @@ async function loadEkipamenduak() {
 }
 
 // =======================
-// OPEN MODAL
+// MODAL IREKI
 // =======================
 async function openModal(etiketa = null) {
   const api_key = getApiKey();
@@ -183,7 +183,7 @@ async function openModal(etiketa = null) {
     idEkipamenduField.value = inv.idEkipamendu;
     erosketaDataField.value = inv.erosketaData;
 
-    // Cambio solicitado: Etiketa no editable
+    // Eskaera aldaketa: etiketa ez da editagarria
     etiketaField.setAttribute('readonly', true);
 
     [idEkipamenduField, erosketaDataField].forEach(f => { f.removeAttribute('disabled'); f.style.pointerEvents = ''; });
@@ -202,7 +202,7 @@ async function openModal(etiketa = null) {
 }
 
 // =======================
-// FORM SUBMIT
+// FORMULARIOAREN BIDALKETA
 // =======================
 form.addEventListener('submit', async e => {
   e.preventDefault();
@@ -242,7 +242,7 @@ form.addEventListener('submit', async e => {
 });
 
 // =======================
-// DELETE INVENTARIO
+// INBENTARIOA EZABATU
 // =======================
 async function deleteInbentarioa(etiketa, silent = false) {
 
@@ -260,7 +260,7 @@ async function deleteInbentarioa(etiketa, silent = false) {
 }
 
 // =======================
-// EVENT LISTENERS
+// GERTAERA ENTZUNLEAK
 // =======================
 document.getElementById('addBtn').addEventListener('click', () => openModal());
 window.addEventListener('DOMContentLoaded', fetchInbentarioak);

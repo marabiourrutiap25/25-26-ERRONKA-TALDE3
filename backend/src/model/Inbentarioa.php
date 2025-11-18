@@ -1,6 +1,6 @@
 <?php
 /**
- * Objeto simple que contiene los campos claves de la tabla `inbentarioa`.
+ * Objektu sinplea, `inbentarioa` taularen eremu gakoak dituena.
  */
 class Inbentarioa {
     public $etiketa;
@@ -8,7 +8,7 @@ class Inbentarioa {
     public $erosketaData;
 
     /**
-     * Construye el modelo desde una fila devuelta por la base de datos.
+     * Datu-baseak itzulitako ilaretik modelo-a eraikitzen du.
      *
      * @param array|null $row
      */

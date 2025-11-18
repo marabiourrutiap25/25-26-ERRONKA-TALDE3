@@ -1,11 +1,11 @@
-// Script de administración de usuarios y sincronización con la API
+// Erabiltzaileen kudeaketa eta APIarekin sinkronizatutako script-a
 // =======================
-// CONFIGURACIÓN DE API
+// API KONFIGURAZIOA
 // =======================
 const apiUrl = `${window.location.origin}/25-26-ERRONKA-TALDE3/backend/src/controller/ErabiltzaileaController.php`;
 
 // =======================
-// ELEMENTOS DEL DOM
+// DOM ELEMENTUAK
 // =======================
 const tbody = document.querySelector('#erabiltzaileaTable tbody');
 const modal = new bootstrap.Modal(document.getElementById('erabiltzaileaModal'));
@@ -23,7 +23,7 @@ const rolaField = document.getElementById('rola');
 const apiKeyField = document.getElementById('api_key');
 
 // =======================
-// HELPER FUNCTIONS
+// LAGUNTZA-FUNTZIOAK
 // =======================
 function getCookie(name) {
   const value = `; ${document.cookie}`;
@@ -47,7 +47,7 @@ function escapeHtml(str) {
 }
 
 // =======================
-// TOAST
+// TOAST 
 // =======================
 let toast = null;
 const toastElement = document.getElementById('notificationToast');
@@ -94,7 +94,7 @@ function showToast(message, type = 'success') {
 }
 
 // =======================
-// FETCH USUARIOS
+// ERABILTZAILEAK LORTU (FETCH)
 // =======================
 async function fetchErabiltzaileak() {
   tbody.innerHTML = '<tr><td colspan="8">Kargatzen...</td></tr>';
@@ -142,7 +142,7 @@ async function fetchErabiltzaileak() {
 }
 
 // =======================
-// OPEN MODAL
+// MODALA IREKI
 // =======================
 async function openModal(nan = null) {
   const api_key = getApiKey();
@@ -160,10 +160,10 @@ async function openModal(nan = null) {
     izenaField.value = user.izena;
     abizenaField.value = user.abizena;
     erabiltzaileaField.value = user.erabiltzailea;
-    pasahitzaField.value = ''; // siempre vacío al editar
+    pasahitzaField.value = ''; // editatzean beti hutsik
     apiKeyField.value = '••••••••';
 
-    // Seleccionar automáticamente el rol del usuario
+    // Erabiltzailearen rola automatikoki hautatu
     const rolaField = document.getElementById('rola');
     rolaField.querySelectorAll('option').forEach(opt => {
       opt.selected = (opt.value === user.rola);
@@ -182,7 +182,7 @@ async function openModal(nan = null) {
 }
 
 // =======================
-// FORM SUBMIT
+// FORMULARIOA BIDALTZEKO (SUBMIT)
 // =======================
 form.addEventListener('submit', async e => {
   e.preventDefault();
@@ -194,7 +194,7 @@ form.addEventListener('submit', async e => {
     abizena: abizenaField.value,
     erabiltzailea: erabiltzaileaField.value,
     pasahitza: pasahitzaField.value,
-    rola: rolaField.value // Aquí ya será 'A' o 'E'
+    rola: rolaField.value // Hemen 'A' edo 'E' izango da
   };
 
   let url;
@@ -219,7 +219,7 @@ form.addEventListener('submit', async e => {
 });
 
 // =======================
-// DELETE USUARIO
+// ERABILTZAILEA EZABATU
 // =======================
 async function deleteErabiltzailea(nan, silent = false) {
   if (!silent && !confirm('Erabiltzailea ezabatuko duzu.')) return;
