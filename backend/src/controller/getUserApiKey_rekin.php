@@ -1,8 +1,12 @@
 <?php
+/**
+ * Laguntza-endpoint bat API key batetik erabiltzaile datuak berreskuratzeko.
+ * Query param edo JSON gorputza onartzen dira malgutasun handiagoa izateko.
+ */
 header("Access-Control-Allow-Origin: *");
 header("Content-Type: application/json; charset=UTF-8");
 
-require_once __DIR__ . '/../DB.php';
+require_once __DIR__ . '/../../config/DB.php';
 require_once __DIR__ . '/../service/ErabiltzaileaService.php';
 
 $dbObj = new DB();

@@ -1,4 +1,7 @@
 <?php
+/**
+ * Datu-basetan gordetzen den bezala erabiltzaile baten errepresentazioa.
+ */
 class Erabiltzailea {
     public $nan;
     public $izena;
@@ -6,8 +9,13 @@ class Erabiltzailea {
     public $erabiltzailea;
     public $pasahitza;
     public $rola;
-    public $api_key; // 🔑 nuevo campo
+    public $api_key;
 
+    /**
+     * Propietateak array elkarrekinlotu batetik betetzen ditu, mysqli-rentzat erabilgarria.
+     *
+     * @param array|null $row
+     */
     public function __construct($row = null) {
         if ($row) {
             $this->nan = $row['nan'];
