@@ -22,42 +22,27 @@ class DB {
      */
     public function __construct()
     {
-        $this->user = "root";
-        $this->host = "localhost";
-        $this->pass = "abcd*1234";
-        $this->db = "Erronka1";
+        $env = require __DIR__ . '/../config.php';
+
+        $this->user = $env['DB_USER'];
+        $this->host = $env['DB_HOST'];
+        $this->pass = $env['DB_PASS'];
+        $this->db   = $env['DB_DATABASE'];
     }
 
-    /**
-     * Abre la conexión y la guarda en la propiedad interna para futuras
-     * operaciones. Finaliza la ejecución si la conexión no es posible.
-     *
-     * @return mysqli Conexión abierta lista para usar.
-     */
     public function konektatu() {
-        $this->konexioa = new mysqli($this->host,$this->user,$this->pass,$this->db, 3306);
+        $this->konexioa = new mysqli(
+            $this->host,
+            $this->user,
+            $this->pass,
+            $this->db,
+            3306
+        );
+
         if ($this->konexioa->connect_errno) {
-            printf("Konexio errorea: %s\n", $this->konexioa->connect_error);
-            die();
+            die("Konexio errorea: " . $this->konexioa->connect_error);
         }
-        else {
-            return $this->konexioa;
-        }       
-    }
-    /**
-     * Devuelve la conexión actual para evitar recrearla.
-     *
-     * @return mysqli|null
-     */
-    public function getKonexioa() {
+
         return $this->konexioa;
-    }
-    /**
-     * Cierra la conexión automaticamente cuando el objeto se destruye.
-     */
-    public function __destruct() {
-        if ($this->konexioa) {
-            $this->konexioa->close();
-        }
     }
 }

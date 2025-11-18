@@ -245,9 +245,8 @@ form.addEventListener('submit', async e => {
 // DELETE INVENTARIO
 // =======================
 async function deleteInbentarioa(etiketa, silent = false) {
-  if (!silent && !confirm('Inbentarioa ezabatuko duzu.')) return;
 
-  const api_key = getCookie('api_key_session');
+  const api_key = getApiKey();
   const res = await fetch(`${apiUrl}?action=delete&etiketa=${encodeURIComponent(etiketa)}`, {
     method: 'DELETE',
     headers: { 'Authorization': 'Bearer ' + api_key }

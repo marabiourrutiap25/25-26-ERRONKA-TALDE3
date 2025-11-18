@@ -14,7 +14,8 @@
   <link rel="stylesheet" href="../css/Erabiltzaileak.css">
 </head>
 
-<script>
+<script type ="module">
+  import ENV from '../../../config.js';
   document.addEventListener("DOMContentLoaded", async () => {
     const apiKey = localStorage.getItem("api_key") || getCookie("api_key_session");
 
@@ -27,13 +28,13 @@
 
     if (!apiKey) {
       alert("🚫 Ez duzu baimenik. Hasi saioa lehenik.");
-      window.location.href = "../Login.html";
+      window.location.href = "../../index.html";
       return;
     }
 
     try {
       const response = await fetch(
-        "http://localhost/25-26-ERRONKA-TALDE3/backend/src/controller/ErabiltzaileaController.php?action=getRole",
+        `${ENV.API_BASE_URL}src/controller/ErabiltzaileaController.php?action=getRole`,
         {
           method: "GET",
           headers: {
@@ -47,7 +48,7 @@
       // Comprobamos si rol === 'a' (admin)
       if (!data.success || data.rola !== "a") {
         alert("🚫 Ez duzu baimen nahikorik.");
-        window.location.href = "../Login.html";
+        window.location.href = "../../index.html";
         return;
       }
 
@@ -56,7 +57,7 @@
     } catch (error) {
       console.error("Errorea rol egiaztatzean:", error);
       alert("Errorea gertatu da. Saiatu berriro.");
-      window.location.href = "../Login.html";
+      window.location.href = "../../index.html";
     }
   });
 
@@ -221,7 +222,7 @@
   </script>
   <script src="../script/Erabiltzailea.js"></script>
   <script type="module" src="../components/Header.js"></script>
-  <script src="../js/lang.js"></script>
+  <script type="module" src="../js/lang.js"></script>
 </body>
 
 </html>
